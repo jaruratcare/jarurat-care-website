@@ -1,99 +1,76 @@
 <script>
-	import NextIcon from '$lib/svg/next-icon.svelte';
+	// Component logic if needed
 </script>
 
-<div class="flex flex-col lg:flex-row mt-16 md:mt-24">
+<section class="max-w-6xl mx-auto py-12 md:py-16">
+	<!-- Section Header -->
+	<h2 class="text-3xl md:text-4xl font-bold text-[#1E293B] text-center mb-10 md:mb-12">
+		Connect With JCF
+	</h2>
 
-	<!-- Newsletter -->
-	<div class="bg-[#D3F2FC] w-full max-w-xl mx-auto lg:mx-0 lg:w-1/2 rounded-2xl lg:rounded-none shadow-xl px-6 md:px-16 py-10">
+	<!-- Two Card Grid -->
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
 
-		<div class="md:border-l-4 border-[#0155BD] md:pl-6">
+		<!-- LEFT CARD: Newsletter -->
+		<div class="bg-[#EBF5FB] rounded-3xl p-8 md:p-10 flex flex-col justify-between border border-blue-50/50">
+			<div>
+				<!-- Badge -->
+				<span class="inline-block bg-[#FFEAD0] text-[#C27803] text-xs font-bold tracking-wider px-3.5 py-1 rounded-full uppercase mb-4">
+					NEWSLETTER
+				</span>
 
-			<div class="mb-8">
-				<h2 class="text-[#0D2460] font-bold text-xl md:text-2xl mb-3">
-					Subscribe to our Nesletter
-				</h2>
+				<h3 class="text-2xl font-bold text-[#1E293B] mb-3">
+					Subscribe to our Newsletter
+				</h3>
 
-				<p class="text-sm text-[#0D2460]">
+				<p class="text-sm text-slate-500 leading-relaxed mb-6">
 					Get the latest updates, inspiring stories, and important news delivered right to your inbox.
 				</p>
 			</div>
 
-			<div class="flex flex-col sm:flex-row gap-4">
-
+			<!-- Input Form -->
+			<form on:submit|preventDefault class="flex items-center gap-3 mt-4">
 				<input
 					type="email"
-					class="rounded-lg w-full sm:flex-1 px-4 py-3 border border-gray-200 focus:outline-none"
 					placeholder="Enter your email address"
+					class="w-full bg-white text-sm text-slate-700 px-4 py-3 rounded-xl border border-slate-200 outline-none focus:border-blue-500 transition-all placeholder:text-slate-400"
 				/>
-
 				<button
-					class="text-[#0155BD] border border-[#0155BD] font-bold px-6 py-3 rounded-3xl whitespace-nowrap"
+					type="submit"
+					class="bg-white border border-slate-300 text-slate-700 font-semibold text-sm px-6 py-3 rounded-xl hover:bg-slate-50 transition-all shadow-sm"
 				>
 					Submit
 				</button>
-
-			</div>
-
+			</form>
 		</div>
 
-	</div>
+		<!-- RIGHT CARD: Collaborate -->
+		<div class="bg-white rounded-3xl p-8 md:p-10 flex flex-col justify-between border border-slate-100 shadow-sm relative pl-10 border-l-4 border-l-[#F59E0B]">
+			<div>
+				<!-- Badge -->
+				<span class="inline-block bg-[#FFEAD0] text-[#C27803] text-xs font-bold tracking-wider px-3.5 py-1 rounded-full uppercase mb-4">
+					COLLABORATE WITH US
+				</span>
 
+				<h3 class="text-2xl font-bold text-[#1E293B] mb-3">
+					Be part of the Journey
+				</h3>
 
-	<!-- Collaborate -->
-	<div class="lg:w-1/2 px-6 md:px-16 py-10">
-
-		<div class="border-l-4 border-[#FFBA41] pl-6">
-
-			<div class="mb-8">
-
-				<h2 class="font-bold text-xl md:text-2xl mb-3">
-					<span class="text-[#FFBA41]">Collaborate</span>
-					<span class="text-[#78C520]"> With Us</span>
-				</h2>
-
-				<p class="text-sm text-[#0D2460]">
-					Our mission thrives through the support of compassionate corporates, individuals, and organizations.
-					You can be a part of this journey too—join us in making a difference.
+				<p class="text-sm text-slate-500 leading-relaxed mb-6">
+					Our mission thrives through the support of compassionate corporates, individuals, and organizations. You can be part of this journey too—join us in making a difference. Every contribution brings hope, supports life-saving care, and helps patients receive the treatment they need.
 				</p>
-
 			</div>
 
-
-			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-semibold">
-
-				<div class="flex gap-3 items-center">
-					<div class="w-4 h-4 flex gap-[1px]"><NextIcon /><NextIcon /></div>
-					<div class="text-sm">
-						<a href="/join-us">Join Jarurat Care Team</a>
-					</div>
-				</div>
-
-				<div class="flex gap-3 items-center">
-					<div class="w-4 h-4 flex gap-[1px]"><NextIcon /><NextIcon /></div>
-					<div class="text-sm">
-						<a href="/contact-us">Become a Caregiver</a>
-					</div>
-				</div>
-
-				<div class="flex gap-3 items-center">
-					<div class="w-4 h-4 flex gap-[1px]"><NextIcon /><NextIcon /></div>
-					<div class="text-sm">
-						<a href="/contact-us">Become a Mentor</a>
-					</div>
-				</div>
-
-				<div class="flex gap-3 items-center">
-					<div class="w-4 h-4 flex gap-[1px]"><NextIcon /><NextIcon /></div>
-					<div class="text-sm">
-						<a href="/donate">Donate Money
-					</div>
-				</div>
-
+			<!-- Links Grid -->
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4 pt-2 text-sm font-semibold text-[#1E3A8A]">
+				<a href="/join-team" class="flex items-center gap-1.5 hover:underline">
+					<span class="text-blue-500">»</span> Join Jarurat Care Team
+				</a>
+				<a href="/donate" class="flex items-center gap-1.5 hover:underline">
+					<span class="text-blue-500">»</span> Donate Money
+				</a>
 			</div>
-
 		</div>
 
 	</div>
-
-</div>	
+</section>

@@ -25,7 +25,7 @@
 	];
 </script>
 
-<div class="-mt-4 sm:-mt-20 -mb-4 sm:-mb-20">
+<div class="-mt-4 sm:-mt-20">
 	<SingleWave fill="#0155bd" class="w-full" />
 
 	<div class="py-8 sm:py-16 px-4 bg-[#0155BD] relative z-10">
@@ -61,5 +61,5 @@
 		</div>
 	</div>
 
-	<SingleWave fill="#0155bd" class="w-full rotate-180 relative z-10" />
+
 </div>

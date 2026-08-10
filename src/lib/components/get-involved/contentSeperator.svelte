@@ -1,5 +1,5 @@
 <script>
-  import NextIcon from '$lib/svg/next-icon.svelte';
+  import {ChevronRight as NextIcon} from 'lucide-svelte';
 </script>
 
 <div

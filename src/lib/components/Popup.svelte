@@ -8,9 +8,9 @@
 	let show = false;
 
 	onMount(() => {
-		setTimeout(() => {
-			show = true;
-		}, 1000); // show after 2 seconds
+		// setTimeout(() => {
+		// 	show = true;
+		// }, 1000); // show after 1 seconds
 	});
 
 	function closePopup() {

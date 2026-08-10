@@ -76,7 +76,7 @@
 						<Icon icon={whatsappIcon} class="w-5 h-5 text-[#1E40AF]" />
 					</a>
 
-					<a href="https://www.instagram.com/carcinome.in?igsh=eWs5aG54OHpkamVs" target="_blank" rel="noopener">
+					<a href="https://www.instagram.com/jarurat.care?igsh=cjNld2FsMmhpeHNp" target="_blank" rel="noopener">
 						<Icon icon={instagramIcon} class="w-5 h-5 text-[#1E40AF]" />
 					</a>
 
