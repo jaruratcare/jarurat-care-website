@@ -1,5 +1,5 @@
 <script>
-	import Logo from '$lib/svg/logo.svelte';
+	import Logo from '$lib/svg/logo-figma.svelte';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { MenuIcon, X } from 'lucide-svelte';
@@ -46,7 +46,8 @@
 </script>
 
 <header class="fixed inset-x-0 top-0 z-50 bg-white shadow-sm">
-	<nav class="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 lg:px-6 py-3">
+	<!-- Updated padding from px-4 md:px-8 to px-6 lg:px-12 to align with page content sections -->
+	<nav class="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-12 py-3">
 
 		<a href="/">
 			<Logo class="h-8 md:h-10 w-auto" />
