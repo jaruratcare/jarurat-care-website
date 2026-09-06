@@ -4,7 +4,7 @@
 
 <div class="max-w-7xl mx-auto my-12 sm:my-16 px-4 space-y-8">
 
-    <h2 class="text-center text-[#1E3A8A] text-3xl sm:text-4xl font-extrabold tracking-tight">
+    <h2 class="text-center text-[#3E4A69] text-4xl sm:text-4xl font-extrabold tracking-tight">
         What Drives Us
     </h2>
 

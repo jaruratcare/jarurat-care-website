@@ -31,22 +31,25 @@
 				Caregiving Solutions
 			</h2>
 
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+			<div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200">
 				{#each items as item}
-					<div class="flex flex-col items-center text-center p-4">
-						<div class="w-16 h-16 mb-4 flex items-center justify-center">
+					<div class="flex flex-col text-left p-6 md:px-8 first:pl-0 last:pr-0">
+						<!-- Icon Container -->
+						<div class="bg-[#EFF6FF] w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
 							<img 
 								src={item.image} 
 								alt={item.title} 
-								class="w-full h-full object-contain" 
+								class="w-7 h-7 object-contain" 
 							/>
 						</div>
 
-						<h3 class="text-lg font-bold text-[#0D2460] mb-3">
+						<!-- Title -->
+						<h3 class="text-xl font-bold text-[#0D2460] mb-3">
 							{item.title}
 						</h3>
 
-						<p class="text-sm text-slate-600 leading-relaxed max-w-xs">
+						<!-- Description -->
+						<p class="text-[15px] text-slate-600 leading-relaxed">
 							{item.about}
 						</p>
 					</div>
