@@ -33,14 +33,6 @@
 		return resp?.data?.url || '';
 	}
 
-	// Retry logic for payment status verification with exponential backoff
-	let reqCount = 1;
-	const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-	const delayTime = 1000;
-	const maxReqCount = 5;
-	const genRangeRandom = (min: number, max: number) =>
-			Math.floor(Math.random() * (max - min + 1)) + min;
-
 	// Payment callback function to verify transaction
 	async function paymentCallback() {
 		isLoading.set(true);
@@ -67,16 +59,12 @@
 				const { state, data } = await fetchTransactionStatus();
 
 				if (state === 'completed') {
-					// Transaction successful
 					currentScreen = 'success';
 					isLoading.set(false);
 
-					// Send email with payment details (name, amount, email)
 					await fetch('https://jarurat-care-email-service.onrender.com/jarurat-care/sendMail/', {
 						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json'
-						},
+						headers: { 'Content-Type': 'application/json' },
 						body: JSON.stringify({
 							name: $paymentData['full-name'],
 							amount: $paymentData.amount,
@@ -88,21 +76,16 @@
 				}
 
 				if (state === 'error') {
-					// Transaction failed
 					alert('Failed to make the transaction');
 					isLoading.set(false);
 					return { status: 'error', data };
 				}
 
-				// If state is still processing/pending, retry with exponential backoff
 				retryCount++;
 				backoffTime *= 2;
-				console.log(`Retrying... Attempt ${retryCount} with ${backoffTime}ms delay`);
-
 				await new Promise(resolve => setTimeout(resolve, backoffTime));
 			}
 
-			// If max retries are exhausted, show an alert
 			alert('Max retries reached. Please try again later.');
 			isLoading.set(false);
 			return { status: 'error', data: null };
@@ -115,38 +98,36 @@
 	}
 </script>
 
-<div id="donate" class="md:p-2 bg-[#D3F2FC]">
-	<div
-			style="background-image: url('{ImgHeroBg}');"
-			class="py-8 px-4 md:my-16 max-w-[66rem] mx-auto md:rounded-xl bg-cover bg-center relative overflow-hidden"
-	>
-		<div class="bg-[#D3F2FC] sm:bg-[#797e8a]/80 absolute inset-0"></div>
+<div id="donate" class="py-12 px-4 bg-[#F8FAFC]">
+	<div class="max-w-[62rem] mx-auto">
+		<!-- Top Centered Header -->
+		<div class="text-center max-w-xl mx-auto mb-8 px-4">
+			<h2 class="text-2xl sm:text-3xl font-bold text-[#2D3142] mb-3 tracking-tight">
+				Help Us Fight Cancer
+			</h2>
+			<p class="text-xs sm:text-sm text-gray-500 leading-relaxed">
+				Empowering cancer patients and caregivers through emotional support, expert guidance, and essential care services funded by your donation.
+			</p>
+		</div>
 
-		<div class="grid md:grid-cols-3 relative z-10">
-			<div class="col-span-2 hidden md:flex flex-col justify-end px-4 max-w-[70%]">
-				<div class="flex flex-col justify-end items-start gap-2">
-					<h3 class="font-rubik text-white text-[1.4em] leading-tight">Help Us Fight Cancer</h3>
-					<p class="text-white text-[0.9em] leading-tight">
-						Jarurat Care is dedicated to providing comprehensive support to cancer patients and
-						their caregivers in our local community. Through emotional counseling, mental wellness
-						programs, caregiver mentorship, and connections to top medical experts, we aim to
-						empower those impacted by cancer. Your donation will directly fund these vital services,
-						ensuring no one faces their cancer journey alone.
-					</p>
-					<p
-							class="bg-green-400 text-[0.8em] leading-tight p-2 rounded-r-md border-l-2 border-black"
-					>
-						All donations to JaruratCare Foundation are eligible for 50% tax exemption under section
-						80G of the Income Tax Act.
-					</p>
-				</div>
+		<!-- Main Card Container -->
+		<div class="bg-[#71808F] p-4 sm:p-6 rounded-3xl shadow-sm grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+			
+			<!-- Left Photo Container (Strict 200% width crop to cut off baked-in form) -->
+			<div class="md:col-span-7 rounded-2xl overflow-hidden min-h-[350px] md:min-h-[480px] relative">
+				<img 
+					src={ImgHeroBg} 
+					alt="Help Us Fight Cancer" 
+					class="absolute top-0 left-0 w-[205%] max-w-none h-full object-cover object-left rounded-2xl" 
+				/>
 			</div>
 
-			<div class="z-10">
+			<!-- Right Form Card -->
+			<div class="md:col-span-5 flex flex-col justify-center relative z-10">
 				{#if currentScreen === 'billing'}
 					<BillingOptions
-							on:data={(ev) => updatePaymentData(ev.detail)}
-							on:submit={() => {
+						on:data={(ev) => updatePaymentData(ev.detail)}
+						on:submit={() => {
 							const resp = billingSchema.safeParse($paymentData);
 
 							if (resp.success) {
@@ -156,9 +137,9 @@
 					/>
 				{:else if currentScreen === 'details'}
 					<PersonalDetails
-							isLoading={$isLoading}
-							on:data={(ev) => updatePaymentData(ev.detail)}
-							on:submit={async () => {
+						isLoading={$isLoading}
+						on:data={(ev) => updatePaymentData(ev.detail)}
+						on:submit={async () => {
 							const billingDetails = billingSchema.parse($paymentData);
 							const personalDetails = personalDetailsSchema.safeParse($paymentData);
 						
@@ -183,6 +164,7 @@
 					<SuccessScreen txnId={$transactionId} amount={$paymentData.amount} />
 				{/if}
 			</div>
+
 		</div>
 	</div>
 </div>

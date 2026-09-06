@@ -1,21 +1,28 @@
 <script>
   import { Quote, ChevronDown } from 'lucide-svelte';
+  import { marked } from 'marked';
 
   let faqs = [
     {
       question: "Who can volunteer with JCF?",
-      answer: "Oncologists, medical students, caregivers, advocates, and passionate individuals who want to contribute their skills toward improving cancer care in India.",
-      open: false
+      answer: "- Open to students, professionals, healthcare workers, survivors, caregivers, and supporters\n- Anyone passionate about helping cancer patients can get involved",
+      linkText: "Apply As Volunteer",
+      linkUrl: "#",
+      open: true
     },
     {
       question: "Can I join the Advisory Board?",
-      answer: "Yes! We welcome experienced medical professionals, policy experts, and community leaders. Click 'Join Our Advisory Board' below or reach out via our contact page.",
-      open: false
+      answer: "Healthcare professionals and subject-matter experts interested in supporting JCF's mission are welcome to express their interest in joining the Advisory Board.",
+      linkText: "Apply",
+      linkUrl: "#",
+      open: true
     },
     {
       question: "Can cancer survivors or caregivers contribute?",
-      answer: "Absolutely. Lived experiences are invaluable for mentoring, sharing insights, and providing empathetic support across our network.",
-      open: false
+      answer: "Yes. Survivors and caregivers can share their experiences, mentor families, support community initiatives, and help others navigating similar journeys.",
+      linkText: "Join The Community",
+      linkUrl: "#",
+      open: true
     }
   ];
 
@@ -29,6 +36,7 @@
   
   <div class="max-w-6xl w-full space-y-20">
 
+    <!-- Founder's Message Section -->
     <div class="text-center space-y-2">
       <h2 class="text-3xl md:text-4xl font-extrabold text-[#0D2561] tracking-tight">
         Founder's Message
@@ -70,6 +78,7 @@
 
     </div>
 
+    <!-- FAQ Section (Matched to Figma) -->
     <div class="max-w-3xl mx-auto w-full space-y-8">
       <h2 class="text-3xl font-extrabold text-[#0D2561] text-center tracking-tight">
         FAQ
@@ -77,10 +86,11 @@
 
       <div class="space-y-4">
         {#each faqs as faq, i}
-          <div class="bg-white/80 border border-slate-200/80 rounded-2xl overflow-hidden shadow-sm transition-all duration-200">
+          <div class="bg-[#F4F6F8] border border-slate-200 rounded-2xl p-5 shadow-xs transition-all">
             <button
+              type="button"
               on:click={() => toggleFaq(i)}
-              class="w-full px-6 py-4 text-left flex justify-between items-center gap-4 text-[#78C520] font-bold text-sm md:text-base hover:text-[#68B218] transition-colors"
+              class="w-full text-left flex justify-between items-center gap-4 text-[#78C520] font-bold text-sm md:text-base pb-3 border-b border-slate-200 cursor-pointer focus:outline-none"
             >
               <span>{faq.question}</span>
               <ChevronDown
@@ -90,8 +100,21 @@
             </button>
 
             {#if faq.open}
-              <div class="px-6 pb-4 text-slate-500 text-xs md:text-sm font-medium leading-relaxed">
-                {faq.answer}
+              <div class="pt-3 text-slate-600 text-xs md:text-sm font-medium leading-relaxed">
+                <div class="faq-content">
+                  {@html marked(faq.answer)}
+                </div>
+
+                {#if faq.linkText}
+                  <div class="flex justify-end mt-3">
+                    <a
+                      href={faq.linkUrl}
+                      class="text-[#3B82F6] hover:text-[#1D4ED8] font-semibold inline-flex items-center gap-1 underline underline-offset-4 text-xs md:text-sm"
+                    >
+                      {faq.linkText} &rarr;
+                    </a>
+                  </div>
+                {/if}
               </div>
             {/if}
           </div>
@@ -101,3 +124,19 @@
 
   </div>
 </section>
+
+<style>
+  :global(.faq-content ul) {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  :global(.faq-content li) {
+    margin-bottom: 0.35rem;
+    color: #475569;
+  }
+  :global(.faq-content p) {
+    margin-bottom: 0.5rem;
+    color: #475569;
+  }
+</style>

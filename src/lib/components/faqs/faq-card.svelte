@@ -71,58 +71,8 @@
 		line-height: 1.5;
 	}
 
-	:global(.faq-content ul) {
-		list-style-type: disc;
-		padding-left: 1.25rem;
-		margin: 0;
-	}
-
-	:global(.faq-content li::marker) {
-		color: #9ca3af;
-	}
-
-	:global(.faq-action-link) {
-		display: block;
-		width: fit-content;
-		margin-left: auto;
-		margin-right: 0;
-		margin-top: 0.45rem;
-		color: #2563eb !important;
-		font-size: 15.5px;
-		font-weight: 700;
-		line-height: 1.3;
-		text-align: right;
-		text-decoration: underline !important;
-		text-decoration-color: #2563eb !important;
-		text-underline-offset: 3.5px;
-		text-decoration-thickness: 1.5px;
-		cursor: pointer;
-		transition: color 0.2s ease, opacity 0.2s ease;
-	}
-
-	:global(.faq-action-link:hover) {
-		color: #1d4ed8 !important;
-		opacity: 0.9;
-	}
-
-	:global(.faq-content a:not(.faq-action-link)) {
-		color: #2563eb !important;
-		font-weight: 700;
-		text-decoration: underline !important;
-		text-decoration-color: #2563eb !important;
-		text-underline-offset: 3.5px;
-	}
-
-	@media (max-width: 700px) {
-		:global(.faq-content p, .faq-content li) {
-			font-size: 14px;
-			line-height: 1.45;
-			margin-bottom: 0.35rem;
-		}
-
-		:global(.faq-action-link) {
-			font-size: 14px;
-			margin-top: 0.45rem;
-		}
-	}
+:global(.faq-content a:hover) {
+    text-decoration: underline;
+}
 </style>
+
