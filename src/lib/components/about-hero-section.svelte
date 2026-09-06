@@ -3,19 +3,17 @@
 </script>
 
 <div class="relative">
-    <!-- Image Wrapper with Flex layout to absolute center the card -->
     <div
-        class="w-full h-[500px] md:h-[600px] bg-cover bg-center relative flex items-center justify-center p-4"
+        class="w-full h-[750px] md:h-[850px] bg-cover bg-center relative flex items-center justify-center p-4"
         style={`background-image: url(${background})`}
     >
-        <!-- Soft dimming overlay to balance out contrast behind the white card -->
         <div class="absolute inset-0 bg-black/10"></div>
 
         <!-- The Figma White Card Design -->
         <div class="relative z-10 bg-white/90 backdrop-blur-sm rounded-[32px] shadow-xl max-w-[520px] w-full p-8 md:p-10 flex flex-col items-center text-center border border-white/40">
             
             <!-- Figma Styled Header -->
-            <h1 class="text-primaryBlue font-extrabold text-4xl md:text-[44px] tracking-tight mb-6">
+            <h1 class="text-[#3E4A68] font-extrabold text-5xl md:text-[56px] tracking-tight mb-6">
                 What we do
             </h1>
 
