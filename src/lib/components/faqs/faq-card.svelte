@@ -25,8 +25,7 @@
 	function getActionHref() {
 		const q = question.trim();
 		if (q === 'What is Jarurat Care Foundation?') return '/about-us';
-		if (q === 'Who can seek support from JCF?') return '/contact-us';
-		if (q === 'Can JCF connect me with experts?' || q === 'Can JCF connect me with experts and support networks?') {
+		if (q === 'Who can seek support from JCF?' || q === 'Can JCF connect me with experts?' || q === 'Can JCF connect me with experts and support networks?') {
 			return '/get-involved';
 		}
 		return '#';
