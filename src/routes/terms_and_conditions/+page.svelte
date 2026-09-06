@@ -24,7 +24,7 @@
 	const categories = [
 		{
 			id: 'getting-started',
-			name: 'Getting Started',
+			name: 'Intro & Access',
 			iconKey: 'getting-started',
 			items: [
 				{
@@ -46,12 +46,22 @@
 		},
 		{
 			id: 'responsibilities',
-			name: 'Your Responsibilities',
+			name: 'User Responsibilities',
 			iconKey: 'responsibilities',
 			items: [
 				{
 					num: 1,
-					title: 'Acceptable Use',
+					title: 'User Obligations',
+					body: 'Users agree to:',
+					list: [
+						'Provide accurate and truthful information.',
+						'Use the platform only for lawful purposes.',
+						'Respect other users and the community.'
+					]
+				},
+				{
+					num: 2,
+					title: 'Prohibited Conduct',
 					body: 'Users agree not to:',
 					list: [
 						'Use the website for any unlawful or fraudulent activity.',
@@ -62,7 +72,7 @@
 					]
 				},
 				{
-					num: 2,
+					num: 3,
 					title: 'User Content',
 					body: `If you submit messages, feedback, or other content through the website, you grant Jarurat Care Foundation a non-exclusive, worldwide, royalty-free license to use, display, and distribute such content for the purpose of operating and improving the platform.\n\nWe reserve the right to remove or restrict content that violates these Terms or is harmful to users or the community.`
 				}
@@ -113,7 +123,7 @@
 		},
 		{
 			id: 'donation',
-			name: 'Donation',
+			name: 'Payments',
 			iconKey: 'donation',
 			items: [
 				{
@@ -227,17 +237,18 @@
 				</svg>
 			</button>
 
-			<!-- Categories List (Always visible on desktop, toggleable on mobile/tab) -->
+			<!-- Categories List with Subheadings Accordion (Always visible on desktop, toggleable on mobile/tab) -->
 			<div class="mt-3 lg:mt-0 space-y-3 {isTocOpen ? 'block' : 'hidden lg:block'}">
 				{#each categories as category}
+					{@const isActive = activeSection === category.name}
 					<div class="border-b border-[#F1F5F9] last:border-none pb-2">
 						<button
 							on:click={() => selectCategory(category.name)}
-							class="w-full flex items-center justify-between py-2 text-left font-semibold text-sm lg:text-base transition-colors {activeSection === category.name ? 'text-[#1E4ED8]' : 'text-[#0C1F56] hover:text-[#1E4ED8]'}"
+							class="w-full flex items-center justify-between py-2 text-left font-semibold text-sm lg:text-base transition-colors {isActive ? 'text-[#1E4ED8]' : 'text-[#0C1F56] hover:text-[#1E4ED8]'}"
 						>
 							<span>{category.name}</span>
 							<svg
-								class="w-4 h-4 text-[#64748B] transition-transform duration-200 lg:inline-block hidden {activeSection === category.name ? 'rotate-180' : ''}"
+								class="w-4 h-4 text-[#64748B] transition-transform duration-200 {isActive ? 'rotate-180' : ''}"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -245,6 +256,22 @@
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
 							</svg>
 						</button>
+
+						<!-- Subheadings / Items list when category is active -->
+						{#if isActive && category.items.length > 0}
+							<ul class="mt-2 pl-3 space-y-1.5 border-l-2 border-[#1E4ED8]/20 ml-1">
+								{#each category.items as item}
+									<li>
+										<a
+											href="#item-{item.num}"
+											class="text-xs sm:text-sm text-[#64748B] hover:text-[#1E4ED8] block py-1 transition-colors"
+										>
+											{item.title}
+										</a>
+									</li>
+								{/each}
+							</ul>
+						{/if}
 					</div>
 				{/each}
 			</div>
