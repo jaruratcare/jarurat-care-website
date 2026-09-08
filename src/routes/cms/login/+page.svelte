@@ -46,30 +46,29 @@
 
 			const { profile_completed, role, verification_status } = profile || {};
 
-			// Super Admins and Admins bypass profile completion
 			if (role === 'Super_Admin') {
-				goto('/cms/super-admin');
+				window.location.href = '/cms/super-admin';
 				return;
 			} else if (role === 'Admin') {
-				goto('/cms/admin-dashboard');
+				window.location.href = '/cms/admin-dashboard';
 				return;
 			}
 
 			if (!profile_completed) {
-				goto('/cms/complete-profile');
+				window.location.href = '/cms/complete-profile';
 				return;
 			}
 
 			if (role === 'Doctor') {
 				if (verification_status === 'approved') {
-					goto('/cms/doctor-dashboard');
+					window.location.href = '/cms/doctor-dashboard';
 				} else {
-					goto('/cms/pending');
+					window.location.href = '/cms/pending';
 				}
 			} else if (role === 'Reader') {
-				goto('/cms/reader-dashboard');
+				window.location.href = '/cms/reader-dashboard';
 			} else {
-				goto('/');
+				window.location.href = '/';
 			}
 		} catch (err: any) {
 			error = err.message || 'Login failed';
