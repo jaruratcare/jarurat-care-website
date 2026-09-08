@@ -86,6 +86,16 @@
 		}
 	}
 
+	async function handleNotificationClick(notif: any) {
+		if (!notif.is_read) {
+			await markAsRead(notif.id);
+		}
+		if (notif.link) {
+			goto(notif.link);
+			showNotifDropdown = false;
+		}
+	}
+
 	async function markAllAsRead() {
 		try {
 			const res = await fetch('/api/notifications', {
@@ -179,17 +189,7 @@
 			{#if showNotifDropdown}
 				<div class="notif-dropdown">
 					<div class="notif-header">
-						<div class="header-left">
-							<strong>Notifications</strong>
-							{#if unreadCount > 0}
-								<span class="notif-badge-header">{unreadCount} New</span>
-							{/if}
-						</div>
-						{#if unreadCount > 0}
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<!-- svelte-ignore a11y-no-static-element-interactions -->
-							<span class="mark-all-read" on:click={markAllAsRead}>Mark all read</span>
-						{/if}
+						<span>Notifications</span>
 					</div>
 					<div class="notif-list">
 						{#if notifications.length === 0}
@@ -206,7 +206,7 @@
 								{#each group.items as notif}
 									<!-- svelte-ignore a11y-click-events-have-key-events -->
 									<!-- svelte-ignore a11y-no-static-element-interactions -->
-									<div class="notif-item {notif.is_read ? 'read' : 'unread'}" on:click={() => markAsRead(notif.id)}>
+									<div class="notif-item {notif.is_read ? 'read' : 'unread'}" on:click={() => handleNotificationClick(notif)}>
 										<div class="notif-icon-wrap">
 											<div class="notif-icon">
 												<Bell size={16} />
@@ -224,9 +224,11 @@
 							{/each}
 						{/if}
 					</div>
-					<div class="notif-footer">
-						<a href="#">View all activity</a>
-					</div>
+					{#if unreadCount > 0}
+						<div class="notif-footer">
+							<a href="#" on:click|preventDefault={markAllAsRead}>Mark all as read</a>
+						</div>
+					{/if}
 				</div>
 			{/if}
 		</div>
