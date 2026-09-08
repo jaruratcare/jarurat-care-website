@@ -595,7 +595,8 @@
 			</a>
 
 			<a
-				href="/cms/login"
+				href="/cms/logout"
+				data-sveltekit-reload
 				class="logout-link"
 			>
 				<LogOut size={17} />

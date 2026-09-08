@@ -175,7 +175,8 @@
 		</a>
 
 		<a
-			href="/cms/login"
+			href="/cms/logout"
+			data-sveltekit-reload
 			class="nav-item logout-btn"
 		>
 			<LogOut size={18} />

@@ -282,7 +282,7 @@
 			userRole = profile?.role || 'user';
 		}
 
-		cmsSupabase.auth.onAuthStateChange(async (_event, session) => {
+		const { data: { subscription } } = cmsSupabase.auth.onAuthStateChange(async (_event, session) => {
 			isLoggedIn = !!session?.user;
 
 			if (session?.user) {
@@ -298,6 +298,10 @@
 				userRole = '';
 			}
 		});
+
+		return () => {
+			subscription.unsubscribe();
+		};
 	});
 
 	async function logout() {
@@ -511,16 +515,11 @@
 	/>
 </svelte:head>
 
-<!-- =========================================================
-     EXISTING WEBSITE NAV
-     DO NOT REMOVE
-========================================================= -->
+<!-- EXISTING WEBSITE NAV  -->
 
 <Nav />
 
-<!-- =========================================================
-     COMMUNITY PAGE
-========================================================= -->
+<!--  COMMUNITY PAGE  -->
 
 <div class="community-page">
 

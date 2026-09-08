@@ -257,7 +257,7 @@
 					</div>
 					<hr />
 					<a href={`/cms/community/doctors/${user.id}`} on:click={() => showDropdown = false}>View Profile</a>
-					<a href="/cms/login" class="text-red-600 font-medium">Logout</a>
+					<a href="/cms/logout" data-sveltekit-reload class="text-red-600 font-medium">Logout</a>
 				</div>
 			{/if}
 		</div>

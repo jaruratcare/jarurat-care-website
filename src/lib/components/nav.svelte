@@ -28,15 +28,16 @@
 		const { data: { user } } = await cmsSupabase.auth.getUser();
 		if (user) isLoggedIn = true;
 
-		cmsSupabase.auth.onAuthStateChange((event, session) => {
+		const { data: { subscription } } = cmsSupabase.auth.onAuthStateChange((event, session) => {
 			isLoggedIn = !!session?.user;
 		});
 
-		window.__cmsLogout = async () => {
-			isLoggedIn = false;
-			toast.success('Logged out successfully');
-			goto('/knowledge-hub');
-			cmsSupabase.auth.signOut();
+		window.__cmsLogout = () => {
+			window.location.href = '/cms/logout';
+		};
+
+		return () => {
+			subscription.unsubscribe();
 		};
 	});
 

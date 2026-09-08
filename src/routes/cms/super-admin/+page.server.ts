@@ -1213,8 +1213,6 @@ approve: async ({ request, locals }) => {
 			.from('profiles')
 			.update(updateData)
 			.eq('id', doctorId)
-			.eq('role', 'Doctor')
-			.or('verification_status.eq.pending,verification_status.is.null')
 			.select('id, full_name, email')
 			.maybeSingle();
 
@@ -1278,8 +1276,6 @@ reject: async ({ request, locals }) => {
 				is_reviewer: false
 			})
 			.eq('id', doctorId)
-			.eq('role', 'Doctor')
-			.or('verification_status.eq.pending,verification_status.is.null')
 			.select('id, full_name, email')
 			.maybeSingle();
 

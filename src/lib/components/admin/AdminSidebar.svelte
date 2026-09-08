@@ -130,7 +130,7 @@
 			<ExternalLink size={16} class="ml-auto opacity-60" />
 		</a>
 
-		<a href="/cms/login" class="nav-btn logout-btn">
+		<a href="/cms/logout" data-sveltekit-reload class="nav-btn logout-btn">
 			<LogOut size={18} />
 			<span>Logout</span>
 		</a>
