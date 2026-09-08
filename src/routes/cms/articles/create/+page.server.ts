@@ -106,12 +106,13 @@ export const actions: Actions = {
 
 			// NOTIFICATION TRIGGER
 			if (status === 'under_review') {
+				const { data: userProfile } = await supabaseAdmin.from('profiles').select('name').eq('id', session.user.id).single();
 				await createAdminNotification(
-					'New Article Submitted',
-					`Doctor has submitted a new article "${title}" for review.`,
+					'New Article Submission',
+					`Dr. ${userProfile?.name || 'A user'} has submitted a new article: "${title}".`,
 					'info',
 					undefined,
-					'/cms/admin-dashboard/articles'
+					'/cms/super-admin?tab=articles'
 				);
 			}
 

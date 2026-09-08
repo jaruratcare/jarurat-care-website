@@ -83,7 +83,7 @@ export const actions: Actions = {
 				`Doctor has submitted a new research paper "${title}" for review.`,
 				'info',
 				undefined,
-				'/cms/admin-dashboard/research'
+				'/cms/super-admin?tab=research'
 			);
 		}
 

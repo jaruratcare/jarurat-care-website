@@ -325,11 +325,12 @@ export const actions: Actions = {
 		if (profileData.role === 'Doctor') {
 			try {
 				await createAdminNotification(
-					'Doctor Verification Request',
-					`Doctor ${profileData.full_name || 'Unknown Doctor'} has submitted a profile for verification.`,
+					'New Verification Request',
+					`A new user (${profileData.full_name}) has submitted their profile for verification as a ${profileData.role}.`,
 					'info',
 					undefined,
-					'/cms/super-admin'
+					'/cms/super-admin?tab=doctor_verification',
+					'super_admin_only'
 				);
 			} catch (notificationError) {
 				/*

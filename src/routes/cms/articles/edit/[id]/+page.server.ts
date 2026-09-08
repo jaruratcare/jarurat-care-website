@@ -124,7 +124,7 @@ export const actions: Actions = {
 				`Doctor has submitted an article "${title}" for review.`,
 				'info',
 				undefined,
-				'/cms/admin-dashboard/articles'
+				'/cms/super-admin?tab=articles'
 			);
 		}
 

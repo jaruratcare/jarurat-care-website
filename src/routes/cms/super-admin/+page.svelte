@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 	import { enhance } from '$app/forms';
 	import toast from 'svelte-french-toast';
 	import {
@@ -91,12 +92,26 @@
 	let isMounted = false;
 	
 	onMount(() => {
-		const stored = localStorage.getItem('superAdminActiveTab');
-		if (stored) {
-			activeSection = stored;
+		const tabParam = $page.url.searchParams.get('tab');
+		if (tabParam) {
+			activeSection = tabParam;
+		} else {
+			const stored = localStorage.getItem('superAdminActiveTab');
+			if (stored) {
+				activeSection = stored;
+			}
 		}
 		isMounted = true;
 	});
+
+	$: {
+		if (isMounted) {
+			const tabParam = $page.url.searchParams.get('tab');
+			if (tabParam && tabParam !== activeSection) {
+				activeSection = tabParam;
+			}
+		}
+	}
 
 	$: {
 		if (isMounted && typeof localStorage !== 'undefined') {

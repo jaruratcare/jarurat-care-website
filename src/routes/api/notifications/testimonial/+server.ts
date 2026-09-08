@@ -15,7 +15,7 @@ export async function POST({ request, locals }) {
 			`A new testimonial from ${name || 'a user'} has been submitted for review.`,
 			'info',
 			undefined,
-			'/cms/super-admin', // Or wherever testimonials are reviewed
+			'/cms/admin-dashboard/testimonials',
 			'testimonial'
 		);
 

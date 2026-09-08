@@ -6,7 +6,7 @@ export async function createAdminNotification(
 	type: 'info' | 'success' | 'warning' | 'error' = 'info',
 	userId?: string, 
 	link?: string,
-	targetGroup: 'content' | 'testimonial' = 'content'
+	targetGroup: 'content' | 'testimonial' | 'super_admin_only' = 'content'
 ) {
 	if (userId) {
 		const { error } = await supabaseAdmin
@@ -25,10 +25,12 @@ export async function createAdminNotification(
 		}
 	} else {
 		// Determine which roles receive this notification
-		let roleFilter = 'role.eq.Super_Admin,is_reviewer.eq.true'; // Default for content/verification
+		let roleFilter = 'role.eq.Super_Admin,is_reviewer.eq.true'; // Default for content
 		
 		if (targetGroup === 'testimonial') {
 			roleFilter = 'role.eq.Super_Admin,role.eq.Admin';
+		} else if (targetGroup === 'super_admin_only') {
+			roleFilter = 'role.eq.Super_Admin';
 		}
 
 		const { data: adminsAndReviewers } = await supabaseAdmin
