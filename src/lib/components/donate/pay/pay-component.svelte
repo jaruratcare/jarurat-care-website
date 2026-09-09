@@ -140,24 +140,45 @@
 						isLoading={$isLoading}
 						on:data={(ev) => updatePaymentData(ev.detail)}
 						on:submit={async () => {
-							const billingDetails = billingSchema.parse($paymentData);
-							const personalDetails = personalDetailsSchema.safeParse($paymentData);
-						
-							window.document.body.style.overflow = 'hidden';
+							try {
+								const billingDetails = billingSchema.parse($paymentData);
+								const personalDetails = personalDetailsSchema.safeParse($paymentData);
+							
+								if (!personalDetails.success) {
+									alert("Please fill all required details correctly.");
+									return;
+								}
 
-							if (personalDetails.success) {
-								const script = document.createElement('script');
-								script.src = 'https://mercury.phonepe.com/web/bundle/checkout.js';
-								document.head.appendChild(script);
+								window.document.body.style.overflow = 'hidden';
+
+								// Wait for the PhonePe SDK script to fully load before proceeding
+								await new Promise((resolve, reject) => {
+									if (document.querySelector('script[src="https://mercury.phonepe.com/web/bundle/checkout.js"]')) {
+										resolve(true);
+										return;
+									}
+									const script = document.createElement('script');
+									script.src = 'https://mercury.phonepe.com/web/bundle/checkout.js';
+									script.onload = resolve;
+									script.onerror = reject;
+									document.head.appendChild(script);
+								});
 
 								const tokenUrl = await getTokenUrl(billingDetails.amount);
+								if (!tokenUrl) throw new Error("Failed to get payment token");
+
 								// @ts-ignore
 								window.PhonePeCheckout.transact({
 									tokenUrl,
 									callback: paymentCallback,
 									type: 'IFRAME'
 								});
-							} else alert(personalDetails.error.message);
+							} catch (err) {
+								console.error("Payment initiation error:", err);
+								alert("Failed to initiate payment. Please try again.");
+								isLoading.set(false);
+								window.document.body.style.overflow = 'auto';
+							}
 						}}
 					/>
 				{:else}
