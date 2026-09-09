@@ -19,14 +19,14 @@
 		
 		<div class="lg:col-span-6 space-y-3.5 text-left">
 			
-			<!-- WHITISH ADVOCACY & IMPACT OVAL BADGE -->
+			<!-- ADVOCACY & IMPACT BADGE -->
 			<div class="inline-block px-3.5 py-1 bg-white/40 border border-white/60 rounded-full backdrop-blur-xs">
 				<span class="text-[#1E40AF] font-medium text-[10px] tracking-wider uppercase">
 					ADVOCACY & IMPACT
 				</span>
 			</div>
 
-			<!-- TITLE & UNBOLDED PARAGRAPH -->
+			<!-- TITLE & PARAGRAPH -->
 			<div class="space-y-2">
 				<h1 class="text-3xl md:text-[44px] font-semibold text-[#0D2460] leading-[1.08] tracking-tight">
 					Join Our <br />
@@ -38,7 +38,7 @@
 				</p>
 			</div>
 
-			<!-- TIGHTER WHITE JS, AK, + BADGES -->
+			<!-- JS, AK, + BADGES -->
 			<div class="flex items-center gap-3 pt-1">
 				<div class="flex -space-x-1.5 shrink-0">
 					<div class="w-8 h-8 rounded-full bg-white/80 border border-slate-300/80 flex items-center justify-center text-xs font-semibold text-[#0D2460]">
@@ -56,7 +56,7 @@
 				</span>
 			</div>
 
-			<!-- BLUE-BORDERED QR SCANNER (NO WHITE OUTLINE) -->
+			<!-- QR SCANNER -->
 			<div class="pt-2 flex items-center gap-4">
 				<div class="p-2 rounded-2xl border-2 border-[#1E40AF] bg-white shadow-sm w-32 h-32 shrink-0 flex items-center justify-center">
 					<img 

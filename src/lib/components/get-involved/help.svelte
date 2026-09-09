@@ -25,7 +25,6 @@
   ];
 </script>
 
-<!-- PURE WHITE SECTION BACKGROUND -->
 <section class="relative py-12 md:py-16 px-4 md:px-6 bg-white overflow-hidden font-sans antialiased">
   
   <div class="max-w-7xl mx-auto relative z-10">
@@ -33,7 +32,7 @@
     <!-- TOP SECTION -->
     <div class="flex flex-col items-center text-center mb-10 md:mb-12">
       
-      <!-- Impact Opportunities Badge with Exact Figma Blue Border -->
+      <!-- Impact Opportunities Badge -->
       <div class="inline-flex items-center px-4 py-1.5 bg-[#EEF5FF] border border-[#2563EB]/40 rounded-full mb-4">
         <span class="text-[#2563EB] font-medium text-[10px] md:text-[11px] tracking-widest uppercase">
           IMPACT OPPORTUNITIES
@@ -57,7 +56,7 @@
         <div class="bg-white border border-slate-100/80 rounded-[28px] p-6 md:p-8 shadow-sm flex flex-col justify-between">
           
           <div>
-            <!-- Bluish-White Icon Container -->
+            <!-- Icon Container -->
             <div class="w-11 h-11 rounded-xl bg-[#EEF5FF] flex items-center justify-center mb-6 border border-[#DCE8FB]">
               <svelte:component this={item.icon} size={22} class="text-[#2563EB]" />
             </div>
@@ -73,7 +72,7 @@
             </p>
           </div>
 
-          <!-- Learn More Link -->
+          <!-- Link -->
           <div class="pt-2">
             <a 
               href="#learn-more" 

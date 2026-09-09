@@ -46,37 +46,33 @@
       </p>
     </div>
 
-    <!-- FIGMA BLUISH CARD -->
+    <!-- CARD -->
     <div class="relative bg-[#EEF4FB] border border-[#D8E6F8] p-10 md:p-16 rounded-[2.5rem] shadow-xs max-w-4xl mx-auto overflow-hidden">
       
-      <!-- TOP LEFT DOUBLE QUOTE (VERTICALLY ELONGATED HEAD & RIGHT TAIL) -->
+      <!-- TOP LEFT DOUBLE QUOTE -->
       <div class="absolute top-10 left-10 text-[#82ACF9] pointer-events-none">
         <svg class="w-12 h-12 md:w-16 md:h-16 fill-current" viewBox="0 0 100 100">
-          <!-- Left Vertically Elongated Block + Right Tail -->
           <rect x="10" y="12" width="28" height="38" rx="3" />
           <path d="M10 50 Q 12 74, 34 78 Q 24 64, 26 50 Z" />
           
-          <!-- Right Vertically Elongated Block + Right Tail -->
           <rect x="54" y="12" width="28" height="38" rx="3" />
           <path d="M54 50 Q 56 74, 78 78 Q 68 64, 70 50 Z" />
         </svg>
       </div>
 
-      <!-- BOTTOM RIGHT DOUBLE QUOTE (SAME GLYPH) -->
+      <!-- BOTTOM RIGHT DOUBLE QUOTE -->
       <div class="absolute bottom-10 right-10 text-[#82ACF9] pointer-events-none">
         <svg class="w-12 h-12 md:w-16 md:h-16 fill-current" viewBox="0 0 100 100">
-          <!-- Left Vertically Elongated Block + Right Tail -->
           <rect x="10" y="12" width="28" height="38" rx="3" />
           <path d="M10 50 Q 12 74, 34 78 Q 24 64, 26 50 Z" />
           
-          <!-- Right Vertically Elongated Block + Right Tail -->
           <rect x="54" y="12" width="28" height="38" rx="3" />
           <path d="M54 50 Q 56 74, 78 78 Q 68 64, 70 50 Z" />
         </svg>
       </div>
 
       <div class="relative z-10 text-center space-y-8">
-        <!-- QUOTE TEXT ("together" IS MEDIUM LIGHTER GREEN & SEMI-BOLD) -->
+        <!-- QUOTE TEXT -->
         <p class="text-2xl md:text-3xl font-semibold text-[#0D2460] max-w-2xl mx-auto leading-relaxed tracking-tight">
           Alone we can do so little, <br/>
           <span class="text-[#78C520] font-semibold">together</span> we can do so much.
@@ -84,7 +80,6 @@
 
         <!-- AUTHOR & AFFILIATION LINES -->
         <div class="space-y-2 pt-2">
-          <!-- PRIYANKA JOSHI WITH DARK BLUE ACCENT BARS -->
           <div class="flex items-center justify-center gap-3">
             <div class="w-10 h-[2px] bg-[#1E40AF]"></div>
             <p class="font-bold text-xs text-[#1E40AF] tracking-[0.2em] uppercase">
@@ -93,7 +88,6 @@
             <div class="w-10 h-[2px] bg-[#1E40AF]"></div>
           </div>
 
-          <!-- Non-Bold Founder & Foundation Text on Separate Lines -->
           <div class="space-y-0.5 text-[#64748B] text-[10px] font-normal uppercase tracking-[0.18em]">
             <p>FOUNDER</p>
             <p>JARURAT CARE FOUNDATION</p>
