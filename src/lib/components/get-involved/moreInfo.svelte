@@ -1,5 +1,5 @@
 <script>
-  import { Quote, ChevronDown } from 'lucide-svelte';
+  import { ChevronDown } from 'lucide-svelte';
   import { marked } from 'marked';
 
   let faqs = [
@@ -32,65 +32,91 @@
   }
 </script>
 
-<section class="w-full bg-[linear-gradient(180deg,#FFFFFF_0%,#F4F8FF_100%)] flex flex-col items-center justify-center px-4 py-16 border-t border-blue-50">
+<section class="w-full bg-white flex flex-col items-center justify-center px-4 py-16 font-sans antialiased">
   
   <div class="max-w-6xl w-full space-y-20">
 
-    <!-- Founder's Message Section -->
+    <!-- Founder's Message Section Header -->
     <div class="text-center space-y-2">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-[#0D2561] tracking-tight">
+      <h2 class="text-3xl md:text-4xl font-semibold text-[#0D2460] tracking-tight">
         Founder's Message
       </h2>
-      <p class="text-slate-500 text-xs md:text-sm font-medium tracking-wide">
+      <p class="text-[#64748B] text-xs md:text-sm font-normal">
         Rewriting the narrative, One life at a time
       </p>
     </div>
 
-    <div class="relative bg-white/70 backdrop-blur-md p-10 md:p-16 rounded-[2.5rem] border border-slate-100 shadow-xl overflow-hidden max-w-4xl mx-auto">
+    <!-- FIGMA BLUISH CARD -->
+    <div class="relative bg-[#EEF4FB] border border-[#D8E6F8] p-10 md:p-16 rounded-[2.5rem] shadow-xs max-w-4xl mx-auto overflow-hidden">
       
-      <div class="absolute top-6 left-8 text-blue-200/60 pointer-events-none">
-        <Quote size={60} class="rotate-180 fill-current" />
+      <!-- TOP LEFT DOUBLE QUOTE (VERTICALLY ELONGATED HEAD & RIGHT TAIL) -->
+      <div class="absolute top-10 left-10 text-[#82ACF9] pointer-events-none">
+        <svg class="w-12 h-12 md:w-16 md:h-16 fill-current" viewBox="0 0 100 100">
+          <!-- Left Vertically Elongated Block + Right Tail -->
+          <rect x="10" y="12" width="28" height="38" rx="3" />
+          <path d="M10 50 Q 12 74, 34 78 Q 24 64, 26 50 Z" />
+          
+          <!-- Right Vertically Elongated Block + Right Tail -->
+          <rect x="54" y="12" width="28" height="38" rx="3" />
+          <path d="M54 50 Q 56 74, 78 78 Q 68 64, 70 50 Z" />
+        </svg>
       </div>
 
-      <div class="absolute bottom-6 right-8 text-blue-200/60 pointer-events-none">
-        <Quote size={60} class="fill-current" />
+      <!-- BOTTOM RIGHT DOUBLE QUOTE (SAME GLYPH) -->
+      <div class="absolute bottom-10 right-10 text-[#82ACF9] pointer-events-none">
+        <svg class="w-12 h-12 md:w-16 md:h-16 fill-current" viewBox="0 0 100 100">
+          <!-- Left Vertically Elongated Block + Right Tail -->
+          <rect x="10" y="12" width="28" height="38" rx="3" />
+          <path d="M10 50 Q 12 74, 34 78 Q 24 64, 26 50 Z" />
+          
+          <!-- Right Vertically Elongated Block + Right Tail -->
+          <rect x="54" y="12" width="28" height="38" rx="3" />
+          <path d="M54 50 Q 56 74, 78 78 Q 68 64, 70 50 Z" />
+        </svg>
       </div>
 
       <div class="relative z-10 text-center space-y-8">
-        <p class="text-2xl md:text-3xl font-bold text-[#0D2561] max-w-2xl mx-auto leading-relaxed tracking-tight">
+        <!-- QUOTE TEXT ("together" IS MEDIUM LIGHTER GREEN & SEMI-BOLD) -->
+        <p class="text-2xl md:text-3xl font-semibold text-[#0D2460] max-w-2xl mx-auto leading-relaxed tracking-tight">
           Alone we can do so little, <br/>
-          <span class="text-[#78C520] font-extrabold">together</span> we can do so much.
+          <span class="text-[#78C520] font-semibold">together</span> we can do so much.
         </p>
 
-        <div class="flex items-center justify-center gap-3 pt-2">
-          <div class="w-12 h-[1.5px] bg-blue-300"></div>
-          <div class="text-center">
-            <p class="font-extrabold text-xs text-[#0D2561] uppercase tracking-[0.2em]">
+        <!-- AUTHOR & AFFILIATION LINES -->
+        <div class="space-y-2 pt-2">
+          <!-- PRIYANKA JOSHI WITH DARK BLUE ACCENT BARS -->
+          <div class="flex items-center justify-center gap-3">
+            <div class="w-10 h-[2px] bg-[#1E40AF]"></div>
+            <p class="font-bold text-xs text-[#1E40AF] tracking-[0.2em] uppercase">
               PRIYANKA JOSHI
             </p>
-            <p class="text-slate-400 text-[9px] font-bold uppercase tracking-[0.2em] mt-0.5">
-              FOUNDER, JARURAT CARE FOUNDATION
-            </p>
+            <div class="w-10 h-[2px] bg-[#1E40AF]"></div>
           </div>
-          <div class="w-12 h-[1.5px] bg-blue-300"></div>
+
+          <!-- Non-Bold Founder & Foundation Text on Separate Lines -->
+          <div class="space-y-0.5 text-[#64748B] text-[10px] font-normal uppercase tracking-[0.18em]">
+            <p>FOUNDER</p>
+            <p>JARURAT CARE FOUNDATION</p>
+          </div>
         </div>
+
       </div>
 
     </div>
 
-    <!-- FAQ Section (Matched to Figma) -->
+    <!-- FAQ Section -->
     <div class="max-w-3xl mx-auto w-full space-y-8">
-      <h2 class="text-3xl font-extrabold text-[#0D2561] text-center tracking-tight">
+      <h2 class="text-3xl font-semibold text-[#0D2460] text-center tracking-tight">
         FAQ
       </h2>
 
       <div class="space-y-4">
         {#each faqs as faq, i}
-          <div class="bg-[#F4F6F8] border border-slate-200 rounded-2xl p-5 shadow-xs transition-all">
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs transition-all">
             <button
               type="button"
               on:click={() => toggleFaq(i)}
-              class="w-full text-left flex justify-between items-center gap-4 text-[#78C520] font-bold text-sm md:text-base pb-3 border-b border-slate-200 cursor-pointer focus:outline-none"
+              class="w-full text-left flex justify-between items-center gap-4 text-[#78C520] font-semibold text-sm md:text-base pb-3 border-b border-slate-100 cursor-pointer focus:outline-none"
             >
               <span>{faq.question}</span>
               <ChevronDown
@@ -100,7 +126,7 @@
             </button>
 
             {#if faq.open}
-              <div class="pt-3 text-slate-600 text-xs md:text-sm font-medium leading-relaxed">
+              <div class="pt-3 text-slate-600 text-xs md:text-sm font-normal leading-relaxed">
                 <div class="faq-content">
                   {@html marked(faq.answer)}
                 </div>
@@ -109,7 +135,7 @@
                   <div class="flex justify-end mt-3">
                     <a
                       href={faq.linkUrl}
-                      class="text-[#3B82F6] hover:text-[#1D4ED8] font-semibold inline-flex items-center gap-1 underline underline-offset-4 text-xs md:text-sm"
+                      class="text-[#2563EB] hover:underline font-medium inline-flex items-center gap-1 text-xs md:text-sm"
                     >
                       {faq.linkText} &rarr;
                     </a>

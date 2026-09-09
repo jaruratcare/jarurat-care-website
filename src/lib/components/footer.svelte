@@ -66,7 +66,6 @@
 				<ul class="space-y-2 text-sm text-slate-600">
 					<li><a class="hover:underline" href="/about-us">About Us</a></li>
 					<li><a class="hover:underline" href="/get-involved">Get Involved</a></li>
-					<li><a class="hover:underline" href="/blogs">News & Blogs</a></li>
 					<li><a class="hover:underline" href="/contact-us">Contact Us</a></li>
 				</ul>
 			</div>
