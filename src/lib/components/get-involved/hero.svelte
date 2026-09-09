@@ -3,23 +3,21 @@
 	import qrCode from '$lib/assets/get-involved/qrcode.png';
 </script>
 
-<section class="relative w-full bg-[#EBF3FF] overflow-hidden min-h-[550px] lg:min-h-[620px] flex items-center">
+<section class="relative w-full bg-[#EBF3FF] overflow-hidden min-h-[500px] lg:min-h-[580px] flex items-center">
 	
-	<div class="hidden lg:flex absolute right-0 bottom-0 top-0 w-[72%] items-end justify-start pointer-events-none z-0 overflow-hidden">
+	<!-- DESKTOP HERO IMAGE -->
+	<div class="hidden lg:flex absolute right-0 bottom-0 top-0 w-[70%] items-end justify-end pointer-events-none z-0 pr-6">
 		<img
 			src={heroImage}
 			alt="Medical Advisory Board Doctors"
-			class="h-[105%] w-auto max-w-none object-contain object-left-bottom -translate-x-16" 
+			class="max-h-[92%] w-auto max-w-full object-contain object-bottom" 
 		/>
 	</div>
 
-	<!-- LEFT SIDE CONTENT CONTAINER -->
 	<div class="max-w-7xl mx-auto px-6 py-10 lg:py-16 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12">
 		
-		<!-- Content Column -->
 		<div class="lg:col-span-6 space-y-6 text-left">
 			
-			<!-- Tag Badge -->
 			<div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 border border-blue-200/60 rounded-full">
 				<span class="relative flex h-2 w-2">
 					<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#38BDF8] opacity-40"></span>
@@ -30,7 +28,6 @@
 				</span>
 			</div>
 
-			<!-- Title & Subtitle -->
 			<div class="space-y-3">
 				<h1 class="text-3xl md:text-5xl font-bold text-[#061E5C] leading-[1.1] tracking-tight">
 					Join Our <br />
@@ -42,7 +39,6 @@
 				</p>
 			</div>
 
-			<!-- Avatars + Joined text -->
 			<div class="flex items-center gap-3 pt-1">
 				<div class="flex -space-x-2 shrink-0">
 					<div class="w-7 h-7 rounded-full border-2 border-white bg-sky-100 flex items-center justify-center text-[9px] font-bold text-[#061E5C]">JS</div>
@@ -81,7 +77,7 @@
 			<img
 				src={heroImage}
 				alt="Medical Advisory Board Doctors"
-				class="w-full object-contain" 
+				class="w-full h-auto max-h-[350px] object-contain mx-auto" 
 			/>
 		</div>
 

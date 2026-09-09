@@ -1,5 +1,5 @@
 <script>
-	import Logo from '$lib/svg/logo.svelte';
+	import Logo from '$lib/svg/logo-figma.svelte';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { MenuIcon, X } from 'lucide-svelte';
@@ -48,7 +48,8 @@
 </script>
 
 <header class="fixed inset-x-0 top-0 z-50 bg-white shadow-sm">
-	<nav class="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 lg:px-6 py-3">
+	<!-- Updated padding from px-4 md:px-8 to px-6 lg:px-12 to align with page content sections -->
+	<nav class="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-12 py-3">
 
 		<a href="/">
 			<Logo class="h-8 md:h-10 w-auto" />
@@ -64,7 +65,7 @@
 		</ul>
 
 		<div class="flex items-center gap-4">
-			<a href="/donate" class="hidden sm:block bg-[#1E4ED8] text-white px-5 lg:px-6 py-2 rounded-full text-xs lg:text-sm font-medium shadow-md hover:shadow-lg transition whitespace-nowrap">Donate Now</a>
+			<a href="/donate" class="hidden sm:flex items-center justify-center h-[62px] w-[154px] bg-[#1E4ED8] text-white rounded-full text-sm lg:text-base font-semibold shadow-md hover:shadow-lg transition whitespace-nowrap">Donate Now</a>
 
 
 			<!-- Hamburger toggle visible only when header links are hidden (< md) -->

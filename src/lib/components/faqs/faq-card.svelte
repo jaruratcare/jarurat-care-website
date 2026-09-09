@@ -1,47 +1,55 @@
-<script lang="ts">
-	import { marked } from 'marked';
+<script>
 	import { ChevronDown } from 'lucide-svelte';
-	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
 
 	export let question = '';
-	export let answer = '';
+	export let points = [];
+	export let linkText = '';
+	export let linkHref = '';
 
-	let isOpen = writable(false);
-
-	let container: HTMLDivElement | null = null;
-	let contentHeight = 0;
-
-	onMount(() => {
-		if (container) contentHeight = container.scrollHeight;
-	});
+	let isOpen = true;
 </script>
 
-<div class="bg-white sm:px-4 py-3 sm:rounded-lg border-b sm:border">
+<div class="bg-[#EFF6FF] rounded-2xl border border-blue-100 p-6 md:p-7 shadow-sm mb-4 font-sans antialiased">
 	<button
-		class="flex items-center justify-between cursor-pointer w-full text-[#6BAA2E] font-medium text-[0.9em] text-left gap-4"
-		on:click={() => isOpen.set(!$isOpen)}
+		type="button"
+		class="flex items-center justify-between w-full text-left gap-4 cursor-pointer group pb-3.5 border-b border-slate-300"
+		on:click={() => (isOpen = !isOpen)}
 	>
-		{question}
-		<ChevronDown class={`text-[#6BAA2E] ${$isOpen ? 'rotate-180' : ''} transition-transform duration-300`} />
+		<span class="text-[#7CB342] font-semibold text-[19px] md:text-[21px] leading-snug tracking-tight">
+			{question}
+		</span>
+		<ChevronDown
+			class={`w-6 h-6 text-[#7CB342] shrink-0 transition-transform duration-300 ${
+				isOpen ? 'rotate-180' : ''
+			}`}
+		/>
 	</button>
 
-	<div
-		bind:this={container}
-		style="height: {$isOpen ? contentHeight : 0}px"
-		class="overflow-hidden transition-all text-gray-700 text-[0.8em]"
-	>
-		<p class="mt-2 px-2 pt-2 border-t prose faq-content">{@html marked(answer)}</p>
-	</div>
-</div>
-<style>
-:global(.faq-content a) {
-    color: #2563EB;
-    font-weight: 700;
-    text-decoration: none;
-}
+	{#if isOpen}
+		<div class="pt-4">
+			<!-- Bullet Points -->
+			{#if points && points.length > 0}
+				<ul class="space-y-3 mb-6">
+					{#each points as point}
+						<li class="flex items-start gap-2.5 text-slate-700 text-[17px] md:text-[18px] leading-relaxed font-normal">
+							<span class="text-slate-400 mt-0.5 select-none font-bold text-lg">•</span>
+							<span>{point}</span>
+						</li>
+					{/each}
+				</ul>
+			{/if}
 
-:global(.faq-content a:hover) {
-    text-decoration: underline;
-}
-</style>
+			{#if linkText && linkHref}
+				<div class="flex justify-end pt-2">
+					<a
+						href={linkHref}
+						class="text-[#2563EB] font-bold text-[18px] md:text-[20px] inline-flex items-center gap-2 underline underline-offset-4 hover:underline transition-colors tracking-tight"
+					>
+						<span>{linkText}</span>
+						<span class="no-underline text-2xl font-normal">→</span>
+					</a>
+				</div>
+			{/if}
+		</div>
+	{/if}
+</div>

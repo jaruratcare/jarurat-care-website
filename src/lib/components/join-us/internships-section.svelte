@@ -1,49 +1,103 @@
-<script>
-   let internships = [
-    {
-        title: "Frontend Development Intern",
-        description:
-            "Assist in building and improving the Jarurat Care website using modern frameworks. Work on UI components, responsive layouts, and accessibility to improve user experience."
-    },
-    {
-        title: "Full Stack Web Development Intern",
-        description:
-            "Support development of new features for the Jarurat Care platform including backend services, APIs, and database integrations to enhance the website’s functionality."
-    },
-    {
-        title: "Web Performance & Optimization Intern",
-        description:
-            "Help optimize website performance, improve loading speeds, implement SEO best practices, and ensure the platform remains scalable and accessible across devices."
-    }
-];
-</script>
+<section class="w-full bg-white px-4 sm:px-6 py-12 md:px-10 md:py-24 overflow-hidden box-border">
+    <!-- Section Heading -->
+    <div class="mx-auto text-center px-2">
+        <h2
+            class="font-bold leading-tight text-3xl sm:text-4xl md:text-[42px]"
+            style="color: rgba(12, 31, 86, 1);"
+        >
+            Internship at a Glance
+        </h2>
 
-<section class="py-16 bg-[#eef4ff]">
-
-    <div class="max-w-6xl mx-auto px-6">
-
-        <div class="text-center">
-
-            <h2 class="font-extrabold text-3xl md:text-4xl text-primaryBlue">
-                Internship Opportunities
-            </h2>
-
-            <p class="mt-3 text-gray-600 max-w-xl mx-auto">
-                We regularly offer internships through Internshala where
-                students can contribute to research, outreach programs,
-                digital initiatives, and awareness campaigns.
-            </p>
-
-            <a
-                href="https://internshala.com/company/jarurat-care-1716706901"
-                target="_blank"
-                class="inline-block mt-6 bg-blue-600 text-white px-7 py-3 rounded-full font-semibold"
-            >
-                View Internships on Internshala
-            </a>
-
-        </div>
-
+        <p
+            class="mt-3 font-semibold text-base sm:text-lg md:text-[20px]"
+            style="color: rgba(107, 114, 128, 1);"
+        >
+            Everything you need to know before you apply
+        </p>
     </div>
 
+    <!-- Four Information Cards -->
+    <div
+        class="mx-auto mt-10 md:mt-20 grid w-full max-w-[1320px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 box-border"
+    >
+        <!-- Card 1 -->
+        <div
+            class="flex h-auto sm:h-[184px] flex-col items-center justify-start rounded-[16px] bg-white px-6 py-6 sm:py-8 text-center shadow-[0_5px_15px_rgba(0,0,0,0.15)] box-border"
+        >
+            <h3
+                class="font-bold leading-tight text-2xl sm:text-[26px]"
+                style="color: rgba(12, 31, 86, 1);"
+            >
+                20+ Domains
+            </h3>
+
+            <p
+                class="mt-4 sm:mt-7 leading-relaxed text-sm sm:text-base md:text-[18px]"
+                style="color: rgba(107, 114, 128, 1);"
+            >
+                Explore opportunities<br />
+                across diverse fields.
+            </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div
+            class="flex h-auto sm:h-[184px] flex-col items-center justify-start rounded-[16px] bg-white px-6 py-6 sm:py-8 text-center shadow-[0_5px_15px_rgba(0,0,0,0.15)] box-border"
+        >
+            <h3
+                class="font-bold leading-tight text-2xl sm:text-[26px]"
+                style="color: rgba(12, 31, 86, 1);"
+            >
+                4 Months
+            </h3>
+
+            <p
+                class="mt-4 sm:mt-7 leading-relaxed text-sm sm:text-base md:text-[18px]"
+                style="color: rgba(107, 114, 128, 1);"
+            >
+                A structured part-time<br />
+                journey.
+            </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div
+            class="flex h-auto sm:h-[184px] flex-col items-center justify-start rounded-[16px] bg-white px-6 py-6 sm:py-8 text-center shadow-[0_5px_15px_rgba(0,0,0,0.15)] box-border"
+        >
+            <h3
+                class="font-bold leading-tight text-2xl sm:text-[26px]"
+                style="color: rgba(12, 31, 86, 1);"
+            >
+                100% Remote
+            </h3>
+
+            <p
+                class="mt-4 sm:mt-7 leading-relaxed text-sm sm:text-base md:text-[18px]"
+                style="color: rgba(107, 114, 128, 1);"
+            >
+                Balance your internship<br />
+                with academics.
+            </p>
+        </div>
+
+        <!-- Card 4 -->
+        <div
+            class="flex h-auto sm:h-[184px] flex-col items-center justify-start rounded-[16px] bg-white px-6 py-6 sm:py-8 text-center shadow-[0_5px_15px_rgba(0,0,0,0.15)] box-border"
+        >
+            <h3
+                class="font-bold leading-tight text-2xl sm:text-[26px]"
+                style="color: rgba(12, 31, 86, 1);"
+            >
+                Certification
+            </h3>
+
+            <p
+                class="mt-4 sm:mt-7 leading-relaxed text-sm sm:text-base md:text-[18px]"
+                style="color: rgba(107, 114, 128, 1);"
+            >
+                Issued to all interns who<br />
+                complete the program.
+            </p>
+        </div>
+    </div>
 </section>
