@@ -73,20 +73,20 @@
   });
 </script>
 
-<!-- PURE WHITE SECTION BACKGROUND -->
+
 <section class="py-12 md:py-20 px-0 md:px-6 bg-white overflow-hidden font-sans antialiased">
   <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
     
     <!-- TOP SECTION -->
     <div class="mb-8 md:mb-12 px-6">
-      <!-- Expert Network Oval Badge -->
+      <!-- Expert Network Badge -->
       <div class="inline-flex items-center px-4 py-1.5 bg-[#EEF5FF] border border-[#2563EB]/40 rounded-full mb-4">
         <span class="text-[#2563EB] font-medium text-[10px] md:text-[11px] tracking-widest uppercase">
           EXPERT NETWORK
         </span>
       </div>
 
-      <!-- Solid Color Advisory Board Title -->
+      <!-- Advisory Board Title -->
       <h2 class="text-3xl md:text-[42px] font-semibold text-[#0D2460] tracking-tight">
         Advisory Board
       </h2>
@@ -120,10 +120,10 @@
       {#each advisoryBoard as doctor}
         <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 flex justify-center px-6 md:px-4 snap-center">
     
-          <!-- Inner White Card with Vignette Shadow and Subtle Border -->
+          <!-- Inner White Card -->
           <div class="w-full max-w-[360px] bg-white rounded-[2rem] p-6 text-center flex flex-col items-center justify-between min-h-[380px] border border-slate-100/80 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1">
         
-            <!-- Image Container with Rounded Corners -->
+            <!-- Image Container -->
             <div class="w-full h-48 rounded-2xl overflow-hidden bg-slate-50 mb-4 flex items-center justify-center border border-slate-100">
               {#if doctor.image}
                 <img 
