@@ -28,6 +28,7 @@
 	async function login() {
 		error = '';
 		loading = true;
+		let redirecting = false;
 		let timer = setTimeout(() => { showLoader = true; }, 300);
 
 		try {
@@ -50,6 +51,11 @@
 			if (profileError) throw profileError;
 
 			const { profile_completed, role, verification_status } = profile || {};
+
+			redirecting = true;
+			// Keep loader visible during redirect
+			clearTimeout(timer);
+			showLoader = true;
 
 			if (role === 'Super_Admin') {
 				window.location.href = '/cms/super-admin';
@@ -80,7 +86,8 @@
 		} finally {
 			clearTimeout(timer);
 			loading = false;
-			showLoader = false;
+			// Only hide loader if we're NOT redirecting
+			if (!redirecting) showLoader = false;
 		}
 	}
 </script>
