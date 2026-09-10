@@ -1,6 +1,6 @@
 <script>
 	import Nav from '$lib/components/nav.svelte';
-	import Footer from '$lib/components/footer.svelte';
+	// Footer import removed from here to prevent duplication if your layout already includes it globally
 	import HeroBackground from './HeroBackground.svg';
 	import HeroBackgroundMobile from './HeroBackgroundMobile.svg';
 
@@ -18,7 +18,7 @@
 		'updates': '/icons/update.svg'
 	};
 
-	let activeSection = 'Getting Started';
+	let activeSection = 'Intro & Access';
 	let isTocOpen = false; // Mobile/Tab accordion state
 
 	const categories = [
@@ -302,7 +302,7 @@
 									{#if item.title === 'Contact'}
 										<p class="text-[#596273] text-sm sm:text-base leading-relaxed">
 											If you have any questions regarding these Terms & Conditions, please contact us at:
-											<a href="http://localhost:5173/about-us4" class="text-[#1E4ED8] font-medium hover:underline">
+											<a href="mailto:Priyanka.joshi@jarurat.care" class="text-[#1E4ED8] font-medium hover:underline">
 												Priyanka.joshi@jarurat.care
 											</a>.
 										</p>
@@ -328,5 +328,3 @@
 		</section>
 	</div>
 </main>
-
-<Footer />
