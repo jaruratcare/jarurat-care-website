@@ -380,9 +380,8 @@ export const load: PageServerLoad = async ({
 		);
 	}
 
-	// =========================================================
+	
 	// RETURN
-	// =========================================================
 
 	return {
 		article: {
@@ -399,14 +398,10 @@ export const load: PageServerLoad = async ({
 	};
 };
 
-// =============================================================
 // ACTIONS
-// =============================================================
 
 export const actions: Actions = {
-	// =========================================================
 	// LIKE / UNLIKE
-	// =========================================================
 
 	toggleLike: async ({ request, locals }) => {
 		const {
@@ -435,9 +430,7 @@ export const actions: Actions = {
 			});
 		}
 
-		// -----------------------------------------------------
 		// RESEARCH
-		// -----------------------------------------------------
 
 		if (contentType === 'research') {
 			const { data: existing } =
@@ -546,12 +539,13 @@ export const actions: Actions = {
 				likesCount: newCount
 			};
 		}
-
 		// -----------------------------------------------------
-		// NORMAL ARTICLE
+		// NORMAL ARTICLE OR CMS CONTENT
 		// -----------------------------------------------------
 
-		if (contentType === 'article') {
+		if (contentType !== 'research') {
+			const targetTable = contentType === 'article' ? 'articles' : 'cms_content';
+
 			const { data: existing } =
 				await supabaseAdmin
 					.from('article_likes')
@@ -568,7 +562,7 @@ export const actions: Actions = {
 
 				const { data: article } =
 					await supabaseAdmin
-						.from('articles')
+						.from(targetTable)
 						.select('likes_count')
 						.eq('id', contentId)
 						.single();
@@ -581,7 +575,7 @@ export const actions: Actions = {
 				);
 
 				await supabaseAdmin
-					.from('articles')
+					.from(targetTable)
 					.update({
 						likes_count: newCount
 					})
@@ -616,7 +610,7 @@ export const actions: Actions = {
 
 			const { data: article } =
 				await supabaseAdmin
-					.from('articles')
+					.from(targetTable)
 					.select('likes_count')
 					.eq('id', contentId)
 					.single();
@@ -627,7 +621,7 @@ export const actions: Actions = {
 				) + 1;
 
 			await supabaseAdmin
-				.from('articles')
+				.from(targetTable)
 				.update({
 					likes_count: newCount
 				})
@@ -790,10 +784,12 @@ export const actions: Actions = {
 		}
 
 		// -----------------------------------------------------
-		// NORMAL ARTICLE
+		// NORMAL ARTICLE OR CMS CONTENT
 		// -----------------------------------------------------
 
-		if (contentType === 'article') {
+		if (contentType !== 'research') {
+			const targetTable = contentType === 'article' ? 'articles' : 'cms_content';
+
 			const { data: existing } =
 				await supabaseAdmin
 					.from('saved_articles')
@@ -810,7 +806,7 @@ export const actions: Actions = {
 
 				const { data: article } =
 					await supabaseAdmin
-						.from('articles')
+						.from(targetTable)
 						.select('saves_count')
 						.eq('id', contentId)
 						.single();
@@ -823,7 +819,7 @@ export const actions: Actions = {
 				);
 
 				await supabaseAdmin
-					.from('articles')
+					.from(targetTable)
 					.update({
 						saves_count: newCount
 					})
@@ -858,7 +854,7 @@ export const actions: Actions = {
 
 			const { data: article } =
 				await supabaseAdmin
-					.from('articles')
+					.from(targetTable)
 					.select('saves_count')
 					.eq('id', contentId)
 					.single();
@@ -869,7 +865,7 @@ export const actions: Actions = {
 				) + 1;
 
 			await supabaseAdmin
-				.from('articles')
+				.from(targetTable)
 				.update({
 					saves_count: newCount
 				})

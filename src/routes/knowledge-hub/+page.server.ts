@@ -130,108 +130,92 @@ export const actions = {
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.getSession();
-	let savedArticleIds: string[] = [];
-	let likedArticleIds: string[] = [];
 
-	if (session) {
-		const { data: savedRows } = await supabaseAdmin
-			.from('saved_articles')
-			.select('article_id')
-			.eq('user_id', session.user.id);
-		
-		if (savedRows) {
-			savedArticleIds = savedRows.map(r => String(r.article_id));
-		}
-
-		const { data: likedRows } = await supabaseAdmin
-			.from('article_likes')
-			.select('article_id')
-			.eq('user_id', session.user.id);
-		
-		if (likedRows) {
-			likedArticleIds = likedRows.map(r => String(r.article_id));
-		}
-	}
-
-	let publications: any[] = [];
-
-	try {
-		// 1. Fetch research articles (CMS)
-		const { data: researchData } = await cmsSupabase
+	// Run all DB calls in parallel
+	const [
+		savedRows,
+		likedRows,
+		researchData,
+		cmsData,
+		articlesData
+	] = await Promise.all([
+		session
+			? supabaseAdmin.from('saved_articles').select('article_id').eq('user_id', session.user.id)
+			: Promise.resolve({ data: [] }),
+		session
+			? supabaseAdmin.from('article_likes').select('article_id').eq('user_id', session.user.id)
+			: Promise.resolve({ data: [] }),
+		supabaseAdmin
 			.from('research_articles')
 			.select('*')
 			.eq('status', 'published')
-			.order('created_at', { ascending: false });
-
-		const researchItems = (researchData || []).map(r => ({
-			id: r.id,
-			slug: r.slug || r.id, // Research articles don't have slug, use ID
-			title: r.title || 'Untitled Research',
-			excerpt: makeExcerpt(r.abstract || ''),
-			thumbnail: r.featured_image || getDefaultThumbnail('research', r.id),
-			category: 'Research Paper',
-			type: 'research',
-			date: formatDate(r.created_at),
-			date_raw: new Date(r.created_at).getTime(),
-			author: r.author_name_credentials || r.author || 'Research Team',
-			likes_count: Number(r.likes_count || 0),
-			saves_count: Number(r.saves_count || 0),
-			views_count: Number(r.views_count || 0)
-		}));
-
-		// 2. Fetch CMS Content (Blogs, News, Events, Campaigns, Testimonials, FAQs)
-		const { data: cmsData } = await cmsSupabase
+			.order('created_at', { ascending: false }),
+		supabaseAdmin
 			.from('cms_content')
 			.select('*')
 			.eq('status', 'published')
-			.order('created_at', { ascending: false });
-
-		const cmsItems = (cmsData || []).map(c => ({
-			id: c.id,
-			slug: c.slug || c.id,
-			title: c.title || 'Untitled',
-			excerpt: makeExcerpt(c.content || ''),
-			thumbnail: c.featured_image || getDefaultThumbnail(c.content_type, c.id),
-			category: c.category || c.content_type.charAt(0).toUpperCase() + c.content_type.slice(1),
-			type: c.content_type,
-			date: formatDate(c.created_at),
-			date_raw: new Date(c.created_at).getTime(),
-			author: c.author_name_credentials || c.author || 'Editorial Team',
-			likes_count: Number(c.likes_count || 0),
-			saves_count: Number(c.saves_count || 0),
-			views_count: Number(c.views_count || 0)
-		}));
-
-		// 3. Fetch CMS Articles (New DB)
-		const { data: articlesData } = await supabaseAdmin
+			.order('created_at', { ascending: false }),
+		supabaseAdmin
 			.from('articles')
 			.select('*')
 			.eq('status', 'published')
-			.order('created_at', { ascending: false });
+			.order('created_at', { ascending: false })
+	]);
 
-		const legacyItems = (articlesData || [])
-			.map(a => ({
-				id: a.id,
-				slug: a.slug || a.id.toString(),
-				title: a.title || 'Untitled Article',
-				excerpt: makeExcerpt(a.abstract || a.content || a.excerpt || ''),
-				thumbnail: a.cover_image_url || a.image || getDefaultThumbnail('article', a.id.toString()),
-				category: a.category || 'General Article',
-				type: 'article',
-				date: formatDate(a.created_at),
-				date_raw: new Date(a.created_at).getTime(),
-				author: a.author_name_credentials || a.author || 'JCF Team',
-				likes_count: Number(a.likes_count || 0),
-				saves_count: Number(a.saves_count || 0),
-				views_count: Number(a.views_count || a.views || 0)
-			}));
+	const savedArticleIds = (savedRows.data || []).map((r: any) => String(r.article_id));
+	const likedArticleIds = (likedRows.data || []).map((r: any) => String(r.article_id));
 
-		// Combine and sort
-		publications = [...researchItems, ...cmsItems, ...legacyItems].sort((a, b) => b.date_raw - a.date_raw);
+	const researchItems = (researchData.data || []).map((r: any) => ({
+		id: r.id,
+		slug: r.slug || r.id,
+		title: r.title || 'Untitled Research',
+		excerpt: makeExcerpt(r.abstract || ''),
+		thumbnail: r.featured_image || getDefaultThumbnail('research', r.id),
+		category: 'Research Paper',
+		type: 'research',
+		date: formatDate(r.created_at),
+		date_raw: new Date(r.created_at).getTime(),
+		author: r.author_name_credentials || r.author || 'Research Team',
+		likes_count: Number(r.likes_count || 0),
+		saves_count: Number(r.saves_count || 0),
+		views_count: Number(r.views_count || 0)
+	}));
 
-	} catch (error) {
-		console.error('Error fetching knowledge hub content:', error);
-	}
+	const cmsItems = (cmsData.data || []).map((c: any) => ({
+		id: c.id,
+		slug: c.slug || c.id,
+		title: c.title || 'Untitled',
+		excerpt: makeExcerpt(c.content || ''),
+		thumbnail: c.featured_image || getDefaultThumbnail(c.content_type, c.id),
+		category: c.category || c.content_type.charAt(0).toUpperCase() + c.content_type.slice(1),
+		type: c.content_type,
+		date: formatDate(c.created_at),
+		date_raw: new Date(c.created_at).getTime(),
+		author: c.author_name_credentials || c.author || 'Editorial Team',
+		likes_count: Number(c.likes_count || 0),
+		saves_count: Number(c.saves_count || 0),
+		views_count: Number(c.views_count || 0)
+	}));
+
+	const legacyItems = (articlesData.data || []).map((a: any) => ({
+		id: a.id,
+		slug: a.slug || a.id.toString(),
+		title: a.title || 'Untitled Article',
+		excerpt: makeExcerpt(a.abstract || a.content || a.excerpt || ''),
+		thumbnail: a.cover_image_url || a.image || getDefaultThumbnail('article', a.id.toString()),
+		category: a.category || 'General Article',
+		type: 'article',
+		date: formatDate(a.created_at),
+		date_raw: new Date(a.created_at).getTime(),
+		author: a.author_name_credentials || a.author || 'JCF Team',
+		likes_count: Number(a.likes_count || 0),
+		saves_count: Number(a.saves_count || 0),
+		views_count: Number(a.views_count || a.views || 0)
+	}));
+
+	const publications = [...researchItems, ...cmsItems, ...legacyItems].sort(
+		(a, b) => b.date_raw - a.date_raw
+	);
 
 	return {
 		publications,

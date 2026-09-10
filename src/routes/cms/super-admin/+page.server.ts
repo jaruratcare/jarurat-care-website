@@ -314,7 +314,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	const {
 		data: cmsContentsData,
 		error: cmsError
-	} = await cmsSupabase
+	} = await supabaseAdmin
 		.from('cms_content')
 		.select('*')
 		.order('created_at', {
@@ -1644,7 +1644,7 @@ reject: async ({ request, locals }) => {
 					: null);
 
 			const { data, error } =
-				await cmsSupabase
+				await supabaseAdmin
 					.from(
 						'cms_content'
 					)
@@ -1932,7 +1932,7 @@ reject: async ({ request, locals }) => {
 			const {
 				data,
 				error
-			} = await cmsSupabase
+			} = await supabaseAdmin
 				.from(
 					'cms_content'
 				)
@@ -2036,7 +2036,7 @@ reject: async ({ request, locals }) => {
 			}
 
 			const { error } =
-				await cmsSupabase
+				await supabaseAdmin
 					.from(
 						'cms_content'
 					)
@@ -2112,7 +2112,7 @@ reject: async ({ request, locals }) => {
 			}
 
 			const { error } =
-				await cmsSupabase
+				await supabaseAdmin
 					.from(
 						'cms_content'
 					)

@@ -4,6 +4,16 @@
 	import { Search, Bell, Mail, ChevronDown, Menu as MenuIcon } from 'lucide-svelte';
 	import { onMount, onDestroy } from 'svelte';
 	import { cmsSupabase } from '$lib/cmsSupabase';
+	import PageLoader from '$lib/components/PageLoader.svelte';
+
+	let loggingOut = false;
+
+	async function handleLogout() {
+		let timer = setTimeout(() => { loggingOut = true; }, 300);
+		await cmsSupabase.auth.signOut();
+		clearTimeout(timer);
+		goto('/cms/login');
+	}
 
 	let showDropdown = false;
 	let dropdownRef: HTMLElement;
@@ -165,6 +175,10 @@
 
 <svelte:window on:click={closeDropdown} />
 
+{#if loggingOut}
+	<PageLoader />
+{/if}
+
 <header class="new-topbar">
 	<div class="topbar-left">
 		<button class="menu-toggle"><MenuIcon size={20} /></button>
@@ -259,7 +273,7 @@
 					</div>
 					<hr />
 					<a href={`/cms/community/doctors/${user.id}`} on:click={() => showDropdown = false}>View Profile</a>
-					<a href="/cms/logout" data-sveltekit-reload class="text-red-600 font-medium">Logout</a>
+					<button type="button" on:click={handleLogout} class="text-red-600 font-medium">Logout</button>
 				</div>
 			{/if}
 		</div>

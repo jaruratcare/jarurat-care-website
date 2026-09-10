@@ -3,6 +3,7 @@
 	import Nav from '$lib/components/nav.svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import PageLoader from '$lib/components/PageLoader.svelte';
 
 	export let data;
 
@@ -11,19 +12,23 @@
 	let error = '';
 	let loading = false;
 	let googleLoading = false;
+	let showLoader = false;
 
 	async function signInWithGoogle() {
 		googleLoading = true;
+		let timer = setTimeout(() => { showLoader = true; }, 300);
 		const { error } = await cmsSupabase.auth.signInWithOAuth({
 			provider: 'google',
 			options: { redirectTo: `${window.location.origin}/cms/auth-callback` }
 		});
-		if (error) googleLoading = false;
+		clearTimeout(timer);
+		if (error) { googleLoading = false; showLoader = false; }
 	}
 
 	async function login() {
 		error = '';
 		loading = true;
+		let timer = setTimeout(() => { showLoader = true; }, 300);
 
 		try {
 			const { data: authData, error: authError } = await cmsSupabase.auth.signInWithPassword({
@@ -73,13 +78,18 @@
 		} catch (err: any) {
 			error = err.message || 'Login failed';
 		} finally {
+			clearTimeout(timer);
 			loading = false;
+			showLoader = false;
 		}
 	}
 </script>
 
 <Nav />
 
+{#if showLoader}
+	<PageLoader />
+{/if}
 <div class="page">
 	<div class="container">
 		<!-- Left: Form -->

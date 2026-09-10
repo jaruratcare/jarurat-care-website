@@ -6,9 +6,12 @@
 	import { cn } from '$lib/utils';
 	import { onMount } from 'svelte';
 	import toast from 'svelte-french-toast';
+	import { cmsSupabase } from '$lib/cmsSupabase';
+	import PageLoader from '$lib/components/PageLoader.svelte';
 
 	let isMenuOpen = false;
 	let isLoggedIn = false;
+	let loggingOut = false;
 
 	$: pathname = $page.url.pathname;
 
@@ -23,8 +26,6 @@
 
 
 	onMount(async () => {
-		const { cmsSupabase } = await import('$lib/cmsSupabase');
-
 		const { data: { user } } = await cmsSupabase.auth.getUser();
 		if (user) isLoggedIn = true;
 
@@ -32,21 +33,22 @@
 			isLoggedIn = !!session?.user;
 		});
 
-		window.__cmsLogout = () => {
-			window.location.href = '/cms/logout';
-		};
-
 		return () => {
 			subscription.unsubscribe();
 		};
 	});
 
-	function logout() {
-		if (typeof window !== 'undefined' && window.__cmsLogout) {
-			window.__cmsLogout();
-		}
+	async function logout() {
+		let timer = setTimeout(() => { loggingOut = true; }, 300);
+		await cmsSupabase.auth.signOut();
+		clearTimeout(timer);
+		goto('/cms/login');
 	}
 </script>
+
+{#if loggingOut}
+	<PageLoader />
+{/if}
 
 <header class="fixed inset-x-0 top-0 z-50 bg-white shadow-sm">
 	<nav class="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 lg:px-6 py-3">

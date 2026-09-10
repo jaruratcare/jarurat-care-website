@@ -1,4 +1,9 @@
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+<script lang="ts">
+	let className: string = '';
+	export { className as class };
+</script>
+
+<svg class={className} version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="180.000000pt" height="55.000000pt" viewBox="0 0 1600.000000 496.000000"
  fill='none'
  preserveAspectRatio="xMidYMid meet">

@@ -3,6 +3,16 @@
 	import { goto } from '$app/navigation';
 	import { onMount, onDestroy } from 'svelte';
 	import { cmsSupabase } from '$lib/cmsSupabase';
+	import PageLoader from '$lib/components/PageLoader.svelte';
+
+	let loggingOut = false;
+
+	async function handleLogout() {
+		let timer = setTimeout(() => { loggingOut = true; }, 300);
+		await cmsSupabase.auth.signOut();
+		clearTimeout(timer);
+		goto('/cms/login');
+	}
 
 	export let doctorName: string = '';
 	export let unreadCount: number = 0;
@@ -165,6 +175,10 @@
 
 <svelte:window on:click={closeDropdown} />
 
+{#if loggingOut}
+	<PageLoader />
+{/if}
+
 <header class="topbar">
 	<div class="search-box">
 		<Search size={16} class="text-slate-400" />
@@ -258,7 +272,7 @@
 					<hr />
 					<a href={`/cms/community/doctors/${userId}`} on:click={() => showDropdown = false}>View Profile</a>
 					<hr />
-					<a href="/cms/logout" data-sveltekit-reload class="text-red-600 font-medium">Logout</a>
+					<button type="button" on:click={handleLogout} class="text-red-600 font-medium">Logout</button>
 				</div>
 			{/if}
 		</div>
@@ -683,7 +697,8 @@
 		border-top: 1px solid #F1F5F9;
 	}
 
-	.profile-dropdown a {
+	.profile-dropdown a,
+	.profile-dropdown button {
 		padding: 8px 16px;
 		font-size: 13px;
 		color: #334155;
@@ -692,19 +707,27 @@
 		align-items: center;
 		transition: all 0.15s;
 		font-weight: 500;
+		background: none;
+		border: none;
+		width: 100%;
+		text-align: left;
+		cursor: pointer;
 	}
 
-	.profile-dropdown a:hover {
+	.profile-dropdown a:hover,
+	.profile-dropdown button:hover {
 		background: #F8FAFC;
 		color: #0F172A;
 	}
 
-	.profile-dropdown a.text-red-600 {
+	.profile-dropdown a.text-red-600,
+	.profile-dropdown button.text-red-600 {
 		color: #DC2626;
 		font-weight: 600;
 	}
 
-	.profile-dropdown a.text-red-600:hover {
+	.profile-dropdown a.text-red-600:hover,
+	.profile-dropdown button.text-red-600:hover {
 		background: #FEF2F2;
 	}
 

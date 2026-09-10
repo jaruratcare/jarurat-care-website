@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Sidebar from '$lib/components/dashboard/Sidebar.svelte';
 	import Topbar from '$lib/components/dashboard/Topbar.svelte';
+	import { enhance } from '$app/forms';
 
 	export let data;
 
