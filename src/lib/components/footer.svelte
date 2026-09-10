@@ -38,13 +38,19 @@
 					Donate Now
 				</a>
 
-				<button
-					type="button"
-					on:click={handleSeekSupport}
-					class="bg-white/80 border border-blue-300 hover:bg-white text-[#1E56A0] text-sm font-semibold px-5 py-2.5 rounded-full transition-all shadow-sm cursor-pointer"
-				>
-					Seek Cancer support
-				</button>
+				<!-- Desktop Version: Redirects to /contact-us -->
+				<a href="/contact-us" class="hidden md:inline-block">
+					<Button class="bg-white border border-[#1E40AF] text-[#1E40AF] hover:bg-[#1E40AF] hover:text-white px-3 py-1.5 text-sm">
+						Seek Support
+					</Button>
+				</a>
+
+				<!-- Mobile & Tablet Version: Keeps mailto functionality -->
+				<a href="mailto:Priyanka.joshi@jarurat.care?subject=Seek Support" class="inline-block md:hidden">
+					<Button class="bg-white border border-[#1E40AF] text-[#1E40AF] hover:bg-[#1E40AF] hover:text-white px-3 py-1.5 text-sm">
+						Seek Support
+					</Button>
+				</a>
 			</div>
 		</div>
 

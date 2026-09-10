@@ -9,6 +9,7 @@
 	let isOpen = true;
 </script>
 
+<<<<<<< HEAD
 <div class="bg-[#EFF6FF] rounded-2xl border border-blue-100 p-6 md:p-7 shadow-sm mb-4 font-sans antialiased">
 	<button
 		type="button"
@@ -16,6 +17,11 @@
 		on:click={() => (isOpen = !isOpen)}
 	>
 		<span class="text-[#7CB342] font-semibold text-[19px] md:text-[21px] leading-snug tracking-tight">
+=======
+<div class="w-full max-w-[591px] mx-auto bg-[#F3F6FD] px-5 py-3.5 rounded-2xl border border-[#AFC6FF] mb-4 transition-all duration-300">
+	<button type="button" class="flex items-center justify-between w-full text-left gap-4 cursor-pointer group focus:outline-none" on:click={toggleOpen}>
+		<span class="text-[#60A52A] font-semibold text-[15px] sm:text-[18px] leading-normal sm:leading-snug group-hover:text-[#589223] transition-colors">
+>>>>>>> privacy-policy
 			{question}
 		</span>
 		<ChevronDown
