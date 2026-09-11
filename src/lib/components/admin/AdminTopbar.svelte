@@ -101,7 +101,7 @@
 			await markAsRead(notif.id);
 		}
 		if (notif.link) {
-			window.location.href = notif.link;
+			goto(notif.link);
 		}
 	}
 
