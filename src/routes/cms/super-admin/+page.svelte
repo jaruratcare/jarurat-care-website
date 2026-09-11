@@ -291,7 +291,6 @@
 			const newRole = formData.get('newRole');
 			
 			roleLoadingId = userId;
-
 			const userIndex = users.findIndex(
 				(u: any) => u.id === userId
 			);
@@ -300,9 +299,9 @@
 
 			if (userIndex !== -1) {
 				oldRole = users[userIndex].role;
-
 				users[userIndex].role = newRole;
 				users = [...users];
+				if (data?.users) data.users[userIndex].role = newRole;
 			}
 
 			return async ({
@@ -328,6 +327,7 @@
 							oldRole;
 
 						users = [...users];
+						if (data?.users) data.users[userIndex].role = oldRole;
 					}
 
 					toast.error(
@@ -386,6 +386,15 @@
 				actionLoading = null;
 				if (result.type === 'success') {
 					toast.success('Publishing power updated.');
+					
+					if (data?.publishingDoctors) {
+						const docIndex = data.publishingDoctors.findIndex(d => d.id === doctorId);
+						if (docIndex !== -1) {
+							data.publishingDoctors[docIndex].status = data.publishingDoctors[docIndex].status === 'granted' ? 'revoked' : 'granted';
+							data = { ...data };
+						}
+					}
+
 					await update({ reset: false, invalidateAll: false });
 				} else {
 					toast.error('Failed to update publishing power.');
