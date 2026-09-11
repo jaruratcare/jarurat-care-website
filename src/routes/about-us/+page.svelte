@@ -7,6 +7,9 @@
     import CaregivingSolution from "$lib/components/caregiving-solution.svelte";
     import Faq from "$lib/components/faqs/faq.svelte";
     import OurValue from "$lib/components/our-value.svelte";
+
+    // Import your About Us specific FAQ dataset
+    import aboutFaqsData from '$lib/data/about-faqs.json';
 </script>
 
 <Nav />
@@ -36,7 +39,8 @@
     </section>
 
     <section class="relative z-10 px-4 md:px-8 lg:px-16">
-        <Faq />
+        <!-- Pass the About Us FAQs prop here -->
+        <Faq faqs={aboutFaqsData} />
     </section>
 
 </main>
