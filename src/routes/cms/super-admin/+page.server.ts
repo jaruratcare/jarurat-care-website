@@ -1135,6 +1135,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 		approvedArticles,
 		approvedResearch,
+		publishedArticles,
+		publishedResearch,
 
 		cmsContents,
 

@@ -407,16 +407,24 @@
 				if (result.type === 'success') {
 					toast.success('Successfully published!');
 					
-					if (type === 'article' && data?.articles) {
-						const index = data.articles.findIndex((a: any) => a.id === id);
+					if (type === 'article' && data?.approvedArticles) {
+						const index = data.approvedArticles.findIndex((a: any) => a.id === id);
 						if (index !== -1) {
-							data.articles[index].status = 'published';
+							const [publishedItem] = data.approvedArticles.splice(index, 1);
+							publishedItem.status = 'published';
+							if (data.publishedArticles) {
+								data.publishedArticles = [publishedItem, ...data.publishedArticles];
+							}
 							data = { ...data };
 						}
-					} else if (type === 'research' && data?.researchPapers) {
-						const index = data.researchPapers.findIndex((r: any) => r.id === id);
+					} else if (type === 'research' && data?.approvedResearch) {
+						const index = data.approvedResearch.findIndex((r: any) => r.id === id);
 						if (index !== -1) {
-							data.researchPapers[index].status = 'published';
+							const [publishedItem] = data.approvedResearch.splice(index, 1);
+							publishedItem.status = 'published';
+							if (data.publishedResearch) {
+								data.publishedResearch = [publishedItem, ...data.publishedResearch];
+							}
 							data = { ...data };
 						}
 					} else if (type === 'cms' && data?.cmsContents) {
@@ -1581,13 +1589,53 @@
 									</tr>
 
 								{/each}
-
+								{#if approvedArticles.length === 0}
+									<tr>
+										<td colspan="5" style="text-align: center; padding: 20px; color: #64748b;">No pending articles.</td>
+									</tr>
+								{/if}
 							</tbody>
-
 						</table>
-
 					</div>
+				</div>
 
+				<div class="panel" style="margin-top: 2rem;">
+					<div class="section-heading" style="margin-bottom: 1rem;">
+						<div>
+							<h3>Published Articles</h3>
+						</div>
+					</div>
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>Title</th>
+									<th>Author</th>
+									<th>Status</th>
+									<th>Created</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								{#each data.publishedArticles || [] as article}
+									<tr>
+										<td><strong>{article.title}</strong></td>
+										<td>{article.author_name_credentials || 'Unknown'}</td>
+										<td><span class="published-label">Published</span></td>
+										<td>{formatDate(article.created_at)}</td>
+										<td>
+											<span class="published-label">Live</span>
+										</td>
+									</tr>
+								{/each}
+								{#if !data.publishedArticles || data.publishedArticles.length === 0}
+									<tr>
+										<td colspan="5" style="text-align: center; padding: 20px; color: #64748b;">No published articles yet.</td>
+									</tr>
+								{/if}
+							</tbody>
+						</table>
+					</div>
 				</div>
 
 			<!-- ================================================= -->
@@ -1712,13 +1760,53 @@
 									</tr>
 
 								{/each}
-
+								{#if approvedResearch.length === 0}
+									<tr>
+										<td colspan="5" style="text-align: center; padding: 20px; color: #64748b;">No pending research papers.</td>
+									</tr>
+								{/if}
 							</tbody>
-
 						</table>
-
 					</div>
+				</div>
 
+				<div class="panel" style="margin-top: 2rem;">
+					<div class="section-heading" style="margin-bottom: 1rem;">
+						<div>
+							<h3>Published Research Papers</h3>
+						</div>
+					</div>
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th>Title</th>
+									<th>Author</th>
+									<th>Status</th>
+									<th>Created</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								{#each data.publishedResearch || [] as research}
+									<tr>
+										<td><strong>{research.title}</strong></td>
+										<td>{research.author_name_credentials || 'Unknown'}</td>
+										<td><span class="published-label">Published</span></td>
+										<td>{formatDate(research.created_at)}</td>
+										<td>
+											<span class="published-label">Live</span>
+										</td>
+									</tr>
+								{/each}
+								{#if !data.publishedResearch || data.publishedResearch.length === 0}
+									<tr>
+										<td colspan="5" style="text-align: center; padding: 20px; color: #64748b;">No published research papers yet.</td>
+									</tr>
+								{/if}
+							</tbody>
+						</table>
+					</div>
 				</div>
 
 			<!-- ================================================= -->
