@@ -286,62 +286,54 @@
 
 	let roleLoadingId: string | null = null;
 
-	const handleRoleUpdate = () => {
+	const handleRoleUpdate = async ({
+		formData
+	}: any) => {
+		const userId = formData.get('userId');
+		const newRole = formData.get('newRole');
+		
+		roleLoadingId = userId;
+		const userIndex = users.findIndex(
+			(u: any) => u.id === userId
+		);
+
+		let oldRole = null;
+
+		if (userIndex !== -1) {
+			oldRole = users[userIndex].role;
+			users[userIndex].role = newRole;
+			users = [...users];
+			if (data?.users) data.users[userIndex].role = newRole;
+		}
+
 		return async ({
-			formData
+			result,
+			update
 		}: any) => {
-			const userId = formData.get('userId');
-			const newRole = formData.get('newRole');
-			
-			roleLoadingId = userId;
-			const userIndex = users.findIndex(
-				(u: any) => u.id === userId
-			);
+			roleLoadingId = null;
+			if (result.type === 'success') {
+				toast.success(
+					'Role updated successfully!'
+				);
 
-			let oldRole = null;
-
-			if (userIndex !== -1) {
-				oldRole = users[userIndex].role;
-				users[userIndex].role = newRole;
-				users = [...users];
-				if (data?.users) data.users[userIndex].role = newRole;
-			}
-
-			return async ({
-				result,
-				update
-			}: any) => {
-				roleLoadingId = null;
-				if (result.type === 'success') {
-					toast.success(
-						'Role updated successfully!'
-					);
-
-					await update({
-						reset: false,
-						invalidateAll: false
-					});
-				} else {
-					if (
-						userIndex !== -1 &&
-						oldRole
-					) {
-						users[userIndex].role =
-							oldRole;
-
-						users = [...users];
-						if (data?.users) data.users[userIndex].role = oldRole;
-					}
-
-					toast.error(
-						'Failed to update role.'
-					);
-
-					await update({
-						reset: false, invalidateAll: false
-					});
+				await update({
+					reset: false, invalidateAll: false
+				});
+			} else {
+				if (userIndex !== -1) {
+					users[userIndex].role = oldRole;
+					users = [...users];
+					if (data?.users) data.users[userIndex].role = oldRole;
 				}
-			};
+
+				toast.error(
+					'Failed to update role.'
+				);
+
+				await update({
+					reset: false, invalidateAll: false
+				});
+			}
 		};
 	};
 
