@@ -517,9 +517,15 @@ export const load: PageServerLoad = async ({ locals }) => {
 					doctor.full_name ||
 					'Unnamed Doctor',
 
+				email:
+					doctor.email || 'No email',
+
 				specialization:
 					doctor.specialization ||
 					'General',
+
+				organization:
+					doctor.organization || '—',
 
 				articles:
 					(articleCounts[doctor.id] ?? 0) +

@@ -94,7 +94,7 @@
 	onMount(() => {
 		const tabParam = $page.url.searchParams.get('tab');
 		if (tabParam) {
-			activeSection = tabParam;
+			activeSection = tabParam.replace('_', '-');
 		} else {
 			const stored = localStorage.getItem('superAdminActiveTab');
 			if (stored) {
@@ -107,8 +107,11 @@
 	$: {
 		if (isMounted) {
 			const tabParam = $page.url.searchParams.get('tab');
-			if (tabParam && tabParam !== activeSection) {
-				activeSection = tabParam;
+			if (tabParam) {
+				const sanitizedTab = tabParam.replace('_', '-');
+				if (sanitizedTab !== activeSection) {
+					activeSection = sanitizedTab;
+				}
 			}
 		}
 	}
@@ -404,34 +407,40 @@
 		};
 	};
 
-	const handleCMSPublish = () => {
-		return async ({
-			result,
-			update
-		}: any) => {
-			if (result.type === 'success') {
-				const status =
-					result.data?.action ===
-					'cms_published'
-						? 'published'
-						: 'draft';
+	const handlePublish = (id: string, type: 'article' | 'research' | 'cms') => {
+		return () => {
+			actionLoading = `pub-${type}-${id}`;
+			return async ({ result, update }: any) => {
+				actionLoading = null;
+				if (result.type === 'success') {
+					toast.success('Successfully published!');
+					
+					if (type === 'article' && data?.articles) {
+						const index = data.articles.findIndex((a: any) => a.id === id);
+						if (index !== -1) {
+							data.articles[index].status = 'published';
+							data = { ...data };
+						}
+					} else if (type === 'research' && data?.researchPapers) {
+						const index = data.researchPapers.findIndex((r: any) => r.id === id);
+						if (index !== -1) {
+							data.researchPapers[index].status = 'published';
+							data = { ...data };
+						}
+					} else if (type === 'cms' && data?.cmsContents) {
+						const index = data.cmsContents.findIndex((c: any) => c.id === id);
+						if (index !== -1) {
+							data.cmsContents[index].status = result.data?.action === 'cms_published' ? 'published' : 'draft';
+							data = { ...data };
+						}
+					}
 
-				toast.success(
-					`Content successfully marked as ${status}.`
-				);
-
-				await update({
-					reset: false, invalidateAll: false
-				});
-			} else {
-				toast.error(
-					'Failed to change content status.'
-				);
-
-				await update({
-					reset: false, invalidateAll: false
-				});
-			}
+					await update({ reset: false, invalidateAll: false });
+				} else {
+					toast.error('Failed to publish content.');
+					await update({ reset: false, invalidateAll: false });
+				}
+			};
 		};
 	};
 </script>
@@ -905,7 +914,6 @@
 						<div class="author-list">
 
 							{#each topPublishingDoctors as doctor, index}
-
 								<div class="author-row">
 
 									<div class="author-rank">
@@ -920,27 +928,24 @@
 									</div>
 
 									<div class="author-main">
+										<strong>{doctor.name}</strong>
+										<span>{doctor.email}</span>
+									</div>
 
-										<strong>
-											{doctor.name}
-										</strong>
+									<div class="author-details">
+										<strong>{doctor.specialization}</strong>
+										<span>{doctor.organization}</span>
+									</div>
 
-										<span>
-											{doctor.specialization}
+									<div class="author-status">
+										<span class="status-badge {doctor.status}">
+											{doctor.status === 'granted' ? 'Active' : 'Revoked'}
 										</span>
-
 									</div>
 
 									<div class="author-count">
-
-										<strong>
-											{doctor.articles}
-										</strong>
-
-										<span>
-											articles
-										</span>
-
+										<strong>{doctor.articles}</strong>
+										<span>articles</span>
 									</div>
 
 								</div>
@@ -1542,7 +1547,8 @@
 
 												<form
 													method="POST"
-													action="?/publishContent" use:enhance
+													action="?/publishContent"
+													use:enhance={handlePublish(article.id, 'article')}
 												>
 
 													<input
@@ -1559,8 +1565,13 @@
 
 													<button
 														class="action-button approve-button"
+														disabled={actionLoading === `pub-article-${article.id}`}
 													>
-														Publish
+														{#if actionLoading === `pub-article-${article.id}`}
+															<Loader2 class="spin-icon" size={14} /> Saving...
+														{:else}
+															Publish
+														{/if}
 													</button>
 
 												</form>
@@ -1667,7 +1678,8 @@
 
 												<form
 													method="POST"
-													action="?/publishContent" use:enhance
+													action="?/publishContent"
+													use:enhance={handlePublish(research.id, 'research')}
 												>
 
 													<input
@@ -1684,8 +1696,13 @@
 
 													<button
 														class="action-button approve-button"
+														disabled={actionLoading === `pub-research-${research.id}`}
 													>
-														Publish
+														{#if actionLoading === `pub-research-${research.id}`}
+															<Loader2 class="spin-icon" size={14} /> Saving...
+														{:else}
+															Publish
+														{/if}
 													</button>
 
 												</form>
@@ -1917,7 +1934,7 @@
 
 											<form
 												method="POST"
-												use:enhance={handleCMSPublish}
+												use:enhance={handlePublish(content.id, 'cms')}
 												action="?/toggleCMSPublish"
 												class="inline-form"
 											>
@@ -1930,23 +1947,23 @@
 
 												<input
 													type="hidden"
-													name="newStatus"
-													value={
-														content.status ===
-														'published'
-															? 'draft'
-															: 'published'
-													}
+													name="status"
+													value={content.status}
 												/>
 
 												<button
-													class="action-button approve-button"
 													type="submit"
-												>
-													{content.status ===
+													class="action-button {content.status ===
 													'published'
-														? 'Unpublish'
-														: 'Publish'}
+														? 'revoke-button'
+														: 'approve-button'}"
+													disabled={actionLoading === `pub-cms-${content.id}`}
+												>
+													{#if actionLoading === `pub-cms-${content.id}`}
+														<Loader2 class="spin-icon" size={14} /> Saving...
+													{:else}
+														{content.status === 'published' ? 'Unpublish' : 'Publish'}
+													{/if}
 												</button>
 
 											</form>
@@ -3623,6 +3640,49 @@
 		font-size: 9px;
 		color: #94a3b8;
 		margin-top: 2px;
+	}
+
+	.author-details {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.author-details strong {
+		display: block;
+		font-size: 11px;
+		color: #0f172a;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.author-details span {
+		display: block;
+		font-size: 9px;
+		color: #94a3b8;
+		margin-top: 2px;
+	}
+
+	.author-status {
+		flex: 0 0 auto;
+		margin-right: 15px;
+	}
+
+	.status-badge {
+		padding: 3px 8px;
+		border-radius: 12px;
+		font-size: 10px;
+		font-weight: 600;
+	}
+
+	.status-badge.granted {
+		background: #dcfce7;
+		color: #166534;
+	}
+
+	.status-badge.revoked {
+		background: #fee2e2;
+		color: #991b1b;
 	}
 
 	.author-count {

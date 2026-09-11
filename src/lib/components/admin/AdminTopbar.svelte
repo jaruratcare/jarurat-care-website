@@ -101,8 +101,7 @@
 			await markAsRead(notif.id);
 		}
 		if (notif.link) {
-			goto(notif.link);
-			showNotifDropdown = false;
+			window.location.href = notif.link;
 		}
 	}
 
