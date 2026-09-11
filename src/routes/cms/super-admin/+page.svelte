@@ -4028,6 +4028,17 @@
 		transform: translateY(-1px);
 	}
 
+	.revoke-button {
+		background: transparent;
+		border-color: #fecaca;
+		color: #ef4444;
+	}
+
+	.revoke-button:hover {
+		background: #fef2f2;
+		border-color: #dc2626;
+	}
+
 	.action-button:disabled {
 		opacity: 0.6;
 		cursor: not-allowed;
