@@ -9,19 +9,28 @@ export const load: PageServerLoad = async ({ locals }) => {
 		throw redirect(303, '/cms/login');
 	}
 
-	const { data: savedRows } = await supabaseAdmin
-		.from('saved_articles')
-		.select('article_id, created_at')
-		.eq('user_id', session.user.id)
-		.order('created_at', { ascending: false });
+	const [ { data: savedArticlesRows }, { data: savedResearchRows } ] = await Promise.all([
+		supabaseAdmin
+			.from('saved_articles')
+			.select('article_id, created_at')
+			.eq('user_id', session.user.id)
+			.order('created_at', { ascending: false }),
+		supabaseAdmin
+			.from('saved_research_articles')
+			.select('research_article_id, created_at')
+			.eq('user_id', session.user.id)
+			.order('created_at', { ascending: false })
+	]);
 
-	const savedIds = (savedRows ?? []).map(r => r.article_id).filter(Boolean);
+	const articleIds = (savedArticlesRows ?? []).map(r => r.article_id).filter(Boolean);
+	const researchIds = (savedResearchRows ?? []).map(r => r.research_article_id).filter(Boolean);
+
 	let savedArticlesAndResearch: any[] = [];
 
-	if (savedIds.length > 0) {
-		const [{ data: savedArticlesData }, { data: savedResearchData }] = await Promise.all([
-			supabaseAdmin.from('articles').select('id, title, category, author_id, author_name_credentials').in('id', savedIds),
-			supabaseAdmin.from('research_articles').select('id, title, user_id, authors_and_affiliations').in('id', savedIds)
+	if (articleIds.length > 0 || researchIds.length > 0) {
+		const [ { data: savedArticlesData }, { data: savedResearchData } ] = await Promise.all([
+			articleIds.length > 0 ? supabaseAdmin.from('articles').select('id, title, category, author_id, author_name_credentials').in('id', articleIds) : Promise.resolve({ data: [] }),
+			researchIds.length > 0 ? supabaseAdmin.from('research_articles').select('id, title, user_id, authors_and_affiliations').in('id', researchIds) : Promise.resolve({ data: [] })
 		]);
 
 		const allAuthorIds = [
@@ -41,7 +50,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		const articleMap = new Map((savedArticlesData || []).map(a => [a.id, a]));
 		const researchMap = new Map((savedResearchData || []).map(r => [r.id, r]));
 
-		savedArticlesAndResearch = (savedRows ?? []).map(row => {
+		const mappedArticles = (savedArticlesRows ?? []).map(row => {
 			const article = articleMap.get(row.article_id);
 			if (article) {
 				return {
@@ -53,8 +62,11 @@ export const load: PageServerLoad = async ({ locals }) => {
 					type: 'article'
 				};
 			}
+			return null;
+		}).filter(Boolean);
 
-			const research = researchMap.get(row.article_id);
+		const mappedResearch = (savedResearchRows ?? []).map(row => {
+			const research = researchMap.get(row.research_article_id);
 			if (research) {
 				return {
 					id: research.id,
@@ -67,6 +79,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 			}
 			return null;
 		}).filter(Boolean);
+
+		savedArticlesAndResearch = [...mappedArticles, ...mappedResearch].sort((a, b) => new Date(b.savedAt).getTime() - new Date(a.savedAt).getTime());
 	}
 
 	return {

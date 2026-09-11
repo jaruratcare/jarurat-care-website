@@ -65,7 +65,7 @@
 					if (result.type === 'redirect' || result.type === 'success') {
 						toast.success('Changes requested successfully!');
 					} else {
-						toast.error(result.data?.message || 'Could not request changes');
+						toast.error(Object(result).data?.message || 'Could not request changes');
 					}
 					await update();
 				};
@@ -88,7 +88,7 @@
 						if (result.type === 'redirect' || result.type === 'success') {
 							toast.success('Article successfully approved!');
 						} else {
-							toast.error(result.data?.message || 'Could not approve article');
+							toast.error(Object(result).data?.message || 'Could not approve article');
 						}
 						await update();
 					};

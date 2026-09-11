@@ -251,36 +251,40 @@
 		currentPage = 1;
 	}
 
-	onMount(async () => {
-		if (data?.savedArticleIds) {
-			data.savedArticleIds.forEach((id: string) => {
-				localSaves[id] = true;
-			});
-		}
+	onMount(() => {
+		const init = async () => {
+			if (data?.savedArticleIds) {
+				data.savedArticleIds.forEach((id: string) => {
+					localSaves[id] = true;
+				});
+			}
 
-		if (data?.likedArticleIds) {
-			data.likedArticleIds.forEach((id: string) => {
-				localLikes[id] = true;
-			});
-		}
+			if (data?.likedArticleIds) {
+				data.likedArticleIds.forEach((id: string) => {
+					localLikes[id] = true;
+				});
+			}
 
-		const {
-			data: { user }
-		} = await cmsSupabase.auth.getUser();
+			const {
+				data: { user }
+			} = await cmsSupabase.auth.getUser();
 
-		if (user) {
-			isLoggedIn = true;
-			userEmail = user.email || '';
-			userId = user.id;
+			if (user) {
+				isLoggedIn = true;
+				userEmail = user.email || '';
+				userId = user.id;
 
-			const { data: profile } = await cmsSupabase
-				.from('profiles')
-				.select('role')
-				.eq('id', user.id)
-				.single();
+				const { data: profile } = await cmsSupabase
+					.from('profiles')
+					.select('role')
+					.eq('id', user.id)
+					.single();
 
-			userRole = profile?.role || 'user';
-		}
+				userRole = profile?.role || 'user';
+			}
+		};
+
+		init();
 
 		const { data: { subscription } } = cmsSupabase.auth.onAuthStateChange(async (_event, session) => {
 			isLoggedIn = !!session?.user;

@@ -18,10 +18,10 @@
 
     <div class="content">
         <Topbar 
-            doctorName={profile?.full_name || 'Dr. Ananya Verma'} 
+            doctorName={profile?.full_name || ''} 
             unreadCount={0} 
             {isReviewer} 
-            email={profile?.email || $page.data.session?.user?.email || 'doctor@jarurat.care'}
+            email={profile?.email || $page.data.session?.user?.email || ''}
             avatar={profile?.avatar_url || ''}
             userId={profile?.id || $page.data.session?.user?.id || ''}
         />

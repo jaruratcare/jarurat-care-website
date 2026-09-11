@@ -9,6 +9,8 @@
 	$: doctors = data.doctors ?? [];
 	$: followedDoctorIds = new Set(data.followedDoctorIds ?? []);
 
+	let loadingId: string | null = null;
+
 	function getInitials(name: string) {
 		if (!name) return 'DR';
 
@@ -119,6 +121,7 @@
 										method="POST"
 										action={isFollowed ? '?/unfollow' : '?/follow'}
 										use:enhance={() => {
+											loadingId = doctor.id;
 											// Optimistic UI Update
 											if (isFollowed) {
 												followedDoctorIds.delete(doctor.id);
@@ -131,6 +134,7 @@
 											doctors = doctors;
 
 											return async ({ result, update }) => {
+												loadingId = null;
 												if (result.type !== 'success') {
 													// Revert on failure
 													await update();
@@ -144,8 +148,14 @@
 											type="submit"
 											class:following={isFollowed}
 											class="follow-btn"
+											disabled={loadingId === doctor.id}
 										>
-											{isFollowed ? 'Following' : 'Follow'}
+											{#if loadingId === doctor.id}
+												<span class="loading-spinner"></span>
+												Wait...
+											{:else}
+												{isFollowed ? 'Following' : 'Follow'}
+											{/if}
 										</button>
 									</form>
 								{:else}
@@ -363,13 +373,37 @@
 		color: white;
 	}
 
-	.follow-btn:hover {
+	.follow-btn:hover:not(:disabled) {
 		background: #264bc4;
 	}
 
 	.follow-btn.following {
 		background: white;
 		color: #315bdc;
+	}
+
+	.follow-btn.following:hover:not(:disabled) {
+		background: #e7efff;
+	}
+
+	.follow-btn:disabled {
+		opacity: 0.7;
+		cursor: not-allowed;
+	}
+
+	.loading-spinner {
+		width: 14px;
+		height: 14px;
+		border: 2px solid currentColor;
+		border-right-color: transparent;
+		border-radius: 50%;
+		animation: spin 0.75s linear infinite;
+	}
+
+	@keyframes spin {
+		to {
+			transform: rotate(360deg);
+		}
 	}
 
 	.self-badge {

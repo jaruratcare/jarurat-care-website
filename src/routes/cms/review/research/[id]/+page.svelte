@@ -118,7 +118,7 @@
 					if (result.type === 'redirect' || result.type === 'success') {
 						toast.success('Changes requested successfully!');
 					} else {
-						toast.error(result.data?.message || 'Could not request changes');
+						toast.error(Object(result).data?.message || 'Could not request changes');
 					}
 					await update();
 				};
@@ -141,7 +141,7 @@
 						if (result.type === 'redirect' || result.type === 'success') {
 							toast.success('Research Paper successfully approved!');
 						} else {
-							toast.error(result.data?.message || 'Could not approve research paper');
+							toast.error(Object(result).data?.message || 'Could not approve research paper');
 						}
 						await update();
 					};

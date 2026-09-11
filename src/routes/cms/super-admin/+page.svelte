@@ -222,7 +222,7 @@
 					}
 
 					await update({
-						reset: false
+						reset: false, invalidateAll: false
 					});
 				} else {
 					toast.error(
@@ -269,7 +269,7 @@
 				}
 
 				await update({
-					reset: false
+					reset: false, invalidateAll: false
 				});
 			};
 		};
@@ -281,12 +281,16 @@
 	 * =========================================================
 	 */
 
+	let roleLoadingId: string | null = null;
+
 	const handleRoleUpdate = () => {
 		return async ({
 			formData
 		}: any) => {
 			const userId = formData.get('userId');
 			const newRole = formData.get('newRole');
+			
+			roleLoadingId = userId;
 
 			const userIndex = users.findIndex(
 				(u: any) => u.id === userId
@@ -305,13 +309,15 @@
 				result,
 				update
 			}: any) => {
+				roleLoadingId = null;
 				if (result.type === 'success') {
 					toast.success(
 						'Role updated successfully!'
 					);
 
 					await update({
-						reset: false
+						reset: false,
+						invalidateAll: false
 					});
 				} else {
 					if (
@@ -329,7 +335,7 @@
 					);
 
 					await update({
-						reset: false
+						reset: false, invalidateAll: false
 					});
 				}
 			};
@@ -353,7 +359,7 @@
 				);
 
 				await update({
-					reset: false
+					reset: false, invalidateAll: false
 				});
 			} else {
 				toast.error(
@@ -361,7 +367,7 @@
 				);
 
 				await update({
-					reset: false
+					reset: false, invalidateAll: false
 				});
 			}
 		};
@@ -372,6 +378,22 @@
 	 * CMS PUBLISH
 	 * =========================================================
 	 */
+
+	const handlePublishingPower = (doctorId) => {
+		return () => {
+			actionLoading = 'pub-' + doctorId;
+			return async ({ result, update }) => {
+				actionLoading = null;
+				if (result.type === 'success') {
+					toast.success('Publishing power updated.');
+					await update({ reset: false, invalidateAll: false });
+				} else {
+					toast.error('Failed to update publishing power.');
+					await update({ reset: false, invalidateAll: false });
+				}
+			};
+		};
+	};
 
 	const handleCMSPublish = () => {
 		return async ({
@@ -390,7 +412,7 @@
 				);
 
 				await update({
-					reset: false
+					reset: false, invalidateAll: false
 				});
 			} else {
 				toast.error(
@@ -398,7 +420,7 @@
 				);
 
 				await update({
-					reset: false
+					reset: false, invalidateAll: false
 				});
 			}
 		};
@@ -485,20 +507,7 @@
 				{/if}
 			</button>
 
-			<button
-				class:active={activeSection === 'verified-doctors'}
-				class="menu-item"
-				on:click={() => (activeSection = 'verified-doctors')}
-			>
-				<CheckCircle size={18} />
-				<span>Verified Doctors</span>
 
-				{#if verifiedDoctors.length > 0}
-					<span class="menu-count">
-						{verifiedDoctors.length}
-					</span>
-				{/if}
-			</button>
 
 			<button
 				class:active={
@@ -1231,23 +1240,6 @@
 
 				</div>
 
-			<!-- ================================================= -->
-			<!-- VERIFIED DOCTORS -->
-			<!-- ================================================= -->
-
-			{:else if activeSection === 'verified-doctors'}
-
-				<div class="section-heading">
-
-					<div>
-						<h2>Verified Doctors</h2>
-						<p>
-							List of all fully verified doctors on the platform.
-						</p>
-					</div>
-
-				</div>
-
 				<div class="panel">
 
 					<div class="panel-header">
@@ -1314,7 +1306,9 @@
 						</table>
 					</div>
 				</div>
-
+			<!-- ================================================= -->
+			<!-- VERIFIED DOCTORS -->
+			<!-- ================================================= -->
 			<!-- ================================================= -->
 			<!-- PUBLISHING POWER -->
 			<!-- ================================================= -->
@@ -1419,7 +1413,7 @@
 
 											<form
 												method="POST"
-												action="?/togglePublishingPower"
+												action="?/togglePublishingPower" use:enhance={handlePublishingPower(doctor.id)}
 											>
 
 												<input
@@ -1439,11 +1433,13 @@
 													}
 												/>
 
-												<button class="action-button">
-													{doctor.status ===
-													'granted'
-														? 'Revoke'
-														: 'Grant'}
+												<button class="action-button" disabled={actionLoading === 'pub-' + doctor.id}>
+													{#if actionLoading === 'pub-' + doctor.id}
+														<Loader2 size={14} class="spin-icon" />
+														Saving...
+													{:else}
+														{doctor.status === 'granted' ? 'Revoke' : 'Grant'}
+													{/if}
 												</button>
 
 											</form>
@@ -1537,7 +1533,7 @@
 
 												<form
 													method="POST"
-													action="?/publishContent"
+													action="?/publishContent" use:enhance
 												>
 
 													<input
@@ -1662,7 +1658,7 @@
 
 												<form
 													method="POST"
-													action="?/publishContent"
+													action="?/publishContent" use:enhance
 												>
 
 													<input
@@ -1948,7 +1944,7 @@
 
 											<form
 												method="POST"
-												action="?/deleteCMSContent"
+												action="?/deleteCMSContent" use:enhance
 												class="inline-form"
 												use:enhance={({ cancel }) => {
 
@@ -1979,7 +1975,7 @@
 														}
 
 														await update({
-															reset: false
+															reset: false, invalidateAll: false
 														});
 													};
 												}}
@@ -2301,12 +2297,20 @@
 													<button
 														type="submit"
 														class="save-button"
+														disabled={roleLoadingId === user.id}
 													>
-														<CheckCircle
-															size={14}
-														/>
-
-														Save
+														{#if roleLoadingId === user.id}
+															<Loader2
+																size={14}
+																class="spin-icon"
+															/>
+															Saving...
+														{:else}
+															<CheckCircle
+																size={14}
+															/>
+															Save
+														{/if}
 													</button>
 
 												{/if}
@@ -3631,6 +3635,8 @@
 
 	.table-wrapper {
 		overflow-x: auto;
+		overflow-y: auto;
+		max-height: 400px;
 	}
 
 	table {
@@ -3649,6 +3655,9 @@
 		text-align: left;
 		border-bottom: 1px solid #e2e8f0;
 		white-space: nowrap;
+		position: sticky;
+		top: 0;
+		z-index: 10;
 	}
 
 	table td {
@@ -4274,6 +4283,8 @@
 
 	.popular-table-wrapper {
 		overflow-x: auto;
+		overflow-y: auto;
+		max-height: 400px;
 	}
 
 	.popular-table {
@@ -4290,6 +4301,10 @@
 		font-weight: 750;
 		text-align: left;
 		border-bottom: 1px solid #f1f5f9;
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		background: white;
 	}
 
 	.popular-table td {

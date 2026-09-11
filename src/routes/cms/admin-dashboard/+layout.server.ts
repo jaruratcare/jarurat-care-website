@@ -8,11 +8,11 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 		throw redirect(303, '/cms/login');
 	}
 
-	const { data: userProfile } = await locals.supabase
+	const { data: userProfile } = await supabaseAdmin
 		.from('profiles')
 		.select('*')
 		.eq('id', session.user.id)
-		.single();
+		.maybeSingle();
 
 	if (!userProfile || (userProfile.role !== 'Admin' && userProfile.role !== 'Super_Admin')) {
 		throw redirect(303, '/');

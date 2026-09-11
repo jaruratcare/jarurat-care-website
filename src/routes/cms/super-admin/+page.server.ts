@@ -906,7 +906,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		}))
 	]
 		.sort((a, b) => b.views - a.views)
-		.slice(0, 10);
+		.slice(0, 25);
 
 	/* =======================================================
 	   ENGAGEMENT TREND
@@ -1149,6 +1149,37 @@ export const load: PageServerLoad = async ({ locals }) => {
 ============================================================= */
 
 export const actions: Actions = {
+	/* =========================================================
+	   UPDATE ROLE
+	========================================================= */
+	updateRole: async ({ request, locals }) => {
+		const auth = await requireSuperAdmin(locals);
+
+		if (!auth.ok) {
+			return fail(auth.status, { message: auth.message });
+		}
+
+		const formData = await request.formData();
+		const userId = String(formData.get('userId') ?? '').trim();
+		const newRole = String(formData.get('newRole') ?? '').trim();
+
+		if (!userId || !newRole) {
+			return fail(400, { message: 'Missing user ID or role' });
+		}
+
+		const { error } = await supabaseAdmin
+			.from('profiles')
+			.update({ role: newRole })
+			.eq('id', userId);
+
+		if (error) {
+			console.error('Error updating role:', error);
+			return fail(500, { message: 'Could not update role' });
+		}
+
+		return { success: true };
+	},
+
 	/* =========================================================
 	   APPROVE DOCTOR
 	========================================================= */

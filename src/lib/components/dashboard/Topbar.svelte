@@ -252,12 +252,12 @@
 		<div class="profile-wrap" bind:this={dropdownRef}>
 			<div class="profile-trigger" on:click={() => showDropdown = !showDropdown}>
 				{#if avatar}
-					<img src={avatar} alt="Doctor Avatar" class="profile-avatar" onerror="this.style.display='none'" />
+					<img src={avatar} alt={isReviewer ? "Reviewer Avatar" : "Doctor Avatar"} class="profile-avatar" onerror="this.style.display='none'" />
 				{:else}
-					<div class="avatar-circle">{doctorName ? doctorName.charAt(0).toUpperCase() : 'D'}</div>
+					<div class="avatar-circle">{doctorName ? doctorName.charAt(0).toUpperCase() : (isReviewer ? 'R' : 'D')}</div>
 				{/if}
 				<div class="user-info">
-					<span class="name">{doctorName || 'Doctor'}</span>
+					<span class="name">{doctorName || (isReviewer ? 'Reviewer' : 'Doctor')}</span>
 					<span class="role" class:role-reviewer={isReviewer}>{isReviewer ? 'Medical Reviewer' : 'Verified Specialist'}</span>
 				</div>
 				<ChevronDown size={14} class="text-slate-500" />
@@ -266,8 +266,8 @@
 			{#if showDropdown}
 				<div class="profile-dropdown">
 					<div class="dd-head">
-						<strong>{doctorName || 'Doctor'}</strong>
-						<span>{email || 'doctor@jarurat.care'}</span>
+						<strong>{doctorName || (isReviewer ? 'Reviewer' : 'Doctor')}</strong>
+						<span>{email || (isReviewer ? 'reviewer@jarurat.care' : 'doctor@jarurat.care')}</span>
 					</div>
 					<hr />
 					<a href={`/cms/community/doctors/${userId}`} on:click={() => showDropdown = false}>View Profile</a>
