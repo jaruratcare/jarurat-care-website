@@ -94,7 +94,7 @@ export const actions: Actions = {
 				`Your article "${updatedArticle.title}" has been approved by the reviewer and is awaiting final publishing.`,
 				'success',
 				updatedArticle.author_id,
-				'/cms/doctor-dashboard/my-articles'
+				'/cms/doctor-dashboard/articles'
 			);
 		} catch (err) {
 			console.error('Notification error:', err);

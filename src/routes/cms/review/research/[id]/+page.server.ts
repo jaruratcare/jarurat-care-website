@@ -93,7 +93,7 @@ export const actions: Actions = {
 				`Your research paper "${updatedResearch.title}" has been approved by the reviewer and is awaiting final publishing.`,
 				'success',
 				updatedResearch.user_id,
-				'/cms/doctor-dashboard/my-research-papers'
+				'/cms/doctor-dashboard/research'
 			);
 		} catch (err) {
 			console.error('Notification error:', err);
@@ -145,7 +145,7 @@ export const actions: Actions = {
 				`A reviewer has requested changes on your research paper "${updatedResearch.title}".`,
 				'warning',
 				updatedResearch.user_id,
-				'/cms/doctor-dashboard/my-research-papers'
+				'/cms/doctor-dashboard/research'
 			);
 		} catch (err) {
 			console.error('Notification error:', err);

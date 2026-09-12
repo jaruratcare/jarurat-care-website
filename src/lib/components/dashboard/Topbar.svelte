@@ -112,6 +112,12 @@
 				} else if (finalLink.includes('doctor_verification')) {
 					finalLink = finalLink.replace('doctor_verification', 'doctor-verification');
 				}
+			} else if (finalLink.includes('/cms/doctor-dashboard')) {
+				if (finalLink.includes('/my-articles')) {
+					finalLink = finalLink.replace('/my-articles', '/articles');
+				} else if (finalLink.includes('/my-research-papers')) {
+					finalLink = finalLink.replace('/my-research-papers', '/research');
+				}
 			}
 
 			goto(finalLink);
