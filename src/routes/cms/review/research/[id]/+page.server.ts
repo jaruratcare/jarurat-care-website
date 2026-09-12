@@ -88,12 +88,23 @@ export const actions: Actions = {
 		}
 
 		try {
+			// Notify author
 			await createAdminNotification(
 				'Research Paper Approved',
 				`Your research paper "${updatedResearch.title}" has been approved by the reviewer and is awaiting final publishing.`,
 				'success',
 				updatedResearch.user_id,
 				'/cms/doctor-dashboard/research'
+			);
+
+			// Notify super admin
+			await createAdminNotification(
+				'Research Ready for Publishing',
+				`The research paper "${updatedResearch.title}" has been approved and is ready to be published.`,
+				'info',
+				undefined,
+				'/cms/super-admin?tab=publishing',
+				'super_admin_only'
 			);
 		} catch (err) {
 			console.error('Notification error:', err);
