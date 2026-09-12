@@ -102,6 +102,7 @@
 		}
 		if (notif.link) {
 			goto(notif.link);
+			showNotifDropdown = false;
 		}
 	}
 

@@ -103,7 +103,7 @@ export const actions: Actions = {
 				`The research paper "${updatedResearch.title}" has been approved and is ready to be published.`,
 				'info',
 				undefined,
-				'/cms/super-admin?tab=publishing',
+				'/cms/super-admin?tab=research',
 				'super_admin_only'
 			);
 		} catch (err) {

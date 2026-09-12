@@ -104,7 +104,7 @@ export const actions: Actions = {
 				`The article "${updatedArticle.title}" has been approved and is ready to be published.`,
 				'info',
 				undefined,
-				'/cms/super-admin?tab=publishing',
+				'/cms/super-admin?tab=articles',
 				'super_admin_only'
 			);
 		} catch (err) {
