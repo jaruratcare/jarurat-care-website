@@ -101,7 +101,20 @@
 			await markAsRead(notif.id);
 		}
 		if (notif.link) {
-			goto(notif.link);
+			let finalLink = notif.link;
+			
+			// Fix for legacy notifications: if it's a super-admin link and user is a reviewer/doctor
+			if (finalLink.includes('/cms/super-admin')) {
+				if (finalLink.includes('tab=articles')) {
+					finalLink = '/cms/doctor-dashboard/review-articles';
+				} else if (finalLink.includes('tab=research')) {
+					finalLink = '/cms/doctor-dashboard/review-research';
+				} else if (finalLink.includes('doctor_verification')) {
+					finalLink = finalLink.replace('doctor_verification', 'doctor-verification');
+				}
+			}
+
+			goto(finalLink);
 			showNotifDropdown = false;
 		}
 	}

@@ -35,18 +35,30 @@ export async function createAdminNotification(
 
 		const { data: adminsAndReviewers } = await supabaseAdmin
 			.from('profiles')
-			.select('id')
+			.select('id, role, is_reviewer')
 			.or(roleFilter);
 
 		if (adminsAndReviewers && adminsAndReviewers.length > 0) {
-			const notifications = adminsAndReviewers.map(user => ({
-				user_id: user.id,
-				title,
-				message,
-				type,
-				link,
-				is_read: false
-			}));
+			const notifications = adminsAndReviewers.map(user => {
+				let actualLink = link;
+				// If user is not Super Admin but is a reviewer, give them reviewer-specific links
+				if (user.role !== 'Super_Admin' && user.is_reviewer) {
+					if (link === '/cms/super-admin?tab=articles') {
+						actualLink = '/cms/doctor-dashboard/review-articles';
+					} else if (link === '/cms/super-admin?tab=research') {
+						actualLink = '/cms/doctor-dashboard/review-research';
+					}
+				}
+
+				return {
+					user_id: user.id,
+					title,
+					message,
+					type,
+					link: actualLink,
+					is_read: false
+				};
+			});
 
 			const { error } = await supabaseAdmin
 				.from('notifications')
