@@ -6,7 +6,7 @@
 	export let data;
 
 	$: profile = data.profile;
-	$: doctors = data.doctors ?? [];
+	$: doctors = (data.doctors ?? []).filter(d => d.id !== profile?.id);
 	$: followedDoctorIds = new Set(data.followedDoctorIds ?? []);
 
 	let loadingId: string | null = null;
@@ -87,7 +87,7 @@
 								<div class="doctor-main">
 									<h2>{doctor.full_name || 'Doctor'}</h2>
 
-									{#if doctor.specialization}
+									{#if doctor.specialization && !doctor.specialization.includes('@')}
 										<p class="specialization">{doctor.specialization}</p>
 									{:else}
 										<p class="specialization">Medical Professional</p>
@@ -119,11 +119,12 @@
 								{#if !isSelf}
 									<form
 										method="POST"
-										action={isFollowed ? '?/unfollow' : '?/follow'}
+										action={followedDoctorIds.has(doctor.id) ? '?/unfollow' : '?/follow'}
 										use:enhance={() => {
 											loadingId = doctor.id;
+											const currentlyFollowed = followedDoctorIds.has(doctor.id);
 											// Optimistic UI Update
-											if (isFollowed) {
+											if (currentlyFollowed) {
 												followedDoctorIds.delete(doctor.id);
 												doctor.followers_count = Math.max(0, (doctor.followers_count || 0) - 1);
 											} else {
@@ -138,6 +139,8 @@
 												if (result.type !== 'success') {
 													// Revert on failure
 													await update();
+												} else {
+													await update({ reset: false });
 												}
 											};
 										}}
@@ -146,7 +149,7 @@
 
 										<button
 											type="submit"
-											class:following={isFollowed}
+											class:following={followedDoctorIds.has(doctor.id)}
 											class="follow-btn"
 											disabled={loadingId === doctor.id}
 										>
@@ -154,7 +157,7 @@
 												<span class="loading-spinner"></span>
 												Wait...
 											{:else}
-												{isFollowed ? 'Following' : 'Follow'}
+												{followedDoctorIds.has(doctor.id) ? 'Following' : 'Follow'}
 											{/if}
 										</button>
 									</form>
