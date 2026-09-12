@@ -1543,7 +1543,11 @@
 
 										<td>
 
-											{#if article.status !== 'published'}
+											{#if article.status === 'under_review'}
+												<span class="status review" style="opacity: 0.7; cursor: not-allowed; padding: 6px 12px; border-radius: 6px; font-size: 13px;">
+													In Review
+												</span>
+											{:else if article.status !== 'published'}
 
 												<form
 													method="POST"
@@ -1714,7 +1718,11 @@
 
 										<td>
 
-											{#if research.status !== 'published'}
+											{#if research.status === 'under_review'}
+												<span class="status review" style="opacity: 0.7; cursor: not-allowed; padding: 6px 12px; border-radius: 6px; font-size: 13px;">
+													In Review
+												</span>
+											{:else if research.status !== 'published'}
 
 												<form
 													method="POST"

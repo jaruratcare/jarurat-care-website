@@ -1494,7 +1494,9 @@ reject: async ({ request, locals }) => {
 				.from(table)
 				.update({
 					status:
-						'published'
+						'published',
+					published_at:
+						new Date().toISOString()
 				})
 				.eq(
 					'id',

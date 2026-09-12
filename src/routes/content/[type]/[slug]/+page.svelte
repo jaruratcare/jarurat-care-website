@@ -202,6 +202,8 @@
 			: 'Content | Jarurat Care Foundation'}
 	</title>
 
+	<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 	{#if article?.seo_description}
 		<meta
 			name="description"
@@ -238,6 +240,7 @@
 		<article
 			bind:this={articleEl}
 			class="max-w-4xl mx-auto px-6"
+			style="font-family: 'Lora', serif; color: #1c1917;"
 		>
 
 			<!-- HEADER -->
@@ -468,84 +471,154 @@
 			{/if}
 
 
-			<!-- RESEARCH PAPER SECTIONS -->
+			<!-- PREMIUM CONTENT RENDERER -->
+			<div class="article-body prose prose-lg max-w-none text-gray-800">
 
-			{#if type === 'research'}
-
-				{#if article.introduction}
-					<section class="research-section">
-						<h2>Introduction</h2>
-						<div>
-							{article.introduction}
-						</div>
-					</section>
+				{#if article.abstract}
+					<div class="article-section">
+						<h3>Abstract</h3>
+						<div class="content-block">{@html article.abstract}</div>
+					</div>
 				{/if}
 
+				{#if article.introduction}
+					<div class="article-section">
+						<h3>Introduction</h3>
+						<div class="content-block">{@html article.introduction}</div>
+					</div>
+				{/if}
+
+				{#if article.background}
+					<div class="article-section">
+						<h3>Background</h3>
+						<div class="content-block">{@html article.background}</div>
+					</div>
+				{/if}
+				
 				{#if article.literature_review}
-					<section class="research-section">
-						<h2>Literature Review</h2>
-						<div>
-							{article.literature_review}
-						</div>
-					</section>
+					<div class="article-section">
+						<h3>Literature Review</h3>
+						<div class="content-block">{@html article.literature_review}</div>
+					</div>
+				{/if}
+
+				{#if article.purpose}
+					<div class="article-section">
+						<h3>Purpose</h3>
+						<div class="content-block">{@html article.purpose}</div>
+					</div>
+				{/if}
+
+				{#if article.scope}
+					<div class="article-section">
+						<h3>Scope</h3>
+						<div class="content-block">{@html article.scope}</div>
+					</div>
 				{/if}
 
 				{#if article.methods}
-					<section class="research-section">
-						<h2>Methods</h2>
-						<div>
-							{article.methods}
-						</div>
-					</section>
+					<div class="article-section">
+						<h3>Methods</h3>
+						<div class="content-block">{@html article.methods}</div>
+					</div>
 				{/if}
 
 				{#if article.results}
-					<section class="research-section">
-						<h2>Results</h2>
-						<div>
-							{article.results}
-						</div>
-					</section>
+					<div class="article-section">
+						<h3>Results</h3>
+						<div class="content-block">{@html article.results}</div>
+					</div>
 				{/if}
-
+				
 				{#if article.discussion}
-					<section class="research-section">
-						<h2>Discussion</h2>
-						<div>
-							{article.discussion}
-						</div>
-					</section>
+					<div class="article-section">
+						<h3>Discussion</h3>
+						<div class="content-block">{@html article.discussion}</div>
+					</div>
 				{/if}
 
-				{#if article.conclusion}
-					<section class="research-section">
-						<h2>Conclusion</h2>
-						<div>
-							{article.conclusion}
-						</div>
-					</section>
+				{#if article.explanation}
+					<div class="article-section">
+						<h3>Explanation</h3>
+						<div class="content-block">{@html article.explanation}</div>
+					</div>
+				{/if}
+
+				{#if article.evidence}
+					<div class="article-section">
+						<h3>Evidence</h3>
+						<div class="content-block">{@html article.evidence}</div>
+					</div>
+				{/if}
+
+				{#if article.examples}
+					<div class="article-section">
+						<h3>Examples</h3>
+						<div class="content-block">{@html article.examples}</div>
+					</div>
+				{/if}
+
+				{#if article.interpretation}
+					<div class="article-section">
+						<h3>Interpretation</h3>
+						<div class="content-block">{@html article.interpretation}</div>
+					</div>
+				{/if}
+
+				{#if article.implications}
+					<div class="article-section">
+						<h3>Implications</h3>
+						<div class="content-block">{@html article.implications}</div>
+					</div>
+				{/if}
+
+				{#if article.recommendations}
+					<div class="article-section">
+						<h3>Recommendations</h3>
+						<div class="content-block">{@html article.recommendations}</div>
+					</div>
+				{/if}
+
+				{#if article.conclusion_summary || article.conclusion}
+					<div class="article-section">
+						<h3>Conclusion</h3>
+						<div class="content-block">{@html article.conclusion_summary || article.conclusion}</div>
+					</div>
+				{/if}
+
+				{#if article.takeaways}
+					<div class="article-section">
+						<h3>Key Takeaways</h3>
+						<div class="content-block takeaways">{@html article.takeaways}</div>
+					</div>
 				{/if}
 
 				{#if article.references_text}
-					<section class="research-section">
-						<h2>References</h2>
-						<div class="whitespace-pre-line">
-							{article.references_text}
-						</div>
-					</section>
+					<div class="article-section">
+						<h3>References</h3>
+						<div class="content-block references">{@html article.references_text}</div>
+					</div>
 				{/if}
 
-			{:else}
+				{#if article.acknowledgements}
+					<div class="article-section">
+						<h3>Acknowledgements</h3>
+						<div class="content-block">{@html article.acknowledgements}</div>
+					</div>
+				{/if}
 
-				<!-- NORMAL CONTENT BODY -->
+				{#if article.appendix}
+					<div class="article-section">
+						<h3>Appendix</h3>
+						<div class="content-block">{@html article.appendix}</div>
+					</div>
+				{/if}
+				
+				{#if article.content}
+					<div class="content-block">{@html article.content}</div>
+				{/if}
 
-				<div
-					class="article-body prose prose-lg max-w-none text-gray-800"
-				>
-					{@html article.content || ''}
-				</div>
-
-			{/if}
+			</div>
 
 
 			<!-- TAGS -->
@@ -734,6 +807,7 @@
 		font-weight: 600;
 		cursor: pointer;
 		transition: all 0.2s ease;
+		font-family: 'Inter', sans-serif;
 	}
 
 	.interaction-button:hover {
@@ -775,6 +849,7 @@
 		background: #f8fafc;
 		color: #475569;
 		font-size: 13px;
+		font-family: 'Inter', sans-serif;
 	}
 
 	.content-stat strong {
@@ -785,75 +860,102 @@
 		color: #64748b;
 	}
 
-	.research-section {
-		margin-bottom: 42px;
+	.article-section {
+		margin-bottom: 48px;
 	}
 
-	.research-section h2 {
-		font-size: 1.75rem;
+	.article-section h3 {
+		font-family: 'Inter', sans-serif;
+		font-size: 1.25rem;
 		font-weight: 700;
-		color: #111827;
+		color: #1c1917;
 		margin-bottom: 16px;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
 	}
 
-	.research-section > div {
-		color: #374151;
-		font-size: 1.05rem;
-		line-height: 1.9;
-		white-space: pre-line;
+	.content-block {
+		font-size: 1.125rem;
+		line-height: 1.8;
+		color: #292524;
 	}
 
-	.article-body :global(h1),
-	.article-body :global(h2),
-	.article-body :global(h3),
-	.article-body :global(h4) {
-		color: #111827;
+	.content-block :global(p) {
+		margin-bottom: 1.5em;
+	}
+
+	.content-block :global(h2), .content-block :global(h3), .content-block :global(h4) {
+		font-family: 'Inter', sans-serif;
 		font-weight: 700;
-		margin-top: 2rem;
-		margin-bottom: 1rem;
+		color: #1c1917;
+		margin-top: 2em;
+		margin-bottom: 1em;
+		line-height: 1.3;
 	}
 
-	.article-body :global(h2) {
-		font-size: 1.75rem;
+	.content-block :global(ul), .content-block :global(ol) {
+		padding-left: 24px;
+		margin-bottom: 1.5em;
 	}
 
-	.article-body :global(h3) {
-		font-size: 1.4rem;
+	.content-block :global(li) {
+		margin-bottom: 0.5em;
 	}
 
-	.article-body :global(p) {
-		line-height: 1.9;
-		margin-bottom: 1.25rem;
-	}
-
-	.article-body :global(ul),
-	.article-body :global(ol) {
-		padding-left: 1.5rem;
-		margin-bottom: 1.5rem;
-	}
-
-	.article-body :global(li) {
-		margin-bottom: 0.5rem;
-	}
-
-	.article-body :global(a) {
-		color: #004085;
-		text-decoration: underline;
-	}
-
-	.article-body :global(img) {
+	.content-block :global(img) {
 		max-width: 100%;
-		height: auto;
 		border-radius: 12px;
-		margin: 2rem auto;
+		margin: 32px 0;
+		box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 	}
 
-	.article-body :global(blockquote) {
-		border-left: 4px solid #004085;
-		padding-left: 1rem;
-		margin: 2rem 0;
-		color: #4b5563;
+	.article-section:first-of-type .content-block {
+		font-size: 1.25rem;
+		line-height: 1.7;
+		color: #44403c;
+		padding: 32px;
+		background: #ffffff;
+		border-radius: 12px;
+		box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+		border-left: 4px solid #ea580c;
 		font-style: italic;
+	}
+
+	.content-block.takeaways {
+		background: linear-gradient(to right, #f0fdf4, #ffffff);
+		padding: 32px;
+		border-left: 5px solid #16a34a;
+		border-radius: 16px;
+		box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+	}
+	
+	.content-block.takeaways :global(ul) {
+		list-style: none;
+		padding-left: 0;
+	}
+	
+	.content-block.takeaways :global(li) {
+		position: relative;
+		padding-left: 28px;
+		margin-bottom: 12px;
+		font-weight: 500;
+		color: #1e293b;
+		font-family: 'Inter', sans-serif;
+	}
+	
+	.content-block.takeaways :global(li)::before {
+		content: '✦';
+		position: absolute;
+		left: 0;
+		color: #16a34a;
+		font-size: 16px;
+	}
+
+	.content-block.references {
+		font-size: 0.95rem;
+		color: #57534e;
+		padding-top: 32px;
+		border-top: 1px solid #e7e5e4;
 	}
 
 	@media (max-width: 640px) {

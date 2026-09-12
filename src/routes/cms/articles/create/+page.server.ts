@@ -95,9 +95,11 @@ export const actions: Actions = {
 				status,
 			};
 
-			const { error } = await supabaseAdmin
+			const { data: newArticle, error } = await supabaseAdmin
 				.from('articles')
-				.insert([insertData]);
+				.insert([insertData])
+				.select('id')
+				.single();
 
 			if (error) {
 				console.error("Insert article error:", error);
@@ -105,14 +107,14 @@ export const actions: Actions = {
 			}
 
 			// NOTIFICATION TRIGGER
-			if (status === 'under_review') {
+			if (status === 'under_review' && newArticle?.id) {
 				const { data: userProfile } = await supabaseAdmin.from('profiles').select('name').eq('id', session.user.id).single();
 				await createAdminNotification(
 					'New Article Submission',
 					`Dr. ${userProfile?.name || 'A user'} has submitted a new article: "${title}".`,
 					'info',
 					undefined,
-					'/cms/super-admin?tab=articles'
+					`/cms/review/article/${newArticle.id}`
 				);
 			}
 

@@ -40,7 +40,7 @@ export const actions: Actions = {
 			return fail(400, { message: 'Title is required' });
 		}
 
-		const { error } = await supabaseAdmin
+		const { data: newResearch, error } = await supabaseAdmin
 			.from('research_articles') // <-- CHANGE THIS TO YOUR ACTUAL TABLE NAME
 			.insert([
 				{
@@ -68,7 +68,9 @@ export const actions: Actions = {
 					featured_image,
 					status
 				}
-			]);
+			])
+			.select('id')
+			.single();
 
 		if (error) {
 			console.error(error);
@@ -77,13 +79,13 @@ export const actions: Actions = {
 			});
 		}
 
-		if (status === 'under_review') {
+		if (status === 'under_review' && newResearch?.id) {
 			await createAdminNotification(
 				'New Research Paper Submitted',
 				`Doctor has submitted a new research paper "${title}" for review.`,
 				'info',
 				undefined,
-				'/cms/super-admin?tab=research'
+				`/cms/review/research/${newResearch.id}`
 			);
 		}
 
