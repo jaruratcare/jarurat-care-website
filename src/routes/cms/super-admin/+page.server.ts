@@ -242,7 +242,13 @@ export const load: PageServerLoad = async ({ locals }) => {
 		);
 	}
 
-	const allArticles = allArticlesData ?? [];
+	const allArticles = (allArticlesData ?? []).map((article: any) => {
+		const author = users.find((u: any) => u.id === article.author_id);
+		return {
+			...article,
+			author_name_credentials: author?.full_name || 'Unknown'
+		};
+	});
 
 	const publishedArticles = allArticles.filter(
 		(article: any) =>
@@ -284,7 +290,13 @@ export const load: PageServerLoad = async ({ locals }) => {
 		);
 	}
 
-	const allResearch = allResearchData ?? [];
+	const allResearch = (allResearchData ?? []).map((research: any) => {
+		const author = users.find((u: any) => u.id === research.user_id);
+		return {
+			...research,
+			author_name_credentials: author?.full_name || 'Unknown'
+		};
+	});
 
 	const publishedResearch = allResearch.filter(
 		(research: any) =>
