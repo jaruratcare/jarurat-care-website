@@ -1,5 +1,5 @@
 <script lang="ts">
-	import AdminTopbar from '$lib/components/dashboard/AdminTopbar.svelte';
+	import AdminTopbar from '$lib/components/admin/AdminTopbar.svelte';
 	import { ArrowLeft, Check, X, FileText, AlertCircle, Calendar, User } from 'lucide-svelte';
 	import { fade, slide } from 'svelte/transition';
 	import { enhance } from '$app/forms';
