@@ -7,32 +7,81 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
-
-<url>
-  <loc>https://www.jarurat.care/</loc>
-  <lastmod>2025-01-03 T0 4:52:58+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://www.jarurat.care/about-us</loc>
-  <lastmod>2025-01-03 T0 4:52:58+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.jarurat.care/get-involved</loc>
-  <lastmod>2025-01-03 T0 4:52:58+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.jarurat.care/donate</loc>
-  <lastmod>2025-01-03 T0 4:52:58+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.jarurat.care/contact-us</loc>
-  <lastmod>2025-01-03 T0 4:52:58+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
+ <url>
+       <loc>https://www.jarurat.care/</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>1.0000</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/about-us</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/get-involved</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/knowledge-hub</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/doctor-form</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/contact-us</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/donate</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/join-us</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/mission</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/terms_and_conditions</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/privacy_policy</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/terms_of_service</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/cms/login</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/cms/signup</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://www.jarurat.care/cms/forgot</loc>
+       <lastmod>2026-09-17T11:00:55+00:00</lastmod>
+       <priority>0.5120</priority>
+  </url>
 
 
 </urlset>
