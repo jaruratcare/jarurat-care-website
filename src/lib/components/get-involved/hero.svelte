@@ -38,16 +38,16 @@
 				</p>
 			</div>
 
-			<!-- JS, AK, + BADGES -->
+			<!-- JS, AK, + BADGES WITH RESPECTIVE COLORS & NO GAPS -->
 			<div class="flex items-center gap-3 pt-1">
-				<div class="flex -space-x-1.5 shrink-0">
-					<div class="w-8 h-8 rounded-full bg-white/80 border border-slate-300/80 flex items-center justify-center text-xs font-semibold text-[#0D2460]">
+				<div class="flex -space-x-3 shrink-0">
+					<div class="w-8 h-8 rounded-full bg-[#E0F2FE] border-2 border-white flex items-center justify-center text-xs font-semibold text-[#0369A1]">
 						JS
 					</div>
-					<div class="w-8 h-8 rounded-full bg-white/80 border border-slate-300/80 flex items-center justify-center text-xs font-semibold text-[#0D2460]">
+					<div class="w-8 h-8 rounded-full bg-[#FCE7F3] border-2 border-white flex items-center justify-center text-xs font-semibold text-[#BE185D]">
 						AK
 					</div>
-					<div class="w-8 h-8 rounded-full bg-white/80 border border-slate-300/80 flex items-center justify-center text-xs font-semibold text-[#0D2460]">
+					<div class="w-8 h-8 rounded-full bg-[#FEF3C7] border-2 border-white flex items-center justify-center text-xs font-semibold text-[#B45309]">
 						+
 					</div>
 				</div>
@@ -56,13 +56,13 @@
 				</span>
 			</div>
 
-			<!-- QR SCANNER -->
+			<!-- QR SCANNER (WITHOUT WHITE BACKGROUND) -->
 			<div class="pt-2 flex items-center gap-4">
-				<div class="p-2 rounded-2xl border-2 border-[#1E40AF] bg-white shadow-sm w-32 h-32 shrink-0 flex items-center justify-center">
+				<div class="w-32 h-32 shrink-0 flex items-center justify-center">
 					<img 
 						src={qrCode}
 						alt="QR Code"
-						class="w-full h-full object-contain rounded-xl"
+						class="w-full h-full object-contain"
 					/>
 				</div>
 

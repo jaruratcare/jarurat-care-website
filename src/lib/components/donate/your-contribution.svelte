@@ -36,10 +36,10 @@
 			Your Contribution At Work
 		</h2>
 
-		<!-- Outer Container Card: Removed inner padding so left card fits edge-to-edge -->
+		<!-- Outer Container Card -->
 		<div class="bg-[#F1F5F9] rounded-[2rem] overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch shadow-sm">
 			
-			<!-- Left Card: Fills full height top-to-bottom and flush to the left border -->
+			<!-- Left Card -->
 			<div class="lg:col-span-5 bg-white p-8 sm:p-10 rounded-[2rem] shadow-sm flex flex-col justify-between h-full z-10">
 				<div>
 					<div class="w-10 h-10 rounded-xl bg-[#EFF6FF] flex items-center justify-center mb-6">
