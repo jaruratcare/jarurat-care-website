@@ -26,11 +26,12 @@
 
 <div class="py-12 md:py-16 relative overflow-x-hidden">
 	<section class="max-w-[1312px] mx-auto px-4">
-		<div class="bg-white/80 backdrop-blur-md rounded-[28px] p-8 md:p-14 shadow-lg border border-slate-100 mx-auto">
-			<h2 class="text-center text-3xl md:text-[36px] font-bold text-[#0D2460] mb-12 tracking-tight">
-				Caregiving Solutions
-			</h2>
+		<!-- Header is now outside the card wrapper -->
+		<h2 class="text-center text-3xl md:text-[36px] font-bold text-[#0D2460] mb-8 md:mb-12 tracking-tight">
+			Caregiving Solutions
+		</h2>
 
+		<div class="bg-white/80 backdrop-blur-md rounded-[28px] p-8 md:p-14 shadow-lg border border-slate-100 mx-auto">
 			<div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200">
 				{#each items as item}
 					<div class="flex flex-col text-left p-6 md:px-8 first:pl-0 last:pr-0">
