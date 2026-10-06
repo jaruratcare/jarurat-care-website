@@ -38,7 +38,7 @@
 				</p>
 			</div>
 
-			<!-- JS, AK, + BADGES WITH RESPECTIVE COLORS & NO GAPS -->
+			<!-- JS, AK, + BADGES -->
 			<div class="flex items-center gap-3 pt-1">
 				<div class="flex -space-x-3 shrink-0">
 					<div class="w-8 h-8 rounded-full bg-[#E0F2FE] border-2 border-white flex items-center justify-center text-xs font-semibold text-[#0369A1]">
@@ -56,7 +56,7 @@
 				</span>
 			</div>
 
-			<!-- QR SCANNER (WITHOUT WHITE BACKGROUND) -->
+			<!-- QR SCANNER -->
 			<div class="pt-2 flex items-center gap-4">
 				<div class="w-32 h-32 shrink-0 flex items-center justify-center">
 					<img 

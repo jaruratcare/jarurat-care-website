@@ -26,7 +26,6 @@
 
 <div class="py-12 md:py-16 relative overflow-x-hidden">
 	<section class="max-w-[1312px] mx-auto px-4">
-		<!-- Header is now outside the card wrapper -->
 		<h2 class="text-center text-3xl md:text-[36px] font-bold text-[#0D2460] mb-8 md:mb-12 tracking-tight">
 			Caregiving Solutions
 		</h2>

@@ -15,14 +15,14 @@
 		Connect With JCF
 	</h2>
 
-	<!-- Main Outer Card (Light Blue with Sharp/Square Corners) -->
+	<!-- Main Outer Card -->
 	<div class="bg-[#EFF6FF] rounded-none p-6 md:p-10 shadow-sm border border-blue-100">
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch relative">
 
-			<!-- LEFT CARD: Newsletter (Separate inner card with Sharp/Square Corners) -->
+			<!-- LEFT CARD: Newsletter -->
 			<div class="bg-[#DBEAFE] rounded-none p-6 md:p-8 flex flex-col justify-between border border-blue-200 shadow-sm">
 				<div>
-					<!-- Pill Badge (Matched to Figma Orange) -->
+					<!-- Pill Badge -->
 					<span class="inline-block bg-[#FEE2E2] text-[#C2410C] border border-[#FED7AA] text-xs font-semibold tracking-wider px-3.5 py-1 rounded-full uppercase mb-4">
 						NEWSLETTER
 					</span>
@@ -56,13 +56,13 @@
 				</form>
 			</div>
 
-			<!-- Vertical Bold & Deep Blue Dividing Line -->
+			<!-- Vertical Blue Dividing Line -->
 			<div class="hidden md:block absolute left-1/2 top-4 bottom-4 w-[2px] bg-[#2563EB] -translate-x-1/2"></div>
 
 			<!-- RIGHT SECTION: Collaborate -->
 			<div class="flex flex-col justify-between p-2 md:p-4 md:pl-6">
 				<div>
-					<!-- Pill Badge (Matched to Figma Orange) -->
+					<!-- Pill Badge -->
 					<span class="inline-block bg-[#FEE2E2] text-[#C2410C] border border-[#FED7AA] text-xs font-semibold tracking-wider px-3.5 py-1 rounded-full uppercase mb-4">
 						COLLABORATE WITH US
 					</span>
