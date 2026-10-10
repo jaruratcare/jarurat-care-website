@@ -131,7 +131,7 @@
 
 	:global(.faq-content a:not(.faq-action-link)) {
 		color: #2563eb !important;
-		font-weight: 700;
+		font-weight: 400 !important;
 		text-decoration: underline !important;
 		text-decoration-color: #2563eb !important;
 		text-underline-offset: 3.5px;
