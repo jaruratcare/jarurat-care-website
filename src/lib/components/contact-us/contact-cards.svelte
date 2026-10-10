@@ -25,7 +25,7 @@
         {@html EmailIcon}
       </div>
       <h3 class="text-[18px] font-semibold text-[#0C1F56] mb-2 leading-[24px] mt-3">Email Us</h3>
-      <p class="text-[16px] font-medium text-[#1E4ED8] leading-6 break-words mt-1">Priyanka.joshi@jarurat.care</p>
+      <p class="text-[16px] font-medium text-[#1E4ED8] leading-6 break-words mt-1">connect@jarurat.care</p>
       <p class="text-[14px] font-medium text-[#4B5563] leading-5 mt-2.5">We reply within 48 business hours</p>
     </div>
 

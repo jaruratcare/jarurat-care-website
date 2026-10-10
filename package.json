@@ -2,7 +2,7 @@
 	"name": "jarurat.care",
 	"version": "0.0.1",
 	"engines": {
-		"node": ">=24.x"
+		"node": ">=24.0.0"
 	},
 	"private": true,
 	"scripts": {

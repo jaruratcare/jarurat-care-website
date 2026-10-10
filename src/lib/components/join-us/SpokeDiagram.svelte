@@ -1,241 +1,461 @@
 <script>
-    import { onMount } from "svelte";
+    import FocusAreaConnectors from '$lib/svg/focus-area-connectors.svg';
+
+    import jaruratCareLogo from '$lib/assets/icons/jarurat-care-logo.svg';
+    import designIcon from '$lib/assets/icons/design-icon.svg';
+    import technologyIcon from '$lib/assets/icons/technology-icon.svg';
+    import businessIcon from '$lib/assets/icons/business-icon.svg';
+    import hrIcon from '$lib/assets/icons/hr-icon.svg';
+    import marketingIcon from '$lib/assets/icons/marketing-icon.svg';
 
     export let center = "Jarurat Care";
-    export let items = [];
-
-    $: spokes =
-        items?.length > 0
-            ? items.map((item) =>
-                  typeof item === "string" ? { label: item } : item
-              )
-            : [
-                  { label: "Healthcare Access" },
-                  { label: "Patient Support" },
-                  { label: "Caregiver Network" },
-                  { label: "Mental Wellness" },
-                  { label: "Home Care" },
-                  { label: "Elder Support" },
-                  { label: "Child Health" },
-                  { label: "Nutrition" },
-                  { label: "Rehabilitation" },
-                  { label: "Awareness" },
-                  { label: "Community Outreach" },
-                  { label: "Digital Health" },
-                  { label: "Research" },
-                  { label: "Partnerships" }
-              ];
-
-    $: centerLabel = center;
-    const centerSubtitle = "Our Focus Areas";
-
-    let containerWidth = 1000;
-    let containerEl;
-    $: isMobile = containerWidth < 640;
-    $: radius = isMobile
-        ? Math.min(containerWidth * 0.32, 180)   // mobile
-        : Math.min(containerWidth * 0.36, 220);  // desktop
-    $: centerR = Math.min(containerWidth * 0.13, 72);
-    $: nodeR = isMobile
-        ? Math.min(containerWidth * 0.07, 40)
-        : Math.min(containerWidth * 0.085, 52);
-    $: svgSize = isMobile
-        ? radius * 2 + nodeR * 1.5
-        : radius * 2 + nodeR * 2 + 20;
-    $: cx = svgSize / 2;
-    $: cy = svgSize / 2;
-    $: maxRadius = (svgSize / 2) - nodeR - 12;
-    
-    // Stable randomness
-    $: variations = spokes.map((_, i) => {
-        const rand = (seed) => {
-            const x = Math.sin(seed * 9999) * 10000;
-            return x - Math.floor(x);
-        };
-
-        return {
-            radiusFactor: 0.75 + rand(i) * 0.4,
-            sizeFactor: 0.7 + rand(i + 100) * 0.6,
-            angleOffset: (rand(i + 200) - 0.5) * 0.4
-        };
-    });
-
-    // New position function (angle-based)
-    function getPos(angle, r) {
-        return {
-            x: cx + r * Math.cos(angle),
-            y: cy + r * Math.sin(angle)
-        };
-    }
-
-    // ✅ Collision-aware layout
-    $: layout = (() => {
-        const placed = [];
-
-        return spokes.map((_, i) => {
-            const v = variations[i];
-
-            let angle =
-                (2 * Math.PI * i) / spokes.length - Math.PI / 2 + v.angleOffset;
-
-            let r = radius * v.radiusFactor;
-            let localNodeR = nodeR * v.sizeFactor;
-
-            let pos = getPos(angle, r);
-
-            let attempts = 0;
-            while (attempts < 20) {
-                let collision = false;
-
-                for (const p of placed) {
-                    const dx = pos.x - p.x;
-                    const dy = pos.y - p.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    const minDist = localNodeR + p.r + 12;
-
-                    if (dist < minDist) {
-                        collision = true;
-                        r += 10; // push outward
-                        pos = getPos(angle, r);
-                        break;
-                    }
-                }
-
-                if (!collision) break;
-                attempts++;
-            }
-
-            const node = { ...pos, r: localNodeR };
-            placed.push(node);
-            return node;
-        });
-    })();
-
-    onMount(() => {
-        const observer = new ResizeObserver((entries) => {
-            containerWidth = entries[0].contentRect.width;
-        });
-
-        if (containerEl) observer.observe(containerEl);
-        containerWidth = containerEl?.offsetWidth || 600;
-
-        return () => observer.disconnect();
-    });
-
-    let hoveredIndex = null;
 </script>
 
-<section class="py-16 bg-[#eef4ff]">
-    <div class="max-w-6xl mx-auto px-6">
+<section
+    class="w-full bg-[#d9edff] px-4 sm:px-6 py-16 md:px-10 md:py-20 lg:px-16 overflow-hidden box-border"
+>
+    <!-- ========================= -->
+    <!-- SECTION HEADING -->
+    <!-- ========================= -->
 
-        <div class="text-center mb-10">
-            <h2 class="font-extrabold text-3xl md:text-4xl text-primaryBlue">
-                {centerSubtitle}
-            </h2>
+    <div class="mx-auto text-center px-2">
+        <h2
+            class="font-bold leading-tight text-3xl sm:text-4xl md:text-[42px]"
+            style="color: rgba(12, 31, 86, 1);"
+        >
+            Our Focus Areas
+        </h2>
 
-            <p class="mt-3 text-gray-600 max-w-xl mx-auto">
-                Explore the many areas where Jarurat Care is making a difference.
-            </p>
+        <p
+            class="mt-3 font-semibold text-base sm:text-lg md:text-[20px]"
+            style="color: rgba(107, 114, 128, 1);"
+        >
+            Explore the areas where Jarurat Care is making a difference.
+        </p>
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- MAIN DIAGRAM -->
+    <!-- ========================= -->
+
+    <div
+        class="
+            mx-auto
+            mt-10
+            md:mt-16
+            grid
+            w-full
+            max-w-[1305px]
+            grid-cols-1
+            lg:grid-cols-[340px_395px_568px]
+            items-center
+            justify-center
+            gap-8
+            lg:gap-0
+        "
+    >
+
+        <!-- ========================= -->
+        <!-- JARURAT CARE CARD -->
+        <!-- ========================= -->
+
+        <div
+            class="
+                relative
+                z-10
+                flex
+                h-[180px]
+                sm:h-[200px]
+                lg:h-[240px]
+                w-full
+                max-w-[340px]
+                mx-auto
+                lg:mx-0
+                shrink-0
+                items-center
+                justify-center
+                rounded-[24px]
+                bg-white
+                shadow-[0_8px_18px_rgba(0,0,0,0.16)]
+                box-border
+            "
+        >
+            <img
+                src={jaruratCareLogo}
+                alt={center}
+                class="h-auto w-[200px] sm:w-[220px] lg:w-[250px] object-contain"
+            />
         </div>
 
-        <div bind:this={containerEl} class="w-full flex items-center justify-center">
 
-            <svg
-                width={svgSize}
-                height={svgSize}
-                viewBox="0 0 {svgSize} {svgSize}"
-                class="max-w-full"
-                style="overflow: visible;"
+        <!-- ===================================== -->
+        <!-- CONNECTOR AREA (Hidden on Mobile/Tablet) -->
+        <!-- ===================================== -->
+
+        <div
+            class="
+                relative
+                hidden
+                lg:block
+                h-[479px]
+                w-[395px]
+            "
+        >
+            <img
+                src={FocusAreaConnectors}
+                alt=""
+                aria-hidden="true"
+                class="
+                    pointer-events-none
+                    absolute
+                    z-0
+                "
+                style="
+                    width: 294px;
+                    height: 479px;
+                    left: 25px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                "
+            />
+        </div>
+
+
+        <!-- ===================================== -->
+        <!-- FOCUS AREA CARDS -->
+        <!-- ===================================== -->
+
+        <div
+            class="
+                relative
+                z-10
+                flex
+                w-full
+                lg:w-[568px]
+                lg:-translate-x-[20px]
+                flex-col
+                gap-4
+                sm:gap-6
+                box-border
+            "
+        >
+
+            <!-- ========================= -->
+            <!-- 1. DESIGN & CREATIVE -->
+            <!-- ========================= -->
+
+            <div
+                class="
+                    relative
+                    z-10
+                    flex
+                    h-auto
+                    min-h-[90px]
+                    sm:h-[100px]
+                    w-full
+                    items-center
+                    rounded-[16px]
+                    bg-white
+                    px-4
+                    sm:px-6
+                    py-4
+                    sm:py-0
+                    shadow-[0_6px_14px_rgba(0,0,0,0.14)]
+                    box-border
+                "
             >
-                <!-- Outer ring -->
-                <circle
-                    cx={cx}
-                    cy={cy}
-                    r={radius + nodeR + 8}
-                    fill="none"
-                    stroke="#dbeafe"
-                    stroke-width="1.5"
-                    stroke-dasharray="6 5"
-                    opacity="0.7"
-                />
-
-                <!-- Spokes -->
-                {#each spokes as _, i}
-                    {@const pos = layout[i]}
-
-                    <line
-                        x1={cx}
-                        y1={cy}
-                        x2={pos.x}
-                        y2={pos.y}
-                        stroke={hoveredIndex === i ? "#2563eb" : "#93c5fd"}
-                        stroke-width={hoveredIndex === i ? 2.5 : 1.5}
-                        stroke-linecap="round"
-                    />
-                {/each}
-
-                <!-- Nodes -->
-                {#each spokes as spoke, i}
-                    {@const pos = layout[i]}
-                    {@const localNodeR = pos.r}
-                    {@const words = spoke.label.split(" ")}
-
-                    <g
-                        on:mouseenter={() => (hoveredIndex = i)}
-                        on:mouseleave={() => (hoveredIndex = null)}
-                    >
-                        <circle
-                            cx={pos.x}
-                            cy={pos.y}
-                            r={hoveredIndex === i ? localNodeR + 3 : localNodeR}
-                            fill={hoveredIndex === i ? "#2563eb" : "white"}
-                            stroke={hoveredIndex === i ? "#1d4ed8" : "#bfdbfe"}
-                            stroke-width="2"
-                        />
-
-                        <text
-                            x={pos.x}
-                            y={pos.y}
-                            text-anchor="middle"
-                            font-size={Math.max(localNodeR * 0.26, 8)}
-                            font-weight="600"
-                            fill={hoveredIndex === i ? "white" : "#1e3a8a"}
-                            pointer-events="none"
-                        >
-                            {#each words as word, wi}
-                                <tspan
-                                    x={pos.x}
-                                    dy={wi === 0 ? 0 : localNodeR * 0.32}
-                                >
-                                    {word}
-                                </tspan>
-                            {/each}
-                        </text>
-                    </g>
-                {/each}
-
-                <!-- Center -->
-                <circle
-                    cx={cx}
-                    cy={cy}
-                    r={centerR}
-                    fill="#2563eb"
-                    stroke="white"
-                    stroke-width="3"
-                />
-
-                <text
-                    x={cx}
-                    y={cy}
-                    text-anchor="middle"
-                    font-size={Math.max(centerR * 0.3, 11)}
-                    font-weight="800"
-                    fill="white"
+                <div
+                    class="
+                        flex
+                        h-[42px]
+                        w-[42px]
+                        sm:h-[48px]
+                        sm:w-[48px]
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-[10px]
+                        bg-[#e9efff]
+                    "
                 >
-                    {centerLabel}
-                </text>
-            </svg>
+                    <img
+                        src={designIcon}
+                        alt=""
+                        aria-hidden="true"
+                        class="h-8 w-8 sm:h-12 sm:w-12 object-contain"
+                    />
+                </div>
+
+                <div class="ml-3 sm:ml-4 overflow-hidden">
+                    <h3
+                        class="font-bold leading-tight text-lg sm:text-[20px]"
+                        style="color: rgba(12, 31, 86, 1);"
+                    >
+                        Design & Creative Side
+                    </h3>
+
+                    <p
+                        class="mt-1 sm:mt-2 text-xs sm:text-sm md:text-[16px] text-gray-500 leading-normal"
+                    >
+                        UI/UX Design · Graphic Design · Creative Design
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- 2. TECHNOLOGY -->
+            <!-- ========================= -->
+
+            <div
+                class="
+                    relative
+                    z-10
+                    flex
+                    h-auto
+                    min-h-[90px]
+                    sm:h-[100px]
+                    w-full
+                    items-center
+                    rounded-[16px]
+                    bg-white
+                    px-4
+                    sm:px-6
+                    py-4
+                    sm:py-0
+                    shadow-[0_6px_14px_rgba(0,0,0,0.14)]
+                    box-border
+                "
+            >
+                <div
+                    class="
+                        flex
+                        h-[42px]
+                        w-[42px]
+                        sm:h-[48px]
+                        sm:w-[48px]
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-[10px]
+                        bg-[#e9efff]
+                    "
+                >
+                    <img
+                        src={technologyIcon}
+                        alt=""
+                        aria-hidden="true"
+                        class="h-8 w-8 sm:h-12 sm:w-12 object-contain"
+                    />
+                </div>
+
+                <div class="ml-3 sm:ml-4 overflow-hidden">
+                    <h3
+                        class="font-bold leading-tight text-lg sm:text-[20px]"
+                        style="color: rgba(12, 31, 86, 1);"
+                    >
+                        Technology & Automation
+                    </h3>
+
+                    <p
+                        class="mt-1 sm:mt-2 text-xs sm:text-sm md:text-[16px] text-gray-500 leading-normal"
+                    >
+                        Python Automation · Automation & Operations
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- 3. BUSINESS -->
+            <!-- ========================= -->
+
+            <div
+                class="
+                    relative
+                    z-10
+                    flex
+                    h-auto
+                    min-h-[90px]
+                    sm:h-[100px]
+                    w-full
+                    items-center
+                    rounded-[16px]
+                    bg-white
+                    px-4
+                    sm:px-6
+                    py-4
+                    sm:py-0
+                    shadow-[0_6px_14px_rgba(0,0,0,0.14)]
+                    box-border
+                "
+            >
+                <div
+                    class="
+                        flex
+                        h-[42px]
+                        w-[42px]
+                        sm:h-[48px]
+                        sm:w-[48px]
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-[10px]
+                        bg-[#e9efff]
+                    "
+                >
+                    <img
+                        src={businessIcon}
+                        alt=""
+                        aria-hidden="true"
+                        class="h-8 w-8 sm:h-12 sm:w-12 object-contain"
+                    />
+                </div>
+
+                <div class="ml-3 sm:ml-4 overflow-hidden">
+                    <h3
+                        class="font-bold leading-tight text-lg sm:text-[20px]"
+                        style="color: rgba(12, 31, 86, 1);"
+                    >
+                        Business & Operations
+                    </h3>
+
+                    <p
+                        class="mt-1 sm:mt-2 text-xs sm:text-sm md:text-[16px] text-gray-500 leading-normal"
+                    >
+                        Business Development · Lead Generation · Partnership
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- 4. HR -->
+            <!-- ========================= -->
+
+            <div
+                class="
+                    relative
+                    z-10
+                    flex
+                    h-auto
+                    min-h-[90px]
+                    sm:h-[100px]
+                    w-full
+                    items-center
+                    rounded-[16px]
+                    bg-white
+                    px-4
+                    sm:px-6
+                    py-4
+                    sm:py-0
+                    shadow-[0_6px_14px_rgba(0,0,0,0.14)]
+                    box-border
+                "
+            >
+                <div
+                    class="
+                        flex
+                        h-[42px]
+                        w-[42px]
+                        sm:h-[48px]
+                        sm:w-[48px]
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-[10px]
+                        bg-[#e9efff]
+                    "
+                >
+                    <img
+                        src={hrIcon}
+                        alt=""
+                        aria-hidden="true"
+                        class="h-8 w-8 sm:h-12 sm:w-12 object-contain"
+                    />
+                </div>
+
+                <div class="ml-3 sm:ml-4 overflow-hidden">
+                    <h3
+                        class="font-bold leading-tight text-lg sm:text-[20px]"
+                        style="color: rgba(12, 31, 86, 1);"
+                    >
+                        HR & People Operations
+                    </h3>
+
+                    <p
+                        class="mt-1 sm:mt-2 text-xs sm:text-sm md:text-[16px] text-gray-500 leading-normal"
+                    >
+                        HR · Talent Acquisition · Clinical Psychology
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- 5. MARKETING -->
+            <!-- ========================= -->
+
+            <div
+                class="
+                    relative
+                    z-10
+                    flex
+                    h-auto
+                    min-h-[90px]
+                    sm:h-[100px]
+                    w-full
+                    items-center
+                    rounded-[16px]
+                    bg-white
+                    px-4
+                    sm:px-6
+                    py-4
+                    sm:py-0
+                    shadow-[0_6px_14px_rgba(0,0,0,0.14)]
+                    box-border
+                "
+            >
+                <div
+                    class="
+                        flex
+                        h-[42px]
+                        w-[42px]
+                        sm:h-[48px]
+                        sm:w-[48px]
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-[10px]
+                        bg-[#e9efff]
+                    "
+                >
+                    <img
+                        src={marketingIcon}
+                        alt=""
+                        aria-hidden="true"
+                        class="h-8 w-8 sm:h-12 sm:w-12 object-contain"
+                    />
+                </div>
+
+                <div class="ml-3 sm:ml-4 overflow-hidden">
+                    <h3
+                        class="font-bold leading-tight text-base sm:text-lg lg:text-[20px]"
+                        style="color: rgba(12, 31, 86, 1);"
+                    >
+                        Marketing, Branding & Communications
+                    </h3>
+
+                    <p
+                        class="mt-1 sm:mt-2 text-xs sm:text-sm md:text-[16px] text-gray-500 leading-normal"
+                    >
+                        Marketing · Social Media & content · Public Relations
+                    </p>
+                </div>
+            </div>
+
         </div>
     </div>
+
 </section>

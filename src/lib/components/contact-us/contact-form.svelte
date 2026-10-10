@@ -107,6 +107,7 @@
     fd.append("phone", phone.trim());
     fd.append("message", message.trim());
     fd.append("agreed", agreed ? "yes" : "no");
+    fd.append("_cc", "Priyanka.joshi@jarurat.care");
 
     try {
       const res = await fetch(FORMSPREE_ENDPOINT, {

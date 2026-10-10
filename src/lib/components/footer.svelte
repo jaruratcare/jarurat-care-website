@@ -3,7 +3,6 @@
 	import Button from './ui/button.svelte';
 	import Icon from '@iconify/svelte';
 	import instagramIcon from '@iconify-icons/mdi/instagram';
-	import twitterIcon from '@iconify-icons/mdi/twitter';
 	import facebookIcon from '@iconify-icons/mdi/facebook';
 	import whatsappIcon from '@iconify-icons/mdi/whatsapp';
 
@@ -35,7 +34,15 @@
 					</Button>
 				</a>
 
-				<a href="mailto:Priyanka.joshi@jarurat.care?subject=Seek Support">
+				<!-- Desktop Version: Redirects to /contact-us -->
+				<a href="/contact-us" class="hidden md:inline-block">
+					<Button class="bg-white border border-[#1E40AF] text-[#1E40AF] hover:bg-[#1E40AF] hover:text-white px-3 py-1.5 text-sm">
+						Seek Support
+					</Button>
+				</a>
+
+				<!-- Mobile & Tablet Version: Keeps mailto functionality -->
+				<a href="mailto:connect@jarurat.care?subject=Seek Support" class="inline-block md:hidden">
 					<Button class="bg-white border border-[#1E40AF] text-[#1E40AF] hover:bg-[#1E40AF] hover:text-white px-3 py-1.5 text-sm">
 						Seek Support
 					</Button>
@@ -71,20 +78,22 @@
 			<div>
 				<p class="font-semibold mb-2">Connect with us</p>
 
-				<div class="flex items-center justify-center sm:justify-start gap-3">
-					<a href="https://wa.me/919940263931" target="_blank" rel="noopener">
+				<div class="flex items-center justify-center sm:justify-start gap-3.5">
+					<a href="https://wa.me/919940263931" target="_blank" rel="noopener" aria-label="WhatsApp">
 						<Icon icon={whatsappIcon} class="w-5 h-5 text-[#1E40AF]" />
 					</a>
 
-					<a href="https://www.instagram.com/jarurat.care?igsh=cjNld2FsMmhpeHNp" target="_blank" rel="noopener">
+					<a href="https://www.instagram.com/jarurat.care?igsh=cjNld2FsMmhpeHNp" target="_blank" rel="noopener" aria-label="Instagram">
 						<Icon icon={instagramIcon} class="w-5 h-5 text-[#1E40AF]" />
 					</a>
 
-					<a href="https://twitter.com/jarurat_care" target="_blank" rel="noopener">
-						<Icon icon={twitterIcon} class="w-5 h-5 text-[#1E40AF]" />
+					<a href="https://twitter.com/jarurat_care" target="_blank" rel="noopener" aria-label="X (formerly Twitter)" class="text-[#1E40AF] hover:opacity-80 flex items-center justify-center">
+						<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+							<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+						</svg>
 					</a>
 
-					<a href="https://facebook.com/share/1DpQCLVLdM/" target="_blank" rel="noopener">
+					<a href="https://facebook.com/share/1DpQCLVLdM/" target="_blank" rel="noopener" aria-label="Facebook">
 						<Icon icon={facebookIcon} class="w-5 h-5 text-[#1E40AF]" />
 					</a>
 				</div>
@@ -96,8 +105,8 @@
 				<div class="text-sm text-[#475569] space-y-1">
 					<div>
 						Email:
-						<a href="mailto:Priyanka.joshi@jarurat.care" class="hover:text-[#1E40AF]">
-							Priyanka.joshi@jarurat.care
+						<a href="mailto:connect@jarurat.care" class="hover:text-[#1E40AF]">
+							connect@jarurat.care
 						</a>
 					</div>
 

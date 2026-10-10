@@ -41,38 +41,39 @@
       class="w-full h-[240px] object-cover object-bottom -mt-1"
     />
   </div>
+
   <!-- TABLET LAYOUT -->
   <div class="hidden md:block lg:hidden relative w-full h-[1040px] overflow-hidden bg-[#EEF5FF]">
-  <img src={tabletHero} alt="Jarurat Care Foundation" class="absolute inset-0 w-full h-full object-cover" />
-  <div class="absolute inset-0 bg-[#1E4ED8]/5"></div>
-  <div class="relative z-10 flex flex-col items-center text-center gap-6 px-8 pt-16">
-    <h1 class="text-[48px] leading-[56px] font-bold text-[#0D2561]">
-      Jarurat Care Foundation
-    </h1>
-    <h2 class="text-[32px] leading-[40px] font-bold text-[#4B71E0]">
-      Jaisi Jarurat, Vaisi Care
-    </h2>
-    <p class="text-[#6B7280] text-[18px] leading-[30px] max-w-[420px]">
-      Providing support to cancer patients and their families.
-      Ensuring no one faces the journey alone.
-    </p>
-    <div class="flex flex-wrap justify-center gap-3">
-      <a href="/donate">
-        <button class="bg-[#1E40AF] text-white px-6 py-3 rounded-full text-sm font-medium shadow-md">
-          Donate Now
-        </button>
-      </a>
-      <a href="mailto:Priyanka.joshi@jarurat.care?subject=Seek%20Support%20For%20Cancer">
-        <button class="border-2 border-[#1E40AF] bg-white text-[#1E40AF] px-6 py-3 rounded-full text-sm font-medium shadow-sm">
-          Seek Cancer Support
-        </button>
-      </a>
+    <img src={tabletHero} alt="Jarurat Care Foundation" class="absolute inset-0 w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-[#1E4ED8]/5"></div>
+    <div class="relative z-10 flex flex-col items-center text-center gap-6 px-8 pt-16">
+      <h1 class="text-[48px] leading-[56px] font-bold text-[#0D2561]">
+        Jarurat Care Foundation
+      </h1>
+      <h2 class="text-[32px] leading-[40px] font-bold text-[#4B71E0]">
+        Jaisi Jarurat, Vaisi Care
+      </h2>
+      <p class="text-[#6B7280] text-[18px] leading-[30px] max-w-[420px]">
+        Providing support to cancer patients and their families.
+        Ensuring no one faces the journey alone.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="/donate">
+          <button class="bg-[#1E40AF] text-white px-6 py-3 rounded-full text-sm font-medium shadow-md">
+            Donate Now
+          </button>
+        </a>
+        <a href="mailto:Priyanka.joshi@jarurat.care?subject=Seek%20Support%20For%20Cancer">
+          <button class="border-2 border-[#1E40AF] bg-white text-[#1E40AF] px-6 py-3 rounded-full text-sm font-medium shadow-sm">
+            Seek Cancer Support
+          </button>
+        </a>
+      </div>
+      <p class="text-[#64748B] text-[18px] leading-[30px] font-bold italic">
+        "Supporting patients across India since 2023"
+      </p>
     </div>
-    <p class="text-[#64748B] text-[18px] leading-[30px] font-bold italic">
-      "Supporting patients across India since 2023"
-    </p>
   </div>
-</div>
 
   <!-- DESKTOP LAYOUT -->
   <div class="hidden lg:block relative w-full h-[806px] overflow-hidden">
@@ -98,7 +99,7 @@
             Donate Now
           </button>
         </a>
-        <a href="mailto:Priyanka.joshi@jarurat.care?subject=Seek%20Support%20For%20Cancer">
+        <a href="/contact-us">
           <button class="border-2 border-[#1E40AF] bg-white text-[#1E40AF] px-6 py-4 rounded-full text-[18px] font-bold shadow-sm hover:bg-[#1E40AF] hover:text-white transition-colors duration-300">
             Seek Cancer Support
           </button>

@@ -1,76 +1,94 @@
 <script>
-	// Component logic if needed
+	let email = '';
+
+	function handleSubscribe() {
+		if (email) {
+			alert(`Subscribed with: ${email}`);
+			email = '';
+		}
+	}
 </script>
 
 <section class="max-w-6xl mx-auto py-12 md:py-16">
 	<!-- Section Header -->
-	<h2 class="text-3xl md:text-4xl font-bold text-[#1E293B] text-center mb-10 md:mb-12">
+	<h2 class="text-3xl font-bold text-[#0D2460] text-center mb-10 tracking-tight">
 		Connect With JCF
 	</h2>
 
-	<!-- Two Card Grid -->
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+	<!-- Main Outer Card -->
+	<div class="bg-[#EFF6FF] rounded-none p-6 md:p-10 shadow-sm border border-blue-100">
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch relative">
 
-		<!-- LEFT CARD: Newsletter -->
-		<div class="bg-[#EBF5FB] rounded-3xl p-8 md:p-10 flex flex-col justify-between border border-blue-50/50">
-			<div>
-				<!-- Badge -->
-				<span class="inline-block bg-[#FFEAD0] text-[#C27803] text-xs font-bold tracking-wider px-3.5 py-1 rounded-full uppercase mb-4">
-					NEWSLETTER
-				</span>
+			<!-- LEFT CARD: Newsletter -->
+			<div class="bg-[#DBEAFE] rounded-none p-6 md:p-8 flex flex-col justify-between border border-blue-200 shadow-sm">
+				<div>
+					<!-- Pill Badge -->
+					<span class="inline-block bg-[#FEE2E2] text-[#C2410C] border border-[#FED7AA] text-xs font-semibold tracking-wider px-3.5 py-1 rounded-full uppercase mb-4">
+						NEWSLETTER
+					</span>
 
-				<h3 class="text-2xl font-bold text-[#1E293B] mb-3">
-					Subscribe to our Newsletter
-				</h3>
+					<!-- Heading -->
+					<h3 class="text-2xl font-bold text-[#0D2460] mb-3 leading-snug">
+						Subscribe to our Newsletter
+					</h3>
 
-				<p class="text-sm text-slate-500 leading-relaxed mb-6">
-					Get the latest updates, inspiring stories, and important news delivered right to your inbox.
-				</p>
+					<!-- Description -->
+					<p class="text-sm text-slate-600 leading-relaxed mb-8">
+						Get the latest updates, inspiring stories, and important news delivered right to your inbox.
+					</p>
+				</div>
+
+				<!-- Input Form -->
+				<form on:submit|preventDefault={handleSubscribe} class="flex items-center gap-3">
+					<input
+						type="email"
+						bind:value={email}
+						placeholder="Enter your email address"
+						required
+						class="w-full bg-white text-sm text-slate-700 px-4 py-3 rounded-xl border border-[#1E40AF] outline-none focus:ring-2 focus:ring-[#1E40AF] transition-all placeholder:text-slate-400"
+					/>
+					<button
+						type="submit"
+						class="bg-white hover:bg-blue-50 text-[#1E40AF] font-medium text-sm px-6 py-3 rounded-full border border-[#1E40AF] transition-all shadow-sm shrink-0"
+					>
+						Submit
+					</button>
+				</form>
 			</div>
 
-			<!-- Input Form -->
-			<form on:submit|preventDefault class="flex items-center gap-3 mt-4">
-				<input
-					type="email"
-					placeholder="Enter your email address"
-					class="w-full bg-white text-sm text-slate-700 px-4 py-3 rounded-xl border border-slate-200 outline-none focus:border-blue-500 transition-all placeholder:text-slate-400"
-				/>
-				<button
-					type="submit"
-					class="bg-white border border-slate-300 text-slate-700 font-semibold text-sm px-6 py-3 rounded-xl hover:bg-slate-50 transition-all shadow-sm"
-				>
-					Submit
-				</button>
-			</form>
+			<!-- Vertical Blue Dividing Line -->
+			<div class="hidden md:block absolute left-1/2 top-4 bottom-4 w-[2px] bg-[#2563EB] -translate-x-1/2"></div>
+
+			<!-- RIGHT SECTION: Collaborate -->
+			<div class="flex flex-col justify-between p-2 md:p-4 md:pl-6">
+				<div>
+					<!-- Pill Badge -->
+					<span class="inline-block bg-[#FEE2E2] text-[#C2410C] border border-[#FED7AA] text-xs font-semibold tracking-wider px-3.5 py-1 rounded-full uppercase mb-4">
+						COLLABORATE WITH US
+					</span>
+
+					<!-- Heading -->
+					<h3 class="text-2xl font-bold text-[#0D2460] mb-3 leading-snug">
+						Be part of the Journey
+					</h3>
+
+					<!-- Description -->
+					<p class="text-sm text-slate-600 leading-relaxed mb-6">
+						Our mission thrives through the support of compassionate corporates, individuals, and organizations. You can be part of this journey too—join us in making a difference. Every contribution brings hope, supports life-saving care, and helps patients receive the treatment they need.
+					</p>
+				</div>
+
+				<!-- Links Grid -->
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4 text-sm font-semibold">
+					<a href="/get-involved" class="flex items-center gap-1.5 text-[#1E40AF] hover:underline">
+						<span>»</span> Join Jarurat Care Team
+					</a>
+					<a href="/donate" class="flex items-center gap-1.5 text-[#1E40AF] hover:underline">
+						<span>»</span> Donate Money
+					</a>
+				</div>
+			</div>
+
 		</div>
-
-		<!-- RIGHT CARD: Collaborate -->
-		<div class="bg-white rounded-3xl p-8 md:p-10 flex flex-col justify-between border border-slate-100 shadow-sm relative pl-10 border-l-4 border-l-[#F59E0B]">
-			<div>
-				<!-- Badge -->
-				<span class="inline-block bg-[#FFEAD0] text-[#C27803] text-xs font-bold tracking-wider px-3.5 py-1 rounded-full uppercase mb-4">
-					COLLABORATE WITH US
-				</span>
-
-				<h3 class="text-2xl font-bold text-[#1E293B] mb-3">
-					Be part of the Journey
-				</h3>
-
-				<p class="text-sm text-slate-500 leading-relaxed mb-6">
-					Our mission thrives through the support of compassionate corporates, individuals, and organizations. You can be part of this journey too—join us in making a difference. Every contribution brings hope, supports life-saving care, and helps patients receive the treatment they need.
-				</p>
-			</div>
-
-			<!-- Links Grid -->
-			<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4 pt-2 text-sm font-semibold text-[#1E3A8A]">
-				<a href="/join-team" class="flex items-center gap-1.5 hover:underline">
-					<span class="text-blue-500">»</span> Join Jarurat Care Team
-				</a>
-				<a href="/donate" class="flex items-center gap-1.5 hover:underline">
-					<span class="text-blue-500">»</span> Donate Money
-				</a>
-			</div>
-		</div>
-
 	</div>
 </section>
