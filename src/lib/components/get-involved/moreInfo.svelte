@@ -1,11 +1,7 @@
 <script>
     import { ChevronDown } from 'lucide-svelte';
     import { marked } from 'marked';
-    
-    // Import your reusable global FAQ component
     import Faq from "$lib/components/faqs/faq.svelte";
-    
-    // Import your newly created Get Involved FAQ dataset
     import getInvolvedFaqsData from '$lib/data/get-involved-faqs.json';
 </script>
 
@@ -26,7 +22,7 @@
     <div class="relative bg-[#EEF4FB] border border-[#D8E6F8] p-10 md:p-16 rounded-[2.5rem] shadow-xs max-w-4xl mx-auto overflow-hidden">
       
       <!-- TOP LEFT DOUBLE QUOTE -->
-      <div class="absolute top-10 left-10 text-[#82ACF9] pointer-events-none">
+      <div class="absolute top-10 left-10 text-[#8AB4F8] pointer-events-none">
         <svg class="w-12 h-12 md:w-16 md:h-16 fill-current" viewBox="0 0 100 100">
           <rect x="10" y="12" width="28" height="38" rx="3" />
           <path d="M10 50 Q 12 74, 34 78 Q 24 64, 26 50 Z" />
@@ -36,8 +32,8 @@
       </div>
 
       <!-- BOTTOM RIGHT DOUBLE QUOTE -->
-      <div class="absolute bottom-10 right-10 text-[#82ACF9] pointer-events-none">
-        <svg class="w-12 h-12 md:w-16 md:h-16 fill-current" viewBox="0 0 100 100">
+      <div class="absolute bottom-10 right-10 text-[#8AB4F8] pointer-events-none">
+        <svg class="w-12 h-12 md:w-16 md:h-16 fill-current scale-x-[-1]" viewBox="0 0 100 100">
           <rect x="10" y="12" width="28" height="38" rx="3" />
           <path d="M10 50 Q 12 74, 34 78 Q 24 64, 26 50 Z" />
           <rect x="54" y="12" width="28" height="38" rx="3" />
@@ -47,7 +43,7 @@
 
       <div class="relative z-10 text-center space-y-8">
         <!-- QUOTE TEXT -->
-        <p class="text-2xl md:text-3xl font-semibold text-[#0D2460] max-w-2xl mx-auto leading-relaxed tracking-tight">
+        <p class="text-2xl md:text-3xl font-semibold text-[#334E68] max-w-2xl mx-auto leading-relaxed tracking-tight">
           Alone we can do so little, <br/>
           <span class="text-[#78C520] font-semibold">together</span> we can do so much.
         </p>
@@ -55,16 +51,16 @@
         <!-- AUTHOR & AFFILIATION LINES -->
         <div class="space-y-2 pt-2">
           <div class="flex items-center justify-center gap-3">
-            <div class="w-10 h-[2px] bg-[#1E40AF]"></div>
-            <p class="font-bold text-xs text-[#1E40AF] tracking-[0.2em] uppercase">
+            <div class="w-10 h-[2px] bg-[#3B82F6]"></div>
+            <p class="font-bold text-xs text-[#2563EB] tracking-[0.15em] uppercase">
               PRIYANKA JOSHI
             </p>
-            <div class="w-10 h-[2px] bg-[#1E40AF]"></div>
+            <div class="w-10 h-[2px] bg-[#3B82F6]"></div>
           </div>
 
-          <div class="space-y-0.5 text-[#64748B] text-[10px] font-normal uppercase tracking-[0.18em]">
-            <p>FOUNDER</p>
-            <p>JARURAT CARE FOUNDATION</p>
+          <div class="space-y-0.5 text-[#64748B] text-[10px] font-normal uppercase tracking-[0.1em]">
+            <p>FOUNDER,</p>
+            <p class="tracking-[0.08em]">JARURAT CARE FOUNDATION</p>
           </div>
         </div>
 
@@ -74,11 +70,6 @@
 
     <!-- FAQ Section -->
     <div class="max-w-3xl mx-auto w-full space-y-8">
-      <h2 class="text-3xl font-semibold text-[#0D2460] text-center tracking-tight">
-        FAQ
-      </h2>
-
-      <!-- Passes the JSON array into your shared component -->
       <Faq faqs={getInvolvedFaqsData} />
     </div>
 
