@@ -5,12 +5,12 @@
 
 <section class="relative w-full bg-[#CDE3F7] pt-24 pb-8 lg:pt-28 lg:pb-10 overflow-hidden flex items-center font-sans antialiased">
 	
-	<!-- DESKTOP HERO IMAGE -->
-	<div class="hidden lg:flex absolute right-0 bottom-0 h-[84%] w-[62%] items-end justify-end pointer-events-none z-0 pr-6">
+	<!-- HERO IMAGE -->
+	<div class="absolute inset-0 w-full h-full pointer-events-none z-0">
 		<img
 			src={heroImage}
 			alt="Medical Advisory Board Doctors"
-			class="h-full w-auto max-w-full object-contain object-bottom" 
+			class="w-full h-full object-cover object-right" 
 		/>
 	</div>
 
@@ -19,8 +19,8 @@
 		
 		<div class="lg:col-span-6 space-y-3.5 text-left">
 			
-			<!-- ADVOCACY & IMPACT BADGE -->
-			<div class="inline-block px-3.5 py-1 bg-white/40 border border-white/60 rounded-full backdrop-blur-xs">
+			<!-- ADVOCACY & IMPACT BADGE-->
+			<div class="inline-block px-3.5 py-1 bg-white border-2 border-[#1E40AF] rounded-full">
 				<span class="text-[#1E40AF] font-medium text-[10px] tracking-wider uppercase">
 					ADVOCACY & IMPACT
 				</span>
@@ -40,14 +40,14 @@
 
 			<!-- JS, AK, + BADGES -->
 			<div class="flex items-center gap-3 pt-1">
-				<div class="flex -space-x-3 shrink-0">
-					<div class="w-8 h-8 rounded-full bg-[#E0F2FE] border-2 border-white flex items-center justify-center text-xs font-semibold text-[#0369A1]">
+				<div class="flex -space-x-2 shrink-0">
+					<div class="w-8 h-8 rounded-full bg-[#E0F2FE] border-2 border-white flex items-center justify-center text-xs font-semibold text-black">
 						JS
 					</div>
-					<div class="w-8 h-8 rounded-full bg-[#FCE7F3] border-2 border-white flex items-center justify-center text-xs font-semibold text-[#BE185D]">
+					<div class="w-8 h-8 rounded-full bg-[#EDE9FE] border-2 border-white flex items-center justify-center text-xs font-semibold text-[#1D4ED8]">
 						AK
 					</div>
-					<div class="w-8 h-8 rounded-full bg-[#FEF3C7] border-2 border-white flex items-center justify-center text-xs font-semibold text-[#B45309]">
+					<div class="w-8 h-8 rounded-full bg-[#E2E8F0] border-2 border-white flex items-center justify-center text-xs font-semibold text-black">
 						+
 					</div>
 				</div>
@@ -80,7 +80,7 @@
 		</div>
 
 		<!-- Mobile Fallback Image -->
-		<div class="block lg:hidden mt-6">
+		<div class="block lg:hidden mt-6 relative z-10">
 			<img
 				src={heroImage}
 				alt="Medical Advisory Board Doctors"

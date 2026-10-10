@@ -5,22 +5,26 @@
     {
       title: "Join the Ecosystem",
       desc: "Be part of India's most inclusive cancer support network and connect with experts.",
-      icon: Users
+      icon: Users,
+      href: "#ecosystem" 
     },
     {
       title: "Medical Opinions",
       desc: "Provide critical secondary medical insights to strengthen patient treatment pathways.",
-      icon: Stethoscope
+      icon: Stethoscope,
+      href: "#opinions"
     },
     {
       title: "Co-Host Webinars",
       desc: "Lead educational webinars and screening initiatives to spread awareness across India.",
-      icon: MonitorPlay
+      icon: MonitorPlay,
+      href: "#webinars" 
     },
     {
       title: "Mentor & Guide",
       desc: "Empower caregivers and early-career oncologists through your clinical experience.",
-      icon: HandHeart
+      icon: HandHeart,
+      href: "#mentor" 
     }
   ];
 </script>
@@ -33,7 +37,7 @@
     <div class="flex flex-col items-center text-center mb-10 md:mb-12">
       
       <!-- Impact Opportunities Badge -->
-      <div class="inline-flex items-center px-4 py-1.5 bg-[#EEF5FF] border border-[#2563EB]/40 rounded-full mb-4">
+      <div class="inline-flex items-center px-4 py-1.5 bg-white border-2 border-[#2563EB] rounded-full mb-4">
         <span class="text-[#2563EB] font-medium text-[10px] md:text-[11px] tracking-widest uppercase">
           IMPACT OPPORTUNITIES
         </span>
@@ -51,13 +55,13 @@
     </div>
 
     <!-- 4 CARDS GRID -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {#each helpItems as item}
-        <div class="bg-white border border-slate-100/80 rounded-[28px] p-6 md:p-8 shadow-sm flex flex-col justify-between">
+        <div class="bg-white border border-slate-100/80 rounded-[28px] p-6 md:p-8 shadow-[0_0_30px_rgba(0,0,0,0.12)] flex flex-col justify-between">
           
           <div>
             <!-- Icon Container -->
-            <div class="w-11 h-11 rounded-xl bg-[#EEF5FF] flex items-center justify-center mb-6 border border-[#DCE8FB]">
+            <div class="w-11 h-11 rounded-xl bg-white flex items-center justify-center mb-6 border border-slate-200/80 shadow-xs">
               <svelte:component this={item.icon} size={22} class="text-[#2563EB]" />
             </div>
 
@@ -75,7 +79,7 @@
           <!-- Link -->
           <div class="pt-2">
             <a 
-              href="#learn-more" 
+              href={item.href} 
               class="inline-flex items-center text-[#2563EB] font-semibold text-base hover:underline transition-colors gap-1.5"
             >
               <span>Learn More</span>
