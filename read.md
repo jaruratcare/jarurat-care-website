@@ -4,17 +4,44 @@
 
 ## 🎯 About the Project
 
-**Jarurat Care** is the official website of [Jarurat Care Foundation](https://www.jarurat.care), a non-profit initiative supporting cancer patients and their caregivers across India. The website brings the foundation's work together in one place, helping visitors learn about its mission, find support and trusted information, contribute through donations, and get involved in its community.
+**Jarurat Care** is the official website of [Jarurat Care Foundation](https://www.jarurat.care), a non-profit initiative supporting cancer patients and their caregivers across India.
 
-Built with **SvelteKit**, **TypeScript**, and **Tailwind CSS**, the website uses **Supabase** for data and authentication.
+The website brings the foundation's work together in one place. Visitors can:
+
+- Learn about its mission.
+- Find support and trusted information.
+- Contribute through donations.
+- Get involved in the community.
+
+Built with **SvelteKit**, **TypeScript**, and **Tailwind CSS**, the website uses **Supabase** for data storage and authentication.
 
 🌐 **Live website:** [www.jarurat.care](https://www.jarurat.care/)
 
 ---
 
+## 🧭 Table of Contents
+
+- [About the Project](#-about-the-project)
+- [Quick Start](#-quick-start-5-minutes)
+- [Architecture & Folder Structure](#-architecture--folder-structure)
+- [Tech Stack](#-tech-stack)
+- [Known Issues & Pending Work](#️-known-issues--pending-work)
+- [Community Section](#-community-section)
+  - [Exploring Community Content](#exploring-community-content)
+  - [Accounts & Access](#accounts--access)
+  - [Roles & Permissions](#roles--permissions)
+  - [Publishing Workflow](#publishing-workflow)
+  - [CMS & Reader Features](#cms--reader-features)
+  - [Community Database](#community-database)
+  - [Security & Access Controls](#security--access-controls)
+  - [Known Community Gaps](#known-community-gaps)
+- [Support & Contact](#-support--contact)
+
+---
+
 ## 🚀 Quick Start (5 Minutes)
 
-### Prerequisites
+## ✅ Prerequisites
 
 ```text
 ✅ Node.js 24.x
@@ -24,7 +51,7 @@ Built with **SvelteKit**, **TypeScript**, and **Tailwind CSS**, the website uses
 ✅ ORCID credentials (only when enabling the pending ORCID integration)
 ```
 
-### Clone & Install
+## 📥 Clone & Install
 
 ```bash
 # Clone the repository
@@ -35,7 +62,7 @@ cd jarurat-care-website
 npm ci
 ```
 
-### Environment Setup
+## 🔐 Environment Setup
 
 Create `.env` in the root directory:
 
@@ -51,24 +78,32 @@ ORCID_CLIENT_SECRET=your_orcid_client_secret
 ORCID_REDIRECT_URI=http://localhost:5173/cms/auth-callback
 ```
 
-### Supabase Database Setup
+## 🗄️ Supabase Database Setup
 
 1. Create a project in [Supabase](https://supabase.com/).
-2. In the Supabase dashboard, open **Project Settings → API** (or **API Keys**) and copy the project URL and public/anon key into `PUBLIC_CMS_SUPABASE_URL` and `PUBLIC_CMS_SUPABASE_ANON_KEY`.
-3. Copy the `service_role` secret key into `SUPABASE_SERVICE_ROLE_KEY`. The server-side admin client uses this key for privileged database operations. Keep it server-only; never add it to client-side code or expose it publicly.
-4. Make sure the database has the tables and access policies required by the app. The Community section reads from `articles`, `research_articles`, `cms_content`, and `profiles`, and uses `saved_articles` for saved items.
+2. In the Supabase dashboard, open **Project Settings → API** (or **API Keys**) and copy:
+   - The project URL into `PUBLIC_CMS_SUPABASE_URL`.
+   - The public/anon key into `PUBLIC_CMS_SUPABASE_ANON_KEY`.
+3. Copy the `service_role` secret key into `SUPABASE_SERVICE_ROLE_KEY`.
+   - The server-side admin client uses this key for privileged database operations.
+   - Keep it server-only; never add it to client-side code or expose it publicly.
+4. Make sure the database has the tables and access policies required by the app.
+   - The Community section reads from `articles`, `research_articles`, `cms_content`, and `profiles`.
+   - Saved items use `saved_articles`.
 
-The repository does not include Supabase SQL migrations, so creating a project and adding its credentials alone may not be enough for a fresh database. The required tables, columns, and Row Level Security (RLS) policies must also be configured in Supabase. Do not use the service-role key as a substitute for correctly configured policies.
+> **Database setup note:** The repository does not include Supabase SQL migrations. Creating a project and adding credentials may not be enough for a fresh database; configure the required tables, columns, and Row Level Security (RLS) policies in Supabase. Do not use the service-role key as a substitute for correctly configured policies.
 
-Keep `.env` private and never commit it. If a service-role key has been exposed, rotate it in the Supabase dashboard.
+> **Keep credentials safe:** Keep `.env` private and never commit it. If a service-role key has been exposed, rotate it in the Supabase dashboard.
 
-### Start the Development Server
+## ▶️ Start the Development Server
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser. To check the project or create a production build, run:
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+To check the project or create a production build, run:
 
 ```bash
 npm run check
@@ -79,7 +114,7 @@ npm run build
 
 ## 🏗️ Architecture & Folder Structure
 
-### Architecture Overview
+## 🧩 Architecture Overview
 
 ```mermaid
 flowchart LR
@@ -90,7 +125,7 @@ flowchart LR
     Browser -->|Donation confirmation email after successful payment| Email[Jarurat Care Email Service]
 ```
 
-### Key Folders
+## 📁 Key Folders
 
 ```text
 jarurat-care-website/
@@ -119,7 +154,7 @@ jarurat-care-website/
 
 ## 🛠️ Tech Stack
 
-### Frontend
+## 🎨 Frontend
 
 | Technology | Purpose |
 |---|---|
@@ -129,7 +164,7 @@ jarurat-care-website/
 | [Tailwind CSS](https://tailwindcss.com/) | Utility-first styling |
 | [Vite](https://vite.dev/) | Development server and build tool |
 
-### Backend & Database
+## ⚙️ Backend & Database
 
 | Technology | Purpose |
 |---|---|
@@ -137,7 +172,7 @@ jarurat-care-website/
 | [`@supabase/ssr`](https://www.npmjs.com/package/@supabase/ssr) | Supabase clients for browser and server-side sessions |
 | [SvelteKit server routes](https://kit.svelte.dev/docs/routing) | Server-side data loading and form actions |
 
-### UI & Content
+## ✨ UI & Content
 
 | Technology | Purpose |
 |---|---|
@@ -147,7 +182,7 @@ jarurat-care-website/
 | [Marked](https://marked.js.org/) | Markdown rendering |
 | [Svelte French Toast](https://svelte-french-toast.com/) | Toast notifications |
 
-### Developer Tools & Deployment
+## 🔧 Developer Tools & Deployment
 
 | Technology | Purpose |
 |---|---|
@@ -159,7 +194,7 @@ jarurat-care-website/
 
 ## ⚠️ Known Issues & Pending Work
 
-### Donation Flow
+## 💳 Donation Flow
 
 The donation interface and PhonePe payment endpoints are present in the code, but the donation flow is still pending completion and end-to-end verification before it can be considered production-ready.
 
@@ -167,7 +202,7 @@ The donation interface and PhonePe payment endpoints are present in the code, bu
 - Test the complete donation journey, including successful, failed, and delayed payment-status responses.
 - Verify that the donation confirmation email is delivered by the external Render email service after a successful payment.
 
-### ORCID Sign-In
+## 🔑 ORCID Sign-In
 
 ORCID sign-in is **not yet ready for production use**. Complete the provider setup and verify the full authentication and registration flow before enabling it for users.
 
@@ -178,9 +213,15 @@ ORCID sign-in is **not yet ready for production use**. Complete the provider set
 
 ## 👥 Community Section
 
-Jarurat Care's Community is a knowledge and engagement hub for patients, caregivers, healthcare professionals, and the wider community. It brings together **articles, research papers, blogs, news, events, FAQs, testimonials, and campaigns**.
+Jarurat Care's Community is a knowledge and engagement hub for:
 
-### Exploring Community Content
+- Patients and caregivers.
+- Healthcare professionals.
+- The wider community.
+
+It brings together **articles, research papers, blogs, news, events, FAQs, testimonials, and campaigns**.
+
+## 🔎 Exploring Community Content
 
 The Knowledge Hub combines published content from `articles`, `research_articles`, and `cms_content` in one feed.
 
@@ -194,7 +235,7 @@ The Knowledge Hub combines published content from `articles`, `research_articles
 
 **Main routes:** `/knowledge-hub` for browsing, `/content/{type}/{slug}` for content details, and `/doctors/{id}` for public Doctor profiles.
 
-### Accounts & Access
+## 👤 Accounts & Access
 
 Community accounts use **Supabase Authentication**. Users can sign up with an email and password or continue with Google.
 
@@ -206,11 +247,14 @@ Community accounts use **Supabase Authentication**. Users can sign up with an em
 | ORCID | **In progress** — setup and end-to-end sign-in are pending. |
 | Password recovery | Users can request a reset link by email and set a new password. |
 
-After sign-in, users complete their profile as a Reader or Doctor. Doctor accounts must be approved before they can access Doctor authoring features.
+After signing in:
+
+1. Users complete their profile as a Reader or Doctor.
+2. Doctor accounts must be approved before they can access Doctor authoring features.
 
 > **Deployment note:** Email verification currently redirects to `http://localhost:5173/cms/login?verified=true`. Update this URL for production and add it to Supabase's allowed redirect URLs.
 
-### Roles & Permissions
+## 🛡️ Roles & Permissions
 
 Access is determined by `profiles.role`. Doctor accounts also use the `is_author` and `is_reviewer` flags. **Role values are case-sensitive.**
 
@@ -228,7 +272,7 @@ Access is determined by `profiles.role`. Doctor accounts also use the `is_author
 
 > **Current implementation caveat:** Admins can also access the Super Admin area and perform some Super Admin actions. Save, like, comment, and follow actions are available to any signed-in user, not only Readers.
 
-### Publishing Workflow
+## 🚦 Publishing Workflow
 
 Doctor articles and research require review before publication:
 
@@ -249,7 +293,7 @@ Admin or Super Admin creates/edits → Publishes → Visible publicly
 
 CMS content does not go through the Doctor/Reviewer review process.
 
-### CMS & Reader Features
+## 📝 CMS & Reader Features
 
 | Area | What users can do |
 |---|---|
@@ -259,9 +303,11 @@ CMS content does not go through the Doctor/Reviewer review process.
 | Super Admin dashboard | Approve Doctors, manage roles and author permissions, publish Doctor submissions, and manage CMS content. |
 | Reader dashboard | Find saved content, followed Doctors, recommendations, and profile interests. |
 
-Readers and other signed-in members can save content, like and comment on content, and follow Doctors. Visitors can browse published content and public Doctor profiles; **sign-in is required for member interactions**.
+**Signed-in members** can save, like, and comment on content, and follow Doctors.
 
-### Community Database
+Visitors can browse published content and public Doctor profiles; **sign-in is required for member interactions**.
+
+## 🗃️ Community Database
 
 Community data is stored in **Supabase**. The table list below comes from the project dashboard; names are grouped by their apparent purpose.
 
@@ -273,7 +319,7 @@ Community data is stored in **Supabase**. The table list below comes from the pr
 | Community activity | `doctor_followers`, `doctor_follows`, `saved_articles`, `saved_research_articles`, `notifications` |
 | Analytics | `analytics_events` |
 
-#### Key tables and relationships
+### 🔗 Key Tables and Relationships
 
 The schema diagram shared for this project shows the following fields and links:
 
@@ -288,7 +334,7 @@ The schema diagram shared for this project shows the following fields and links:
 
 The diagram shows user-related references from `saved_articles.user_id`, `doctor_follows.follower_id`, and `analytics_events.user_id` to `profiles.id`; `articles.author_id` is also linked to a profile. Only the fields visible in the shared diagram are listed here; it does not show every column in every table.
 
-#### Row Level Security (RLS)
+### 🔒 Row Level Security (RLS)
 
 The shared Supabase Policies screen shows RLS enabled for `profiles` and `author_profiles` (the dashboard offers **Disable RLS** for both tables).
 
@@ -301,7 +347,7 @@ The shared Supabase Policies screen shows RLS enabled for `profiles` and `author
 
 The repository does not include Supabase migrations, so this README is an overview of the shared dashboard/schema screenshots and application code—not a full database definition.
 
-### Security & Access Controls
+## 🔐 Security & Access Controls
 
 - **Verified sessions:** Server-side session handling validates the signed-in user with Supabase before treating a session as authenticated.
 - **Protected save action:** Saving an article is checked on the server and requires an authenticated session; unauthenticated requests are rejected.
@@ -311,7 +357,7 @@ The repository does not include Supabase migrations, so this README is an overvi
 
 > **Security configuration:** Enable Supabase email confirmation if verified email is required, and configure RLS policies for the project’s tables. The repository does not include database migrations or a complete RLS policy set.
 
-### Known Community Gaps
+## 🧩 Known Community Gaps
 
 | Area | Current behavior | Follow-up |
 |---|---|---|
