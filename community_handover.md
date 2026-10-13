@@ -1,7 +1,5 @@
 # Jarurat Care Community — Handover & Documentation
 
-**Last Verified:** [PLACEHOLDER: YYYY-MM-DD — update after the next project/deployment verification]
-
 ### Table of Contents
 
 - [1. Quick Summary](#1-quick-summary)
