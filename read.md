@@ -91,7 +91,21 @@ ORCID_REDIRECT_URI=http://localhost:5173/cms/auth-callback
    - The Community section reads from `articles`, `research_articles`, `cms_content`, and `profiles`.
    - Saved items use `saved_articles`.
 
-> **Database setup note:** The repository does not include Supabase SQL migrations. Creating a project and adding credentials may not be enough for a fresh database; configure the required tables, columns, and Row Level Security (RLS) policies in Supabase. Do not use the service-role key as a substitute for correctly configured policies.
+### Create the Community tables in a new Supabase project
+
+The repository includes a standalone SQL setup script at [`scripts/supabase-setup.sql`](./scripts/supabase-setup.sql). It is intended for a **new, empty Supabase project** and creates the 18 Community tables and their listed indexes. It is not a migration and is not safe to run on an existing or production database: the `CREATE TABLE` statements are not repeatable.
+
+1. Open the intended Supabase project and select **SQL Editor**.
+2. Open `scripts/supabase-setup.sql` from this repository and copy the complete file.
+3. Paste it into a new SQL Editor query and run it once.
+4. Confirm that the query completed successfully and that the tables exist under the `public` schema.
+5. Before connecting the website or allowing public/member traffic, add and verify appropriate least-privilege RLS policies for the expected user roles.
+
+The script enables RLS on every table but deliberately creates **no access policies**. Until suitable policies are added, normal `anon` and `authenticated` client requests will not be able to use these tables. Do not fix this by disabling RLS or adding an “allow all authenticated” policy. The script also does not configure Supabase Auth providers, Storage buckets/policies (including `cms-images`), or application environment variables.
+
+`article_versions` is listed in an older schema inventory but is not present in the supplied current Supabase schema, so it is intentionally not created by this script. Confirm its status before adding it back.
+
+> **Database setup note:** The repository does not contain Supabase CLI migrations. The standalone SQL file is for manual use in the Supabase SQL Editor on an empty project only. Creating a project and adding credentials alone does not configure the complete application. Do not use the service-role key as a substitute for correctly configured policies.
 
 > **Keep credentials safe:** Keep `.env` private and never commit it. If a service-role key has been exposed, rotate it in the Supabase dashboard.
 
@@ -314,7 +328,7 @@ Community data is stored in **Supabase**. The table list below comes from the pr
 | Area | Tables |
 |---|---|
 | Profiles & authors | `profiles`, `author_profiles`, `author_requests` |
-| Articles & editorial | `articles`, `article_comments`, `article_likes`, `article_versions`, `research_articles`, `research_article_comments`, `research_article_likes`, `review_comments` |
+| Articles & editorial | `articles`, `article_comments`, `article_likes`, `research_articles`, `research_article_comments`, `research_article_likes`, `review_comments` |
 | CMS & testimonials | `cms_content`, `testimonials` |
 | Community activity | `doctor_followers`, `doctor_follows`, `saved_articles`, `saved_research_articles`, `notifications` |
 | Analytics | `analytics_events` |
@@ -345,7 +359,7 @@ The shared Supabase Policies screen shows RLS enabled for `profiles` and `author
 
 > **Important:** The screenshot shows policy names, commands, and applied roles, but not the policy expressions (`USING` / `WITH CHECK`). It also does not show RLS status for the other tables. Review each policy's definition and the remaining tables before treating this as a complete security audit.
 
-The repository does not include Supabase migrations, so this README is an overview of the shared dashboard/schema screenshots and application code—not a full database definition.
+The repository does not include Supabase CLI migrations. The standalone SQL setup script described in [Supabase Database Setup](#-supabase-database-setup) contains the supplied table definitions for a new project. It does not include RLS access policies; policy names from screenshots do not include the `USING` and `WITH CHECK` expressions needed to reproduce safe access rules.
 
 ## 🔐 Security & Access Controls
 
@@ -355,7 +369,7 @@ The repository does not include Supabase migrations, so this README is an overvi
 - **Role and approval flow:** Doctor access depends on profile completion and approval status. Doctor content follows reviewer approval and Super Admin publication.
 - **Server-only admin key:** `SUPABASE_SERVICE_ROLE_KEY` is used by a server-side Supabase client and must never be exposed to browser code or committed to the repository. This key bypasses Row Level Security (RLS), so database policies and server-side access checks must be configured carefully.
 
-> **Security configuration:** Enable Supabase email confirmation if verified email is required, and configure RLS policies for the project’s tables. The repository does not include database migrations or a complete RLS policy set.
+> **Security configuration:** Enable Supabase email confirmation if verified email is required, and configure reviewed RLS policies for the project’s tables. The SQL setup script enables RLS but adds no policies, so application access must not be enabled until suitable policies have been created and tested. The repository does not include a complete RLS policy set.
 
 ## 🧩 Known Community Gaps
 
