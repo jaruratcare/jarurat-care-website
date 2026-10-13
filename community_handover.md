@@ -18,6 +18,7 @@
 - [12. Known Issues & Pending Work](#12-known-issues--pending-work)
 - [13. Troubleshooting](#13-troubleshooting)
 - [14. Third-Party Services & Access Transfer](#14-third-party-services--access-transfer)
+- [15. Contacts & Escalation](#15-contacts--escalation)
 
 # 1. Quick Summary
 
@@ -745,3 +746,17 @@ Access should be transferred by inviting the incoming maintainer's own account t
 | Google OAuth provider | Google sign-in through Supabase Auth. | [PLACEHOLDER: Google OAuth application owner] | Owner grants access to the authorized OAuth application/configuration and updates callback URLs where needed. Do not send client secrets through chat or commit them. |
 | ORCID | Implemented researcher sign-in code; currently not working, with end-to-end testing/fixes pending. | [PLACEHOLDER: ORCID application owner] | Owner transfers access through the ORCID application's official account/team process. Keep the integration disabled/unadvertised until its issues are fixed and callback, session creation, and signup flow are successfully tested. |
 | Vercel | Community testing deployment, deployment history, build logs, environment variables, and domain configuration. | [PLACEHOLDER: Vercel team/project owner] | Vercel owner invites the successor to the correct team/project, identifies the testing branch, explains deployment triggers, and demonstrates rollback permissions. |
+
+# 15. Contacts & Escalation
+
+| Issue type | Contact / escalation path |
+|---|---|
+| General Jarurat Care contact | `connect@jarurat.care` |
+| Community feature requirements, role definitions, or prioritization | [PLACEHOLDER: internship supervisor / product owner] |
+| Repository access, code review, branch choice | [PLACEHOLDER: GitHub repository maintainer] |
+| Supabase schema, RLS, Auth, or Storage access | [PLACEHOLDER: Supabase project owner] |
+| Google OAuth configuration | [PLACEHOLDER: Google OAuth application owner] |
+| ORCID application and researcher login | [PLACEHOLDER: ORCID application owner] |
+| Testing deployment, Vercel settings, rollback | [PLACEHOLDER: Vercel project owner] |
+
+For access-control errors, unexpected profile visibility, exposed secrets, or incorrect role privileges, notify the supervisor and Supabase owner before continuing tests with real user data. For deployment incidents, contact the Vercel/repository owner and avoid changing production configuration without authorization.
