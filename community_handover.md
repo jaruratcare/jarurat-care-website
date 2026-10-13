@@ -1,5 +1,6 @@
-# Jarurat Care Community — Intern Handover
+# Jarurat Care Community — Handover & Documentation
 
+**Last Verified:** [PLACEHOLDER: YYYY-MM-DD — update after the next project/deployment verification]
 
 ### Table of Contents
 
@@ -18,8 +19,6 @@
 - [13. Troubleshooting](#13-troubleshooting)
 - [14. Third-Party Services & Access Transfer](#14-third-party-services--access-transfer)
 - [15. Contacts & Escalation](#15-contacts--escalation)
-- [16. Handover Checklist](#16-handover-checklist)
-- [17. Items to Verify](#17-items-to-verify)
 
 # 1. Quick Summary
 
@@ -79,7 +78,7 @@ The following is a summary of project documentation, **not a fresh production te
 | Knowledge Hub and content discovery | Documented as live/implemented; production content and image links need checking. |
 | Search, filters, sorting, grid/list display, and pagination | Documented as implemented; not independently tested for this handover. |
 | Email/password and Google sign-in | Implemented; redirects and provider configuration need follow-up. |
-| ORCID sign-in | Not production-ready; setup and end-to-end behavior need verification. |
+| ORCID sign-in | Code is present, but the flow is currently not working; fixes and end-to-end testing are pending. Not production-ready. |
 | Reader, Doctor, Reviewer, Admin, and Super Admin areas | Routes and dashboards exist; known workflow and permission mismatches need follow-up. |
 | CMS for blogs, news, events, FAQs, and campaigns | Documented as implemented; creating testimonials through CMS is a known gap. |
 | Doctor article/research review and publication | Workflow exists; Reviewer feedback and final Super Admin publication are separate steps. |
@@ -93,7 +92,7 @@ The following is a summary of project documentation, **not a fresh production te
 - npm
 - Git
 - Supabase project for Community database and authentication
-- ORCID credentials only if working on the pending ORCID integration
+- ORCID credentials only if configuring or testing the implemented but currently non-working ORCID flow
 
 ## Clone and install
 
@@ -120,7 +119,7 @@ ORCID_CLIENT_SECRET=
 ORCID_REDIRECT_URI=http://localhost:5173/cms/auth-callback
 ```
 
-Keep `.env` private and never commit credentials. `SUPABASE_SERVICE_ROLE_KEY` is privileged and must remain server-side. ORCID is pending and only needs configuration when working on that integration.
+Keep `.env` private and never commit credentials. `SUPABASE_SERVICE_ROLE_KEY` is privileged and must remain server-side. ORCID configuration is only needed when investigating or testing its implemented but currently non-working flow.
 
 ## Supabase database setup
 
@@ -185,7 +184,7 @@ The Community is implemented as part of the existing Jarurat Care SvelteKit appl
 | **Supabase Auth** | User identity, sign-in, session, and email authentication services. | Community email/password and Google sign-in use Supabase Auth. Email confirmation, provider setup, and redirect allowlists are configured in the Supabase project and must match the target environment. |
 | **Supabase Storage** | Object storage for files/images associated with a Supabase project. | The documented Community bucket is `cms-images`. Verify the bucket exists and check its upload/read policies and image URLs; broken Community image links have been reported. |
 | **Google OAuth** | Third-party identity provider connected through Supabase Auth. | Allows Google sign-in when enabled and configured. The provider's client configuration and callback URLs must be maintained by an authorized owner; live production settings are not confirmed here. |
-| **ORCID** | Researcher identity provider. | ORCID login code exists but is documented as incomplete and not production-ready. Do not describe it as an available production sign-in method until its callback, provider settings, and account flow are confirmed. |
+| **ORCID** | Researcher identity provider. | ORCID login code exists, but the flow is currently not working; fixes and end-to-end testing are pending. Do not describe it as an available production sign-in method until verified. |
 
 ## Hosting service
 
@@ -283,8 +282,8 @@ This workflow does not include the Doctor/Reviewer process. CMS testimonial crea
 | Sorting and display modes | Visitor, signed-in members | Sort by date/title; switch between grid/list views. | Documented as implemented. |
 | Pagination | Visitor, signed-in members | Navigate results in pages; documentation says up to nine results per page. | Documented behavior; verify if changing page-size or query logic. |
 | Content detail pages | Visitor, signed-in members | Read the full content item. | Main documented route: `/content/{type}/{slug}`. |
-| Public Doctor profiles | Visitor, signed-in members | View Doctor profile information. | Profile visibility may not currently filter for approval status. |
-| Reader dashboard and interactions | Reader, other signed-in users in current behavior | View saved items, followed Doctors, recommendations, interests; save, like, comment, follow. | Dashboard exists; interaction role enforcement is broader than intended. |
+| Public Doctor profiles | Visitor, signed-in members | View Doctor profile information. | Profile route is implemented. |
+| Reader dashboard and interactions | Reader | View saved items, followed Doctors, recommendations, interests; save, like, comment, follow. | Dashboard and interaction features are implemented. |
 | Doctor authoring | Approved Doctor/author | Create, edit, draft, and submit articles and research. | Routes exist; approval and redirect behavior have known inconsistencies. |
 | Reviewer queues | Reviewer Doctor | Review Doctor submissions and record feedback. | Routes exist; there is no distinct Reviewer-approved status. |
 | CMS editorial content | Admin, Super Admin | Manage blogs, news, events, FAQs, and campaigns. | Documented as implemented. |
@@ -580,19 +579,19 @@ This section is a practical inventory for deciding where to continue Community w
 | Sorting and grid/list display | Done (documented) | [`src/routes/knowledge-hub/+page.svelte`](./src/routes/knowledge-hub/+page.svelte) | Sorting by date/title and two display modes are documented. Confirm actual controls and behavior before changing the UI. |
 | Knowledge Hub pagination | Done (documented) | [`src/routes/knowledge-hub/`](./src/routes/knowledge-hub/) | Project notes describe pagination with up to nine items per page. Verify current page size and boundary behavior if modifying feed queries. |
 | Public content listing and detail pages | Done | [`src/routes/content/`](./src/routes/content/) | Includes content index/type/detail routes. Content is fetched and displayed by type/slug; review the server loader and content rendering path before changing HTML handling. |
-| Public Doctor directory/profile | Partial | [`src/routes/doctors/`](./src/routes/doctors/), [`src/routes/cms/community/doctors/`](./src/routes/cms/community/doctors/) | Directory/profile routes exist. A known gap is that public Doctor profile results are not filtered by Doctor approval status. |
+| Public Doctor directory/profile | Partial | [`src/routes/doctors/`](./src/routes/doctors/), [`src/routes/cms/community/doctors/`](./src/routes/cms/community/doctors/) | Directory/profile routes exist; confirm the intended public profile visibility rules with the project owner. |
 | Email/password signup and login | Partial | [`src/routes/cms/signup/`](./src/routes/cms/signup/), [`src/routes/cms/login/`](./src/routes/cms/login/) | The flow exists, with Supabase Auth and profile creation. Known redirect issues and the signup/reset password-length mismatch need correction; verify Supabase email-confirmation settings. |
 | Google sign-in | Partial | [`src/routes/cms/login/`](./src/routes/cms/login/), [`src/routes/cms/auth-callback/`](./src/routes/cms/auth-callback/) | OAuth flow code exists. Provider credentials, callback allowlists, and the current testing deployment's full flow need verification. |
-| ORCID sign-in | Partial / not production-ready | [`src/routes/cms/signup/`](./src/routes/cms/signup/), [`src/routes/cms/login/`](./src/routes/cms/login/), [`src/routes/cms/auth-callback/`](./src/routes/cms/auth-callback/) | Integration code exists but is not ready for production. The `/cms/register` redirect target is reported missing; do not advertise this as a supported sign-in path until completed and tested. |
+| ORCID sign-in | Partial — implemented, currently not working; testing pending | [`src/routes/cms/signup/`](./src/routes/cms/signup/), [`src/routes/cms/login/`](./src/routes/cms/login/), [`src/routes/cms/auth-callback/`](./src/routes/cms/auth-callback/) | ORCID flow code is present, but the flow is currently not working and end-to-end testing remains pending. The `/cms/register` redirect target is reported missing, and the existing-account callback path does not establish a Supabase session in the inspected code. Fix these issues and test provider configuration, new/existing accounts, missing-email cases, and redirects before calling the feature production-ready. |
 | Password recovery and reset | Partial | [`src/routes/cms/forgot/`](./src/routes/cms/forgot/), [`src/routes/cms/reset-password/`](./src/routes/cms/reset-password/) | Routes exist, but the reset password minimum is documented as six characters while signup uses eight. Align validation and confirm email redirect configuration. |
 | Reader dashboard | Partial | [`src/routes/cms/reader-dashboard/`](./src/routes/cms/reader-dashboard/) | Dashboard routes cover profile, saved/recommended/trending content, and Doctor discovery. Member interactions are not currently restricted to Reader role as intended. |
-| Save and like actions | Partial | [`src/routes/knowledge-hub/+page.server.ts`](./src/routes/knowledge-hub/+page.server.ts), [`src/routes/cms/reader-dashboard/`](./src/routes/cms/reader-dashboard/) | Authenticated actions exist for article saving/liking. Current role checks are broader than the intended Reader-only behavior; verify database policy and server-side checks together. |
+| Save and like actions | Implemented | [`src/routes/knowledge-hub/+page.server.ts`](./src/routes/knowledge-hub/+page.server.ts), [`src/routes/cms/reader-dashboard/`](./src/routes/cms/reader-dashboard/) | Authenticated actions exist for article saving and liking. |
 | Comments and Doctor follows | Partial | Community detail/dashboard routes and the interaction tables in [`scripts/supabase-setup.sql`](./scripts/supabase-setup.sql) | Tables and member-facing flows are documented, but the relevant follow table naming differs (`doctor_follows` and `doctor_followers`), and Reader-only access is not consistently enforced. |
 | Doctor profile completion and access request | Partial | [`src/routes/cms/complete-profile/`](./src/routes/cms/complete-profile/), [`src/routes/cms/author-request/`](./src/routes/cms/author-request/), [`src/routes/cms/pending/`](./src/routes/cms/pending/) | Routes exist for profile completion/request/pending states. Confirm the current approval fields and redirects against server logic before changing onboarding. |
 | Doctor article authoring | Partial | [`src/routes/cms/articles/`](./src/routes/cms/articles/), [`src/routes/cms/doctor-dashboard/`](./src/routes/cms/doctor-dashboard/) | Create/edit/view and dashboard routes exist. Doctor submit is reported to redirect to legacy `/cms/author_dashboard`; the current dashboard is `/cms/doctor-dashboard`. |
 | Doctor research authoring | Partial | [`src/routes/cms/research/`](./src/routes/cms/research/), [`src/routes/cms/doctor-dashboard/my-research-papers/`](./src/routes/cms/doctor-dashboard/my-research-papers/) | Create/edit/view and Doctor list routes exist. Verify submit, ownership, and status transitions against the current database before modifying. |
 | Reviewer article/research queues | Partial | [`src/routes/cms/doctor-dashboard/review-articles/`](./src/routes/cms/doctor-dashboard/review-articles/), [`src/routes/cms/doctor-dashboard/review-research/`](./src/routes/cms/doctor-dashboard/review-research/), [`src/routes/cms/review/`](./src/routes/cms/review/) | Review screens exist. Reviewer feedback is stored, but does not have a separate approval status; content remains `under_review` until Super Admin action. |
-| Super Admin Doctor approval and final publication | Partial | [`src/routes/cms/super-admin/`](./src/routes/cms/super-admin/) | Super Admin routes/panels exist. Admin can perform some Super Admin actions, so role separation must be checked and enforced server-side. |
+| Super Admin Doctor approval and final publication | Implemented (documented) | [`src/routes/cms/super-admin/`](./src/routes/cms/super-admin/) | Super Admin routes/panels support Doctor approval and final publication after review. |
 | CMS blogs, news, events, FAQs, campaigns | Done (documented) | [`src/routes/cms/admin-dashboard/`](./src/routes/cms/admin-dashboard/) | Admin CMS route families exist for editorial content stored in `cms_content`. This flow does not use Doctor review. |
 | CMS testimonial creation/management | Not started (complete CMS flow) | [`src/routes/cms/admin-dashboard/testimonials/`](./src/routes/cms/admin-dashboard/testimonials/), testimonial routes/components | The project notes say testimonials cannot be created through the CMS. Existing names vary between `testimonial` and `testimonials`; establish a canonical type/table before implementing. |
 | Admin users and settings management | Not started / incomplete | [`src/routes/cms/admin-dashboard/users/`](./src/routes/cms/admin-dashboard/users/), [`src/routes/cms/admin-dashboard/settings/`](./src/routes/cms/admin-dashboard/settings/) | Pages are reported empty. Confirm expected requirements with the owner before building or removing navigation. |
@@ -643,7 +642,7 @@ Google sign-in requires Google OAuth to be enabled in Supabase and the callback 
 
 ## ORCID sign-in
 
-ORCID is an incomplete integration and must not be treated as production-ready:
+ORCID implementation code exists, but the flow is currently not working and has not completed end-to-end testing. It must not be treated as production-ready:
 
 1. Signup/login code constructs an ORCID authorization URL using `ORCID_CLIENT_ID` and `ORCID_REDIRECT_URI`.
 2. The callback at `/cms/auth-callback` exchanges the returned authorization code using `ORCID_CLIENT_SECRET`, then attempts to read the ORCID profile/email.
@@ -708,30 +707,14 @@ Until the project owner confirms the actual deployment wiring, use this as a saf
 
 # 12. Known Issues & Pending Work
 
-The table consolidates the Community gaps recorded in the supplied project context and reviewed documentation. “Reported/confirmed” means the issue is documented; it does not imply that the current testing deployment was independently retested during this handover.
+This is a short, prioritized list of the main remaining work, not an exhaustive list of every possible improvement. “Reported/confirmed” means the issue is documented; it does not imply that the current testing deployment was independently retested during this handover.
 
 | Issue | Where to investigate | Impact | Suggested next step | Status |
 |---|---|---|---|---|
-| Community is not on the production domain yet. | Vercel project and release settings | Public production visitors cannot access the Community through `jarurat.care`. | Confirm launch owner, target project/branch, acceptance criteria, and deployment plan. | Current state provided by project owner; deployment settings unverified |
-| Two different Vercel URLs appear in project materials. | Vercel project configuration and hardcoded content/image URLs | Team may test or deploy the wrong project; images may point to an old host. | Confirm canonical testing URL/project and replace stale references after review. | Discrepancy reported |
-| Testing deployment contains test content and broken image links. | `/knowledge-hub`, Supabase content rows, `cms-images` bucket | Public-facing test site appears unfinished; media may not load. | Identify test records, agree cleanup, verify image object paths/bucket policies, then smoke-test the Knowledge Hub. | Reported; current live state unverified |
-| ORCID is not production-ready and its callback targets missing `/cms/register`. | Signup/login/auth callback routes | ORCID sign-in may fail, end at a 404, or fail to create a usable session. | Complete registration/account linking, fix callback destinations, confirm provider config, and test all callback outcomes before enabling. | Documented/code-path issue |
-| ORCID existing-account path does not establish a Supabase session in the callback code. | `src/routes/cms/auth-callback/+server.ts` | Existing ORCID user may be redirected without being signed in. | Implement a secure account/session flow and test account linking; do not treat redirect as successful authentication. | Present in code comments; behavior needs verification |
-| Email verification redirect is reported to point to localhost. | Signup server action and Supabase Auth URL settings | Users of the testing/deployed site may be redirected to the wrong origin. | Compare the code's request-origin redirect with deployed behavior; set an explicit environment-safe redirect and Supabase allowlist. | Conflicting project notes/code; verify |
-| Admin login destination differs across project notes and active UI code. | `src/routes/cms/login/+page.svelte` and dashboard routes | Admin may land on a missing or unintended route. | Confirm deployed build and route; use one canonical Admin dashboard destination. | Discrepancy: notes say `/cms/admin`; current UI code routes to `/cms/admin-dashboard` |
-| Doctor submission may redirect to legacy `/cms/author_dashboard`. | Article/research submission actions and `src/hooks.server.ts` | Doctor may return to an obsolete URL after submission. | Trace both submission actions; redirect consistently to `/cms/doctor-dashboard` and test article and research paths. | Reported; recheck current code/deployment |
-| Supabase configuration is hardcoded in `src/lib/supabase.js`. | `src/lib/supabase.js` and imports | Duplicated project configuration can route requests to an unintended Supabase project; embedded public key/config should be rotated/reviewed. | Replace with environment-backed shared client in a reviewed change; rotate the exposed public key/config as appropriate. Never reproduce the key in documentation. | Confirmed repository risk |
-| CMS content uses `{@html}` rendering. | Public CMS content/detail components | Untrusted HTML may execute in users' browsers if not safely sanitized. | Sanitize HTML with an explicit allowlist at a trusted boundary and restrict authoring/publishing permissions; test unsafe input. | Risk documented; current sanitization needs verification |
-| Admin can perform some Super Admin actions. | Admin/Super Admin route guards, server actions, dashboard | Admin may approve Doctors, change roles, or publish Doctor work beyond intended access. | Enforce role checks on the server and in RLS; test Admin and Super Admin accounts separately. | Reported |
-| Save/like/comment/follow are not limited to Readers. | Knowledge Hub actions, detail pages, dashboard actions | Other signed-in roles may perform Reader interactions. | Define the intended role policy and enforce it consistently in UI, server actions, and RLS. | Reported |
-| Public Doctor profile query does not filter by approval status. | `/doctors/[id]` loader and Community directory queries | Unapproved Doctor profiles may be visible publicly. | Add a server-side approved-status condition if that is the confirmed policy; test approved/unapproved accounts. | Reported |
-| Permissive “Allow all authenticated” policies are reported for `profiles` and `author_profiles`; policy expressions are not documented. | Supabase RLS policy editor | Authenticated users may have wider profile access than intended. | Inspect actual `USING`/`WITH CHECK` expressions and all table policies; replace with least-privilege policies and test roles. | Policy names documented; actual expressions/current live state unverified |
-| The repository does not have a complete schema/policy deployment process. | `scripts/supabase-setup.sql`, `read.md`, Supabase dashboard | A fresh project may lack app-required columns, policies, Auth settings, or Storage setup. | Compare the script with the live schema and document safe SQL/policy setup. Never run the table script against existing/production data. | Documented limitation |
-| Signup and password-reset minimum lengths differ (8 vs 6). | Signup server action and reset-password page | A password accepted during reset may violate signup's policy. | Choose one minimum and enforce it in both client and server validation. | Confirmed in code |
-| Testimonials cannot be created through the CMS; naming differs (`testimonial`/`testimonials`). | Admin testimonial route, data queries, content-type picker | Editors cannot manage testimonials consistently and code may query different names. | Choose canonical naming and implement/test the intended CMS flow. | Reported |
-| Admin `users` and `settings` pages are empty. | `/cms/admin-dashboard/users`, `/cms/admin-dashboard/settings` | Navigation can expose screens with no useful functionality. | Confirm requirements; implement the expected actions or remove/label unfinished links. | Reported |
-| Legacy routes/files remain (`+page.svelte.new`, `author_dashboard`, `editor_dashboard`, `testimonial_dashboard`, `code.txt`). | Repository search, route links, redirects | Obsolete paths and duplicate code confuse maintenance; redirects may preserve old destinations. | Trace references and deployment use before cleanup; archive/delete only after maintainer confirmation. | Existence reported; active references need checking |
-| Reviewer approval has no independent status. | Review actions, content status fields, dashboard queues | Reviewer feedback may be confused with the Super Admin publication decision. | Keep current workflow distinction explicit or design a reviewed status model and migration before changing behavior. | Confirmed workflow limitation |
+| Donate page/payment flow is not complete or verified end to end. | Donation page and PhonePe payment flow; see the project-level pending-work notes in [`read.md`](./read.md#-known-issues--pending-work). | Donations should not be treated as production-ready until a complete payment journey has been verified. | Confirm secure PhonePe deployment configuration; test successful, failed, and delayed payment responses; verify the donation confirmation email. | Pending in `read.md`; end-to-end verification remains |
+| ORCID code exists, but sign-in is currently not working and testing remains pending. | Signup/login/auth callback routes and ORCID application settings. | Users may encounter a broken callback or fail to receive a usable session. | Fix the callback/account flow and test new users, existing accounts, missing-email cases, and redirects before enabling ORCID. | Code exists; fixes and end-to-end testing pending |
+| Community has not been released to the production domain. | Vercel project and release settings. | Community visitors cannot access the Knowledge Hub from the main production site. | Confirm the production project, branch, release owner, and approval before planning a launch. | Production release not confirmed |
+| Testing deployment has reported test content and broken image links. | `/knowledge-hub`, content records, and the `cms-images` bucket. | The testing site may display unfinished content or missing media. | Identify test-only records and broken assets, agree on cleanup, then smoke-test the Knowledge Hub. | Reported; current live state not rechecked |
 
 # 13. Troubleshooting
 
@@ -744,15 +727,12 @@ Use the table as a first diagnostic pass. Do not change production data, RLS, pr
 | User can sign in but is sent to the wrong dashboard. | Profile row missing/incomplete, role string casing/value mismatch, approval status not set, or redirect logic differs between email and OAuth. | Check the test user's Auth identity and matching `profiles` row. Inspect `role`, `profile_completed`, `verification_status`, `is_author`, and `is_reviewer`; compare both login and callback routing. |
 | Email verification opens localhost or a wrong deployment. | Redirect URI or Supabase allowed redirect URL is incorrect, or behavior differs between local request-origin and deployed configuration. | Inspect the email link's destination without exposing its token; compare with signup code and Supabase Auth URL settings; update only through an authorized maintainer. |
 | Google OAuth returns an error or loops back to sign-in. | Google provider disabled/misconfigured or callback/allowlist mismatch. | Confirm Google provider settings in Supabase and the exact callback URL for the current hostname. Test with an authorized non-production account. |
-| ORCID sends the user to `/cms/register` and shows a 404. | The callback's destination route is reported missing. | Treat ORCID as incomplete; correct the route and account/session flow before presenting it as working. |
+| ORCID sends the user to `/cms/register` and shows a 404. | The callback's destination route is reported missing. | ORCID code exists, but the flow is currently not working and testing is pending; correct the route and account/session flow, then verify the end-to-end journey before presenting it as working. |
 | Password reset link says invalid/expired. | Link expired, reset redirect URL is not allowed, or the browser did not receive a valid recovery session. | Request a fresh link, confirm the Supabase allowed URL includes the active origin and `/cms/reset-password`, and follow it in the same browser. |
 | Password accepted on one screen but rejected on another. | Signup minimum is eight characters and reset currently accepts six. | Use the stronger rule temporarily and align signup/reset validation as a code fix. |
 | Admin is denied a feature or can access a Super Admin feature. | Role guards differ across layouts/actions or use mismatched role values. | Inspect server-side guards and the exact profile fields. Test with separate Admin and Super Admin accounts; do not rely on hidden UI controls alone. |
 | Doctor submission returns to an old/invalid page. | Submit action still redirects to a legacy author dashboard URL. | Check article and research form actions plus the legacy redirect in `src/hooks.server.ts`; use the current Doctor dashboard destination after confirming route ownership. |
 | Images are broken on Community cards or content pages. | Stored URL is stale, image object is missing, or `cms-images` access/policy is incorrect. | Verify the content row path, bucket existence, object name, and authorized read behavior in the correct Supabase project. |
-| New database tables exist but the app receives permission errors. | Setup SQL enables RLS but intentionally creates no access policies. | Add reviewed least-privilege policies for the required operations and test with intended roles. Do not disable RLS or expose the service-role key. |
-| `supabaseAdmin` operations fail while ordinary reads work. | `SUPABASE_SERVICE_ROLE_KEY` is missing and the code falls back to the anon key; or server authorization/RLS blocks the request. | Confirm the route imports the intended client and check server environment configuration with the owner. Keep the service-role value server-only. |
-| Changes do not appear at the testing URL. | Wrong Vercel project/branch, failed build, stale preview, or deployment not triggered. | Confirm the deployed commit and project/branch in Vercel with the owner; review deployment build logs and URL. |
 
 # 14. Third-Party Services & Access Transfer
 
@@ -764,7 +744,7 @@ Access should be transferred by inviting the incoming maintainer's own account t
 | Supabase | PostgreSQL, Auth, Storage (`cms-images`), and RLS configuration. | [PLACEHOLDER: Supabase project owner] | Project owner invites the successor to the correct project with least privilege; confirm which project is testing and which is production. Review schema, policies, Auth URLs, and bucket configuration together. |
 | Resend | Believed to deliver Supabase Auth email-verification messages through custom SMTP; the application itself calls Supabase Auth and no direct Resend API integration was found in the repository. | [PLACEHOLDER: Resend account owner] | Confirm whether Resend is configured as the SMTP provider in the correct Supabase project's Auth settings. If so, transfer access through the Resend team's official account process and check sender/domain configuration without sharing credentials. |
 | Google OAuth provider | Google sign-in through Supabase Auth. | [PLACEHOLDER: Google OAuth application owner] | Owner grants access to the authorized OAuth application/configuration and updates callback URLs where needed. Do not send client secrets through chat or commit them. |
-| ORCID | Incomplete researcher sign-in integration. | [PLACEHOLDER: ORCID application owner] | Owner transfers access through the ORCID application's official account/team process. Keep the integration disabled/unadvertised until callback, session creation, and signup flow are complete. |
+| ORCID | Implemented researcher sign-in code; currently not working, with end-to-end testing/fixes pending. | [PLACEHOLDER: ORCID application owner] | Owner transfers access through the ORCID application's official account/team process. Keep the integration disabled/unadvertised until its issues are fixed and callback, session creation, and signup flow are successfully tested. |
 | Vercel | Community testing deployment, deployment history, build logs, environment variables, and domain configuration. | [PLACEHOLDER: Vercel team/project owner] | Vercel owner invites the successor to the correct team/project, identifies the testing branch, explains deployment triggers, and demonstrates rollback permissions. |
 
 # 15. Contacts & Escalation
@@ -780,61 +760,3 @@ Access should be transferred by inviting the incoming maintainer's own account t
 | Testing deployment, Vercel settings, rollback | [PLACEHOLDER: Vercel project owner] |
 
 For access-control errors, unexpected profile visibility, exposed secrets, or incorrect role privileges, notify the supervisor and Supabase owner before continuing tests with real user data. For deployment incidents, contact the Vercel/repository owner and avoid changing production configuration without authorization.
-
-# 16. Handover Checklist
-
-## Access and environment
-
-- [ ] The incoming intern has access to the GitHub repository and knows which branch contains the Community work.
-- [ ] The maintainer has identified the Supabase testing project and granted the appropriate individual access.
-- [ ] Local development uses authorized test credentials; `.env` is not committed.
-- [ ] The incoming intern has run `npm ci`, `npm run dev`, `npm run check`, and `npm run build`.
-- [ ] The Vercel project and branch that deploy `https://jarurat-care-website-red.vercel.app/` are confirmed.
-
-## Product and workflow knowledge
-
-- [ ] The Knowledge Hub, content detail, Doctor profile, and CMS routes have been shown.
-- [ ] Reader, unapproved Doctor, approved Doctor, Reviewer, Admin, and Super Admin flows have been explained.
-- [ ] The distinction between Reviewer feedback and Super Admin final publication is understood.
-- [ ] The distinction between CMS publishing and Doctor-content review is understood.
-- [ ] ORCID is identified as incomplete and not ready for production.
-
-## Database and security
-
-- [ ] The current Supabase testing schema is compared with `scripts/supabase-setup.sql`.
-- [ ] RLS enablement and actual policy expressions are reviewed table by table.
-- [ ] Storage bucket `cms-images`, its policies, and image URLs are checked.
-- [ ] The service-role key remains server-only and is never shared in documentation.
-- [ ] Duplicate/ambiguous table names (`doctor_follows` / `doctor_followers`) and the missing `article_versions` definition are resolved or recorded as open.
-
-## Pending work and release readiness
-
-- [ ] Known issues are reviewed with the supervisor and prioritized.
-- [ ] Test content and broken image links on the testing deployment have an owner and a cleanup plan.
-- [ ] Admin and Super Admin permissions are tested with separate non-production accounts.
-- [ ] Auth redirect destinations are checked against active routes and Supabase URL allowlists.
-- [ ] Production launch is not attempted until the production project, branch, owner, acceptance criteria, and rollback process are confirmed.
-- [ ] All remaining placeholders and verification items below are assigned to an owner or explicitly left open.
-
-# 17. Items to Verify
-
-| Item | What must be confirmed |
-|---|---|
-| Testing deployment branch | Which Git branch and Vercel project serve `https://jarurat-care-website-red.vercel.app/`? |
-| Production release path | Which project/branch/domain will host Community when approved for production, and who authorizes the release? |
-| Alternate Vercel URL | Is `jarurat-care-website-jcf.vercel.app` active, a preview, or an obsolete URL? |
-| Initial account role | Documentation says new profiles begin as `user`; current signup server code inserts `Reader`. Which behavior and role model are intended on the testing database? |
-| Email verification redirect | Project notes report a localhost redirect; current signup code derives the redirect from request origin. What happens on the deployed testing site, and which Supabase redirect URLs are allowed? |
-| Verification email delivery | Maintainer recalls that Resend is used. Confirm whether Resend is configured as custom SMTP for Supabase Auth, and verify the sender/domain and delivery settings with the service owner. |
-| Admin dashboard redirect | Project notes mention `/cms/admin` as missing; inspected login UI routes Admins to `/cms/admin-dashboard`. Which behavior is deployed and should be canonical? |
-| Doctor submit redirect | Do article and research submission actions still redirect to legacy `/cms/author_dashboard`, or has this already been corrected? |
-| ORCID availability | Is ORCID intended to remain disabled? Confirm callback target, missing `/cms/register` route, account linking, and session creation before enabling. |
-| Supabase database and RLS | Does the deployed testing database match the supplied SQL? What are the actual `USING`/`WITH CHECK` expressions and RLS states for every table? |
-| Follow table | Which table does active app code use: `doctor_follows`, `doctor_followers`, or both? What is the intended canonical schema? |
-| Saved research and interactions | Verify deployed table names/columns for saved research, likes, and comments against current route code. |
-| `article_versions` | It appears in the older table inventory but no schema definition was supplied and it is excluded from the setup script. Does the current project need it? |
-| Storage | Does the correct testing Supabase project have `cms-images`; is it public or signed-URL based, and what are its policies? |
-| `.env.example` | Does an environment example exist on the relevant branch? If not, should a names-only template be created? |
-| GitHub workflow | What does `.github/workflows/preview.yaml` do, and is it connected to the Vercel testing deployment? |
-| Service ownership and contacts | Fill in the placeholders for the repository, Supabase, Google OAuth, ORCID, Vercel, and product/supervisor owners. |
-| Test content and broken images | Which records/assets on the testing deployment are test-only, and who approves cleanup? |
