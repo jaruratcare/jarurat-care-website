@@ -33,7 +33,7 @@
 							{/if}
 						</span>
 					</div>
-					<img src={article.thumbnail} alt={article.title} class="article-thumb" />
+					<img src={article.thumbnail} alt="Thumbnail for the article: {article.title} by {article.authorName}" class="article-thumb" />
 				</a>
 			{/each}
 		</div>

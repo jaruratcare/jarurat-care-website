@@ -119,7 +119,7 @@
 						>
 							<img
 								src={item.imgSrc}
-								alt={item.title}
+								alt="Donation impact: {item.title} for cancer patients"
 								class="w-full aspect-[4/3] object-cover rounded-xl mb-4"
 							/>
 

@@ -37,14 +37,14 @@
     </div>
     <img
       src={mobileHero}
-      alt="Jarurat Care Foundation"
+      alt="Cancer patient receiving compassionate support from Jarurat Care Foundation"
       class="w-full h-[240px] object-cover object-bottom -mt-1"
     />
   </div>
 
   <!-- TABLET LAYOUT -->
   <div class="hidden md:block lg:hidden relative w-full h-[1040px] overflow-hidden bg-[#EEF5FF]">
-    <img src={tabletHero} alt="Jarurat Care Foundation" class="absolute inset-0 w-full h-full object-cover" />
+    <img src={tabletHero} alt="Jarurat Care Foundation providing financial and emotional care for cancer patients" class="absolute inset-0 w-full h-full object-cover" />
     <div class="absolute inset-0 bg-[#1E4ED8]/5"></div>
     <div class="relative z-10 flex flex-col items-center text-center gap-6 px-8 pt-16">
       <h1 class="text-[48px] leading-[56px] font-bold text-[#0D2561]">
@@ -77,7 +77,7 @@
 
   <!-- DESKTOP LAYOUT -->
   <div class="hidden lg:block relative w-full h-[806px] overflow-hidden">
-    <img src={patient} alt="Jarurat Care Foundation" class="absolute inset-0 w-full h-full object-cover object-[70%_center]" />
+    <img src={patient} alt="Smiling cancer patient representing the journey and support provided by Jarurat Care Foundation" class="absolute inset-0 w-full h-full object-cover object-[70%_center]" />
     <div class="absolute inset-0 bg-[#1E4ED8]/3"></div>
     <div class="relative z-10 h-full flex flex-col justify-center
     md:gap-5 lg:gap-8

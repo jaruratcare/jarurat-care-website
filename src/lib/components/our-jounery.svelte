@@ -179,7 +179,7 @@
 
         <!-- 1. HEADER & LOGO -->
         <div class="flex flex-col items-center mb-16 relative z-10">
-            <img src={logo} alt="Our Journey Logo" class="w-24 h-24 md:w-30 md:h-30 mb-3 object-contain" />
+            <img src={logo} alt="Jarurat Care Foundation Our Journey logo" class="w-24 h-24 md:w-30 md:h-30 mb-3 object-contain" />
             <h2 data-journey-title class="text-3xl md:text-5xl font-extrabold text-white tracking-wide">Our Journey</h2>
         </div>
 
@@ -189,7 +189,7 @@
             <div class="w-full flex justify-start md:pl-12 lg:pl-24 lg:items-start lg:h-[18.375rem]">
                 <div class="w-full max-w-[360px] flex flex-col items-center text-center">
                     <div data-journey-image class="w-full rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 mb-4 lg:mb-8 bg-white/10">
-                        <img src={photo1} alt="December 2023" class="w-full h-52 md:h-56 object-cover rounded-3xl" />
+                        <img src={photo1} alt="A visual representing the personal loss to cancer that inspired the founding of Jarurat Care Foundation" class="w-full h-52 md:h-56 object-cover rounded-3xl" />
                     </div>
                     <!-- Yellow bar sits over the connector line. -->
                     <div data-journey-bar class="w-28 h-1.5 bg-[#FFC107] mb-4 rounded-full relative z-20"></div>
@@ -205,7 +205,7 @@
             <div class="w-full flex justify-end md:pr-12 lg:pr-24 lg:items-start lg:h-[18.375rem]">
                 <div class="w-full max-w-[360px] flex flex-col items-center text-center">
                     <div data-journey-image class="w-full rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 mb-4 lg:mb-8 bg-white/10">
-                        <img src={photo2} alt="Priyanka Founder" class="w-full h-52 md:h-56 object-cover rounded-3xl" />
+                        <img src={photo2} alt="Priyanka, Founder of Jarurat Care Foundation, leading efforts to support cancer patients" class="w-full h-52 md:h-56 object-cover rounded-3xl" />
                     </div>
                     <div data-journey-bar class="w-28 h-1.5 bg-[#FFC107] mb-4 rounded-full relative z-20"></div>
                     <h3 class="text-xl font-black text-white mb-1 tracking-wide">2024</h3>
@@ -220,7 +220,7 @@
             <div class="w-full flex justify-start md:pl-12 lg:pl-24">
                 <div class="w-full max-w-[360px] flex flex-col items-center text-center">
                     <div data-journey-image class="w-full rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 mb-4 lg:mb-8 bg-white/10">
-                        <img src={photo3} alt="Community Initiatives" class="w-full h-52 md:h-56 object-cover rounded-3xl" />
+                        <img src={photo3} alt="Community-led cancer support initiatives and action programs by Jarurat Care Foundation" class="w-full h-52 md:h-56 object-cover rounded-3xl" />
                     </div>
                     <div data-journey-bar class="w-28 h-1.5 bg-[#FFC107] mb-4 rounded-full relative z-20"></div>
                     <h3 class="text-xl font-black text-white mb-1 tracking-wide">2024</h3>

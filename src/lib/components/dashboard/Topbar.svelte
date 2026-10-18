@@ -38,7 +38,7 @@
 		<div class="profile-wrap" bind:this={dropdownRef}>
 			<div class="profile-trigger" on:click={() => showDropdown = !showDropdown}>
 				{#if avatar}
-					<img src={avatar} alt="Doctor Avatar" class="profile-avatar" onerror="this.style.display='none'" />
+					<img src={avatar} alt="Profile photo of {doctorName || 'Doctor'}" class="profile-avatar" onerror="this.style.display='none'" />
 				{:else}
 					<div class="avatar-circle">{doctorName ? doctorName.charAt(0).toUpperCase() : 'D'}</div>
 				{/if}

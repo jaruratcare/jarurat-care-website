@@ -9,7 +9,7 @@
 	<div class="absolute inset-0 w-full h-full pointer-events-none z-0">
 		<img
 			src={heroImage}
-			alt="Medical Advisory Board Doctors"
+			alt="Medical advisory board doctors collaborating to shape the Jarurat Care Foundation cancer support ecosystem"
 			class="w-full h-full object-cover object-right" 
 		/>
 	</div>

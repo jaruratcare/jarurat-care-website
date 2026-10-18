@@ -13,7 +13,7 @@
     <div class="hidden md:flex justify-center items-center mix-blend-multiply overflow-visible">
         <img 
             src={perfectLayout} 
-            alt="Our Values Layout" 
+            alt="arurat Care Foundation core values: Evolve, Reach, Sustain, and Impact in supporting cancer patients" 
             class="w-full md:max-w-5xl lg:max-w-6xl xl:max-w-7xl h-auto object-contain transition-transform duration-200"
         />
     </div>

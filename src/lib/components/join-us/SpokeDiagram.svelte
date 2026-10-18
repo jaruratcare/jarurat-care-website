@@ -83,7 +83,7 @@
         >
             <img
                 src={jaruratCareLogo}
-                alt={center}
+                alt="{center} Foundation logo highlighting our organizational focus areas"
                 class="h-auto w-[200px] sm:w-[220px] lg:w-[250px] object-contain"
             />
         </div>

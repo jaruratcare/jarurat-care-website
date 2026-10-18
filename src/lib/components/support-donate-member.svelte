@@ -83,7 +83,7 @@
 					<div class="flex flex-col justify-between text-center md:text-left px-4 {index === 1 ? 'md:pl-6 md:pr-14' : 'md:px-10'} first:md:pl-0 last:md:pr-0 relative h-full pb-8 md:pb-0 border-b md:border-b-0 border-[#E2E8F0] last:border-b-0">
 						<div>
 							<div class="w-12 h-12 flex items-center justify-center md:justify-start mb-4 shrink-0 mx-auto md:mx-0">
-								<img src={item.icon} alt={item.title} class="w-10 h-10 object-contain" />
+								<img src={item.icon} alt="{item.title} icon representing Jarurat Care Foundation's mission" class="w-10 h-10 object-contain" />
 							</div>
 							<h3 class="text-lg md:text-xl font-bold text-[#0D2561] mb-2">
 								{item.title}
@@ -120,7 +120,7 @@
 					class="bg-white rounded-3xl shadow-lg p-6 md:p-8 text-center hover:scale-105 transition duration-300"
 				>
 					<div class="w-full aspect-[4/3] rounded-2xl overflow-hidden mb-4">
-						<img src={card.image} alt={card.title} class="w-full h-full object-cover" />
+						<img src={card.image} alt="{card.title} service offered by Jarurat Care Foundation for cancer patients" class="w-full h-full object-cover" />
 					</div>
 					<h3 class="text-lg md:text-xl font-semibold text-[#0D2561] mb-2">
 						{card.title}
@@ -152,7 +152,7 @@
 				<div class="md:col-span-6 lg:col-span-6 overflow-hidden rounded-2xl relative">
 					<img
 						src={ImgMom}
-						alt="Where It All Started"
+						alt="Rekha on a trip before battling cholangiocarcinoma, whose legacy inspired the founding of Jarurat Care Foundation"
 						class="w-full h-[220px] sm:h-[300px] md:h-[380px] object-cover object-[center_68%] rounded-2xl shadow-sm"
 					/>
 					<div class="absolute inset-0 bg-[#0D2561]/15 pointer-events-none rounded-2xl"></div>

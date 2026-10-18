@@ -117,7 +117,7 @@
 			<div class="md:col-span-7 rounded-2xl overflow-hidden min-h-[350px] md:min-h-[480px] relative">
 				<img 
 					src={ImgHeroBg} 
-					alt="Help Us Fight Cancer" 
+					alt="Compassionate caregiver supporting a cancer patient, made possible through your donations to Jarurat Care Foundation" 
 					class="absolute top-0 left-0 w-[205%] max-w-none h-full object-cover object-left rounded-2xl" 
 				/>
 			</div>

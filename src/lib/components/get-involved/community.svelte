@@ -128,7 +128,7 @@
               {#if doctor.image}
                 <img 
                   src={doctor.image} 
-                  alt={doctor.name} 
+                  alt="Profile photo of {doctor.name}, Advisory Board Member at Jarurat Care Foundation"
                   class="w-full h-full object-cover object-top rounded-2xl"
                 />
               {:else}

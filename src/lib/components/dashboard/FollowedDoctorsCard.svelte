@@ -26,7 +26,7 @@
 				<div class="doctor-item">
 					<div class="avatar-wrapper">
 						{#if doc.avatar}
-							<img src={doc.avatar} alt={doc.name} class="avatar-img" />
+							<img src={doc.avatar} alt="{doc.name}{doc.specialization ? ', ' + doc.specialization : ', Medical Professional'}" class="avatar-img" />
 						{:else}
 							<div class="avatar-fallback">{doc.name.charAt(0).toUpperCase()}</div>
 						{/if}

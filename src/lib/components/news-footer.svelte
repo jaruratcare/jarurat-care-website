@@ -38,7 +38,7 @@
     <div class="bg-[#DCEEFF] p-8 rounded-none flex flex-col justify-between">
       <div class="relative px-2 flex flex-col gap-3">
         <div>
-          <img src={newsletterBadge} alt="Newsletter" class="h-[34px] mb-3 select-none" />
+          <img src={newsletterBadge} alt="Subscribe to the Jarurat Care Foundation email newsletter" class="h-[34px] mb-3 select-none" />
           <h1 class="text-[#0C1F56] font-bold text-[1.85rem] leading-snug">
             {newsText}
           </h1>
@@ -83,7 +83,7 @@
     <div class="py-4 pl-6 pr-4 flex flex-col justify-between">
       <div class="border-[#1E4ED8] border-l-4 pl-6 flex flex-col gap-4">
         <div>
-          <img src={collaborateBadge} alt="Collaborate With Us" class="h-[34px] mb-3 select-none" />
+          <img src={collaborateBadge} alt="Collaborate and partner with Jarurat Care Foundation" class="h-[34px] mb-3 select-none" />
           <h1 class="text-[#0C1F56] font-bold text-[1.85rem] leading-snug">
             {collaborateText}
           </h1>
@@ -140,7 +140,7 @@
     
     <!-- Top Subscribe Box -->
     <div class="bg-[#DCEEFF] p-4 flex flex-col">
-      <img src={newsletterBadge} alt="Newsletter" class="h-[22px] w-max mb-2 select-none" />
+      <img src={newsletterBadge} alt="Subscribe to the Jarurat Care Foundation email newsletter" class="h-[22px] w-max mb-2 select-none" />
       <h1 class="text-[#0C1F56] font-bold text-[20px] leading-tight">
         {newsText}
       </h1>
@@ -179,7 +179,7 @@
     <div class="py-1 px-1 flex flex-col">
       <div class="border-[#1E4ED8] border-l-[3px] pl-3 flex flex-col gap-2.5">
         <div>
-          <img src={collaborateBadge} alt="Collaborate With Us" class="h-[22px] w-max mb-2 select-none" />
+          <img src={collaborateBadge} alt="Collaborate and partner with Jarurat Care Foundation" class="h-[22px] w-max mb-2 select-none" />
           <h1 class="text-[#0C1F56] font-bold text-[20px] leading-tight">
             {collaborateText}
           </h1>

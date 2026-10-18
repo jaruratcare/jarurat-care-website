@@ -32,7 +32,7 @@
 			<div class="lg:col-span-6 overflow-hidden rounded-2xl border border-slate-100 shadow-xs h-full min-h-[260px] max-h-[340px]">
 				<img 
 					src={communityImg} 
-					alt="Medical Network Community" 
+					alt="Group of medical professionals representing the Jarurat Care Foundation expert doctor community"
 					class="w-full h-full object-cover object-center rounded-2xl"
 				/>
 			</div>
@@ -52,7 +52,7 @@
 					<div class="w-24 h-24 md:w-28 md:h-28 shrink-0 flex items-center justify-center">
 						<img 
 							src={qrCode} 
-							alt="QR Registration" 
+							alt="QR code to scan and register for the Jarurat Care Foundation medical expert network"
 							class="w-full h-full object-contain"
 						/>
 					</div>
